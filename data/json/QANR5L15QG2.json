@@ -1,0 +1,63 @@
+{
+    "question": {
+        "@xmlns": "http://schemas.assemblee-nationale.fr/referentiel",
+        "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+        "@xsi:type": "QuestionGouvernement_Type",
+        "uid": "QANR5L15QG2",
+        "identifiant": {
+            "numero": "2",
+            "regime": "5eme R\ufffdpublique",
+            "legislature": "15"
+        },
+        "type": "QG",
+        "indexationAN": {
+            "rubrique": "emploi et activit\u00e9",
+            "teteAnalyse": null,
+            "ANALYSE": {
+                "ANA": "situation de l'entreprise GM et S"
+            }
+        },
+        "auteur": {
+            "identite": {
+                "acteurRef": "PA719242",
+                "mandatRef": "PM722604"
+            },
+            "groupe": {
+                "organeRef": "PO730964",
+                "abrege": "LAREM",
+                "developpe": "La R\u00e9publique en Marche"
+            }
+        },
+        "minInt": {
+            "abrege": "\u00c9conomie et finances",
+            "developpe": "Minist\u00e8re de l'\u00e9conomie et des finances"
+        },
+        "minAttribs": {
+            "minAttrib": {
+                "denomination": {
+                    "abrege": "\u00c9conomie et finances",
+                    "developpe": "Minist\u00e8re de l'\u00e9conomie et des finances"
+                }
+            }
+        },
+        "textesReponse": {
+            "texteReponse": {
+                "infoJO": {
+                    "typeJO": "JO_DEBAT",
+                    "dateJO": "06/07/2017"
+                },
+                "texte": "</p><p align=\"CENTER\"> SITUATION DE L'ENTREPRISE GM ET S <a name=PG2></a> </p><br><strong>M.\u00a0le pr\u00e9sident. </strong>La parole est \u00e0 M.\u00a0Jean-Baptiste Moreau, pour le groupe La R\u00e9publique en marche.<br><br><strong>M.\u00a0Jean-Baptiste Moreau. </strong>Monsieur le ministre de l'\u00e9conomie et des finances, ce matin, les salari\u00e9s de l'entreprise GM\u00a0et\u00a0S de La Souterraine, sous-traitant de Renault et de PSA, se sont rendus sur un site de production de PSA \u00e0 Dompierre, dans l'Allier. Ils s'inqui\u00e8tent pour l'avenir du site de La Souterraine et de leurs emplois.<br><br>L'entreprise GM\u00a0et\u00a0S a en effet \u00e9t\u00e9 plac\u00e9e en liquidation judiciaire avec poursuite de l'activit\u00e9 par le tribunal de commerce de Poitiers, qui doit rendre une d\u00e9cision d\u00e9finitive le 21\u00a0juillet prochain et statuer sur la reprise de GM\u00a0et\u00a0S par le groupe GMD, \u00e9galement sous-traitant de la fili\u00e8re automobile.<br><br>Monsieur le ministre, nous connaissons les efforts que vous avez d\u00e9ploy\u00e9s, avec Benjamin Griveaux, depuis votre prise de fonctions, sur ce dossier laiss\u00e9 non trait\u00e9 par le pr\u00e9c\u00e9dent gouvernement.<br><br><strong>Plusieurs d\u00e9put\u00e9s du groupe LR .</strong> C'\u00e9taient les m\u00eames\u00a0!<br><br><strong>M.\u00a0Jean-Baptiste Moreau. </strong>Nous savons que vous avez mobilis\u00e9 les services de l'\u00c9tat, les collectivit\u00e9s territoriales et la r\u00e9gion Nouvelle Aquitaine. Vous avez renou\u00e9 le dialogue avec, d'une part, les organisations syndicales, et d'autre part, les constructeurs Renault et PSA, qui sous votre impulsion ont annonc\u00e9 de nouveaux investissements et garanti des commandes.<br><br>Cette action des salari\u00e9s de GM\u00a0et\u00a0S intervient donc \u00e0 un moment crucial pour le sauvetage de cette entreprise, deuxi\u00e8me employeur priv\u00e9 du d\u00e9partement de la Creuse. Depuis ce matin, PSA menace de revoir son soutien \u00e0 l'\u00e9quipementier. Quelles garanties pouvez-vous donner aux salari\u00e9s sur la reprise du site par GMD et la p\u00e9rennit\u00e9 de l'activit\u00e9 industrielle \u00e0 La Souterraine\u00a0? <i>(Applaudissements sur les bancs des groupes REM et MODEM et sur plusieurs bancs du groupes LC.)</i><br><br><strong>M.\u00a0le pr\u00e9sident. </strong>La parole est \u00e0 M.\u00a0le ministre de l'\u00e9conomie et des finances.<br><br><strong>M.\u00a0Bruno Le\u00a0Maire,</strong><i> ministre de l'\u00e9conomie et des finances. </i>Monsieur le d\u00e9put\u00e9, le r\u00f4le de l'\u00c9tat, en mati\u00e8re \u00e9conomique, c'est d'assurer la transformation \u00e9conomique de notre nation. Je veux rassurer M.\u00a0Abad \u00e0 ce sujet\u00a0: nous le ferons, vite et fort. C'est \u00e9galement d'accompagner chaque salari\u00e9 en difficult\u00e9, notamment dans un d\u00e9partement tel que la Creuse, qui a des difficult\u00e9s d'acc\u00e8s, et o\u00f9 la d\u00e9sindustrialisation menace un certain nombre de sites.<br><br>Je salue votre action. Avec Benjamin Griveaux et moi-m\u00eame, les pouvoirs publics font le maximum pour garantir la p\u00e9rennit\u00e9 du site. Vous l'avez rappel\u00e9\u00a0: nous avons obtenu 22\u00a0millions d'euros de commandes suppl\u00e9mentaires de la part de Renault et de Peugeot pour le site de La\u00a0Souterraine\u00a0: ce n'est pas rien. Nous avons aussi r\u00e9solu un certain nombre de difficult\u00e9s li\u00e9es \u00e0 la d\u00e9pollution du site. Nous nous sommes en outre engag\u00e9s pour la reconversion de chaque salari\u00e9, car nous ne devons nous bercer d'illusions\u00a0: non, tous les salari\u00e9s ne seront pas gard\u00e9s \u00e0 La Souterraine, mais chaque salari\u00e9 sera accompagn\u00e9 afin qu'il puisse se reconvertir et retrouver un emploi.<br><br>Les collectivit\u00e9s locales et la r\u00e9gion se sont elles aussi engag\u00e9es. Je veux aller au bout de ce processus, sur la base de l'offre de reprise d\u00e9pos\u00e9e par GMD. Cela suppose que les salari\u00e9s qui, aujourd'hui, bloquent des sites de production de Peugeot, l\u00e8vent imm\u00e9diatement et sans d\u00e9lai ces blocages.<br><br><strong>M.\u00a0Jean-Paul Lecoq.</strong> C'est du chantage\u00a0!<br><br><strong>M.\u00a0Bruno Le\u00a0Maire,</strong><i> ministre . </i>Il n'y aura aucune solution dans la menace ou dans le blocage des sites de production.<br><br><strong>Mme\u00a0Marie-George Buffet.</strong> Ils se battent, c'est tout\u00a0! Ils ont le droit de se battre\u00a0!<br><br><strong>M.\u00a0Bruno Le\u00a0Maire,</strong><i> ministre . </i>Cela suppose que Peugeot confirme son engagement d'investir sur le site, de m\u00eame que Renault, \u00e0 hauteur de 5\u00a0millions d'euros. Je vous propose de nous retrouver, avec Benjamin Griveaux, dans les jours prochains, une fois que le site de Peugeot \u00e0 Dompierre aura \u00e9t\u00e9 d\u00e9bloqu\u00e9, afin d'achever cette discussion, avec les salari\u00e9s et leurs repr\u00e9sentants, avec les industriels, pour que l'offre soit d\u00e9pos\u00e9e et que la p\u00e9rennit\u00e9 du site de La Souterraine soit garantie. <i>(Applaudissements sur les bancs des groupes REM et MODEM et sur plusieurs bancs du groupe LC.)</i><br> <p>"
+            }
+        },
+        "cloture": {
+            "codeCloture": "REP_PUB",
+            "libelleCloture": "R\u00e9ponse publi\u00e9e",
+            "dateCloture": "06/07/2017",
+            "infoJO": {
+                "typeJO": "JO_DEBAT",
+                "dateJO": "06/07/2017",
+                "pageJO": "1216"
+            }
+        }
+    }
+}
