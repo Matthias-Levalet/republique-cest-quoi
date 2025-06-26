@@ -6,6 +6,7 @@
 
 # Folders
 data/
+biblio/
 
 # Data Files
 *.csv
