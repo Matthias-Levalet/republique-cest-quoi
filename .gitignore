@@ -7,6 +7,10 @@
 # Folders
 data/
 
+# Data Files
+*.csv
+*.xml
+
 # Python/Jupyter Artifacts
 __pycache__/
 *.py[cod]
