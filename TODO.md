@@ -29,6 +29,7 @@ nettoyer les textes
 - [ ] améliorer la regex
 - [ ] aviser si fait ensuite passer un modèle pour exclure ce qui est toujours hors scope (voir test ollama)
 - [ ] ou alors utiliser un modèle pour carrément sélectionner ou entrainer un classifier et faire tourner sur tout. MAIS pas trop le temps pour l'instant ? avancer pour l'instant en mode essai/demo et affiner comme il faut ensuite ?
+- [ ] few-shot ?
 
 ## 4-analysis ?
 
