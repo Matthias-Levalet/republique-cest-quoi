@@ -10,11 +10,14 @@
   
 ## 2-clean&filter
 
+- **à un moment, faire un match avec les députés et leurs groupes !!!**
+  
 filtrer interventions:
 
 - [x] pour l'analyse, virer les prises de parole de Mme la présidente / le président (texte court et passage de parole)
 - [ ] aviser pour virer selon les types d'intervention (Code_parole) et leur taille (intervention générique / accepté/ pour contre ammendement, mais parfois une justification donc aviser ?)
 - [ ] remplacer les nan de code parole par des "standard" ou "sans_type"
+
 
 nettoyer les textes
 
