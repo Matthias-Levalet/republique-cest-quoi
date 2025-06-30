@@ -11,7 +11,15 @@
 ## 2-clean&filter
 
 - garder en tête : import des fichiers et dtypes : pb des ID et autres vus comme floats
-  
+
+### nettoyer les textes ?
+
+- [ ] nettoyer les balises
+- [ ] nettoyer les parenthèses (applaudissements, etc.)
+- [ ] repérer ce qu'il y a d'autre, etc.
+- [ ] ÉVITER DE PASSER EN LOWCASE (utile pour l'identification avec regex, ou sinon ne pas la faire sur le même texte)
+
+
 ### filtrer interventions
 
 - [X] pour l'analyse, virer les prises de parole de Mme la présidente / le président (texte court et passage de parole)
@@ -49,23 +57,25 @@ Honnêtement, quasi juste que des membres du gouv sans mandat, le reste (avec un
 - ou alors encore juste mettre l'affiliation maj de leur gouv.
 - Si vraiment pb, créer une catégorie non-affilié (qui existe peut-être ailleurs ?
 - Mais ils sont 27, pas un drame (même si beaucoup d'interventions)
-- 
+
+
 ## 3-identify-republic
 
 - [x] pb ici : vérifier d'ou vient mais changement taille fichier entrée (check) et (par conséquent ?) parfois match_valide 4900/4592 et match_simple 4500/4114. -> après vérif semble ok, sans doute vautré avant ça dans l'execution et le traitement des données ?
-- [ ] améliorer la regex
+- [X] améliorer la regex -> pas sur que ma stratégie d'inclusion exclusion marche bien, vérif à la main sur des exemples manuels -> works okay(ish?)
+- [X] au pire virer le (?<!\w)(anti-?|pré-?|post-?|pro?)? -> genre on raterait irrépublicain et je vois pas de mots qui auraient républi quelque chose en milieu de mot qu'on voudrait pas.
+- [X] Limite même pareil pour la fin
 - [ ] aviser si fait ensuite passer un modèle pour exclure ce qui est toujours hors scope (voir test ollama)
 - [ ] ou alors utiliser un modèle pour carrément sélectionner ou entrainer un classifier et faire tourner sur tout. MAIS pas trop le temps pour l'instant ? avancer pour l'instant en mode essai/demo et affiner comme il faut ensuite ?
 - [ ] few-shot ?
+- [ ] à virer  : Gauche démocrate et républicaine, La République en marche / République en marche, les Républicains (en plus de Les Républicains), procureur de la République ?, république islamique d’Iran, République démocratique du Congo
+- présidence de la République ?
+- (école de la République me semble plus coller, etc. élus de la république ?
+
 
 ## 4-analysis ?
 
-### nettoyer les textes (ou plus tôt dans analyse ?)
-
-- [ ] nettoyer les balises
-- [ ] nettoyer les parenthèses (applaudissements, etc.)
-- [ ] repérer ce qu'il y a d'autre, etc.
-- [ ] si remonte plus tot : ÉVITER DE PASSER EN LOWCASE (utile pour l'identification avec regex, ou sinon ne pas la faire sur le même texte)
+### de nouveau pré-traitement des textes ?
 
 ### dates
 
