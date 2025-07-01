@@ -19,7 +19,6 @@
 - [ ] repérer ce qu'il y a d'autre, etc.
 - [ ] ÉVITER DE PASSER EN LOWCASE (utile pour l'identification avec regex, ou sinon ne pas la faire sur le même texte)
 
-
 ### filtrer interventions
 
 - [X] pour l'analyse, virer les prises de parole de Mme la présidente / le président (texte court et passage de parole)
