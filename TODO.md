@@ -6,6 +6,7 @@
 - [ ] (les différences avec la v3 ont été testées et l'écart de nb c'était des infos inutiles)
 - [ ] stabiliser le tout en comparant entre fichiers pour être sur que leur structure reste cohérente
 - [ ] une fois avisé, stabiliser les noms (pas de maj, probablement plutôt reprendre noms de base ? etc.)
+- [ ] Remarque : en fait j'aurai probablement pu cibler directement juste les textes qui ont un texte stime= qui semblent être ceux des vrais gens quand du texte venant juste de complément mise en page et contexte a pas de stime ?
 - [ ] check xmltodict ? (<https://github.com/martinblech/xmltodict>) -> essayé, meeehhhhh
   
 ## 2-clean&filter
