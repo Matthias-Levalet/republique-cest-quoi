@@ -10,8 +10,6 @@ biblio/
 models/
 
 # Data Files
-*.csv
-*.xml
 
 # Python/Jupyter Artifacts
 __pycache__/
