@@ -21,8 +21,8 @@
 ### Match info députés
 
 -   **(ou déplacer plus tard dans le code pour éviter traiter données pour rien ?)**
--   \[\] aviser pour les données assemblée lorsque passera historique avec enjeux appartenance groupe à un temps t (cf les députés qui changent de groupe, et notmament avec apparition LREM)
--   \[\] anticiper : possible pb des membres gouvernement sans fonction député (et donc pas de match dans base ?)
+- [ ] aviser pour les données assemblée lorsque passera historique avec enjeux appartenance groupe à un temps t (cf les députés qui changent de groupe, et notmament avec apparition LREM)
+- [ ] anticiper : possible pb des membres gouvernement sans fonction député (et donc pas de match dans base ?)
     -   Vérifier les valeurs manquantes
     -   9400 et quelques manquantes (mais doublons de personnes = nb interventions, pas gens qui manquent)
     -   Normalement des membres gouv pas élus avant ? Voir un jour si il y a une base avec tous les ID ?
@@ -39,7 +39,7 @@
 -   [ ] Virer les trucs qu'on veut pas et voir si améliore au pire ?
 -   [ ] Même si resolu pour l'instant avec quotes, voir quand même d'ou vient dans les données du join
 
-PB JOIN : exemple de trucs qui avaient l'air de faire merder autour de Eric Martineau, \<www.ericmartineauavecvous.fr\> (etc.) qui dans un autre test se retrouvent dans seance ref session ref et un missing dans UID.
+PB JOIN : exemple de trucs qui avaient l'air de faire merder autour de Eric Martineau, <www.ericmartineauavecvous.fr> (etc.) qui dans un autre test se retrouvent dans seance ref session ref et un missing dans UID.
 
 ``` markdown
 eric.martineau@assemblee-nationale.fr,"@EricMartineau72
