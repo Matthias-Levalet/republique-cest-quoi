@@ -19,6 +19,7 @@
 ### filtrer interventions
 
 ### Match info députés
+- **TODO: regroup without interruption ?**
 
 -   **(ou déplacer plus tard dans le code pour éviter traiter données pour rien ?)**
 - [ ] aviser pour les données assemblée lorsque passera historique avec enjeux appartenance groupe à un temps t (cf les députés qui changent de groupe, et notmament avec apparition LREM)
