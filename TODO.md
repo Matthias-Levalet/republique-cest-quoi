@@ -75,6 +75,12 @@ eric.martineau@assemblee-nationale.fr,"@EricMartineau72
 ### Bert, etc
 
 - [ ] decider du focus sentence/paragraph/intervention/etc.
+- [ ] Tester Flaubert et autres, qwen, etc. ALibaba = cry in GPU, , etc. Aviser dans colab ou humanum ?
+  - [ ] Qwen pour sa Context Length ? + est multilingue ?
+  - [ ] pousser vers leur 4B ou 8B si ressources suffisantes ?
+- [ ] revoir regroupement des topics
+- [ ] revoir Topic distribution
+- [ ] aviser genAI sur le nom des topics ?
 
 ## x-ollama
 
@@ -82,3 +88,4 @@ eric.martineau@assemblee-nationale.fr,"@EricMartineau72
 - test max nb annotation
 - on peut faire des envois en batch ?
 - need to check prompt struct to be sure of what is going to ollama
+- en profiter pour comparer des modèles entre eux et leur perf ?
