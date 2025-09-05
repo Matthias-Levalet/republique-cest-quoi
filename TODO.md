@@ -1,12 +1,23 @@
 # TODO
 
+## Général
+
+- [ ] intégrer 15ème législature (cf matthias)
+- [ ] regrouper les interventions séparées pas interruption ?
+- [ ] Aviser pour un match des députés par législature (= prendre en compte possibles changements de groupe)
+- [ ] Attente possible retour fichier datan
+- [ ] IDÉE : en fait on veut le match sur tout si jamais après on veut faire des % par total intervnetion des groupes etc.
+- [ ] remonter les éventuelles modif du code depuis exploration matthias
+- [ ] décider de ce qu'on fait du statut de la parole des membre gouvernement (qui sont eux même députés à d'autre moment)
+
 ## 1-data-extraction
 
 ### stabiliser l'extraction
 
 - [ ] stabiliser le tout en comparant entre fichiers de plusieurs législatures pour être sur que leur structure reste cohérente
-- [ ] Remarque : en fait j'aurai probablement pu cibler directement juste les textes qui ont un texte stime= qui semblent être ceux des vrais gens quand du texte venant juste de complément mise en page et contexte a pas de stime ? -\> non finalement car des scories et des NA qui sont bien des prises de paroles
-- [ ] une fois avisé, stabiliser les noms (pas de maj, probablement plutôt reprendre noms de base ? etc.)
+- [ ] et donc intégrer 15ème législature (cf matthias)
+- [X] Remarque : en fait j'aurai probablement pu cibler directement juste les textes qui ont un texte stime= qui semblent être ceux des vrais gens quand du texte venant juste de complément mise en page et contexte a pas de stime ? -\> non finalement car des scories et des NA qui sont bien des prises de paroles -> et en plus absent de la 15ème législature
+- [ ] une fois avisé, stabiliser les noms des variables (pas de maj, probablement plutôt reprendre noms de base (id_syceron) ? etc.)
 
 ### sinon voir des alternatives
 
@@ -16,13 +27,15 @@
 
 - garder en tête : import des fichiers et dtypes : pb des ID et autres vus comme floats
 - **TODO: regroup without interruption ?**
-  - Reprendre en compte le fait de vouloir joindre les interventions victimes d'interruptions ?
+- Reprendre en compte le fait de vouloir joindre les interventions victimes d'interruptions ?
 
 ### filtrer interventions
 
+- [ ] finalement garder code parole plus large (voir matthias et filtrer sur code style normal) car dans description fichier AN et dans 15ème des trucs qui peuvent être gardés. Filtrer ensuite président et présidente permet d'exclure pas mal des phrases de trasnsition/donner la parole etc.
+
 ### Match info députés
 
-- **(ou déplacer plus tard dans le code pour éviter traiter données pour rien ?)**
+- **(ou déplacer plus tard dans le code pour éviter traiter données pour rien ?)** > IDÉE : en fait on veut le match sur tout si jamais après on veut faire des % par total intervnetion des groupes etc.
 - [ ] aviser pour les données assemblée lorsque passera historique avec enjeux appartenance groupe à un temps t (cf les députés qui changent de groupe, et notmament avec apparition LREM)
 - [ ] anticiper : possible pb des membres gouvernement sans fonction député (et donc pas de match dans base ?)
   - Vérifier les valeurs manquantes
