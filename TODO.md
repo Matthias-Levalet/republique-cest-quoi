@@ -69,6 +69,7 @@ eric.martineau@assemblee-nationale.fr,"@EricMartineau72
 - [x] ÉVITER DE PASSER EN LOWCASE (utile pour l'identification avec regex, ou sinon ne pas la faire sur le même texte)
 - [ ] repérer ce qu'il y a d'autre, etc.
 - [ ] Pour pays : voir les remarques et avancées matthias sur enjeu apostrophes et \b (qui en réalité pour arménie était peut lié à l'apostrophe ?)
+- [ ] for "fun" : https://www.insee.fr/fr/information/7766585
 
 ### stabiliser regex
 
