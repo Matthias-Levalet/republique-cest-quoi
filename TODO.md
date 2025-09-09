@@ -6,7 +6,7 @@
 - [ ] regrouper les interventions séparées pas interruption ?
 - [ ] Aviser pour un match des députés par législature (= prendre en compte possibles changements de groupe)
 - [ ] Attente possible retour fichier datan
-- [ ] IDÉE : en fait on veut le match sur tout si jamais après on veut faire des % par total intervnetion des groupes etc.
+- [ ] IDÉE : en fait on veut le match sur tout si jamais après on veut faire des % par total intervention des groupes etc.
 - [ ] remonter les éventuelles modif du code depuis exploration matthias
 - [ ] décider de ce qu'on fait du statut de la parole des membre gouvernement (qui sont eux même députés à d'autre moment)
 
@@ -31,12 +31,12 @@
 
 ### filtrer interventions
 
-- [ ] finalement garder code parole plus large (voir matthias et filtrer sur code style normal) car dans description fichier AN et dans 15ème des trucs qui peuvent être gardés. Filtrer ensuite président et présidente permet d'exclure pas mal des phrases de trasnsition/donner la parole etc.
+- [ ] finalement garder code parole plus large (voir matthias et filtrer sur code style normal) car dans description fichier AN et dans 15ème des trucs qui peuvent être gardés. Filtrer ensuite président et présidente permet d'exclure pas mal des phrases de transition/donner la parole etc.
 
 ### Match info députés
 
-- **(ou déplacer plus tard dans le code pour éviter traiter données pour rien ?)** > IDÉE : en fait on veut le match sur tout si jamais après on veut faire des % par total intervnetion des groupes etc.
-- [ ] aviser pour les données assemblée lorsque passera historique avec enjeux appartenance groupe à un temps t (cf les députés qui changent de groupe, et notmament avec apparition LREM)
+- **(ou déplacer plus tard dans le code pour éviter traiter données pour rien ?)** > IDÉE : en fait on veut le match sur tout si jamais après on veut faire des % par total intervention des groupes etc.
+- [ ] aviser pour les données assemblée lorsque passera historique avec enjeux appartenance groupe à un temps t (cf les députés qui changent de groupe, et notamment avec apparition LREM)
 - [ ] anticiper : possible pb des membres gouvernement sans fonction député (et donc pas de match dans base ?)
   - Vérifier les valeurs manquantes
   - 9400 et quelques manquantes (mais doublons de personnes = nb interventions, pas gens qui manquent)
@@ -45,10 +45,10 @@
   - si fait ça, le faire aussi pour les autres où il y a un match (et perte d'info)
   - ou, renvoyer la couleur politique du gouv ? (pour pas mélanger dans une catégorie gouv de droite et gauche)
   - Honnêtement, quasi juste que des membres du gouv sans mandat, le reste (avec un - dedans) sont des gens auditionnés.
-  - Se contenter d'un GOUV. Mmais alors retourner aussi ça pour les autres concernés membre de gouv mais encien mandant ? pense pas
+  - Se contenter d'un GOUV. Mais alors retourner aussi ça pour les autres concernés membre de gouv mais encien mandant ? pense pas
     - préciser une affiliation si existe ailleurs (genre être maire rép sans être député et donc sort pas dans la base assemblée ?)
     - ou alors encore juste mettre l'affiliation maj de leur gouv.
-    - Si vraiment pb, créer une catégorie non-affilié (qui existe peut-être ailleurs ?- Mais ils sont 27, pas un drame (même si beaucoup d'interventions)
+    - Si vraiment pb, créer une catégorie non-affilié (qui existe peut-être ailleurs ?- Mais ils sont 27, pas un drame (même si beaucoup d'interventions))
 - [x] JOIN INTRODUIT UN SOUCIS D'ÉCRITURE/LECTURE ENSUITE DU CSV QUI AUGMENTE NB LIGNES. Resolu pour l'instant avec quotes.
 - [ ] Virer les trucs qu'on veut pas et voir si améliore au pire ?
 - [ ] Même si resolu pour l'instant avec quotes, voir quand même d'ou vient dans les données du join
@@ -75,9 +75,7 @@ eric.martineau@assemblee-nationale.fr,"@EricMartineau72
 
 - [ ] LLM : aviser si fait ensuite passer un modèle pour exclure ce qui est toujours hors scope (voir test ollama)
 - [ ] few-shot ?
-- [ ] activetigger : ou alors utiliser un modèle pour carrément sélectionner ou entrainer un classifier et faire tourner sur tout. MAIS pas trop le temps pour l'instant ? avancer pour l'instant en mode essai/demo et affiner comme il faut ensuite ?
-- [ ] Sinon aviser pour également exclure république + pays
-- [ ] Matthias : faire un export avec les exclusions les républicains pour controler ce qui sort
+- [ ] activetigger : modèle entrainé sur la regex inclusion famille de mot "République", à ne garder que les occurrences de la FDM appartenant à l'idée de "République" (= exclure les pays, institutions, noms de groupes et partis)
 
 ## 4-analysis ?
 
@@ -89,7 +87,7 @@ eric.martineau@assemblee-nationale.fr,"@EricMartineau72
 
 ### Bert, etc
 
-- [ ] decider du focus sentence/paragraph/intervention/etc.
+- [ ] **decider du focus sentence/paragraph/intervention/etc.**
 - [ ] Tester Flaubert et autres, qwen, etc. ALibaba = cry in GPU, , etc. Aviser dans colab ou humanum ?
   - [ ] Qwen pour sa Context Length ? + est multilingue ?
   - [ ] pousser vers leur 4B ou 8B si ressources suffisantes ?
