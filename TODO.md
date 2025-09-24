@@ -48,6 +48,7 @@ Gilbert Collard PA606212
 Louis Aliot PA720798
 
 ### Nettoyage
+
 Nettoyer les noms de députés (parfois des balises, espaces, groupes, qualité) car on s'en sert possiblement, ou feinter juste sur l'ID_Orateur et renvoyer un nom clean avec)
 
 ## 3-identify-republic
