@@ -2,74 +2,60 @@
 
 ## Général
 
-- [ ] intégrer 15ème législature (cf matthias)
 - [ ] regrouper les interventions séparées pas interruption ?
-- [ ] Aviser pour un match des députés par législature (= prendre en compte possibles changements de groupe)
-- [ ] Attente possible retour fichier datan
-- [ ] IDÉE : en fait on veut le match sur tout si jamais après on veut faire des % par total intervention des groupes etc.
+- [ ] Aviser du cas des membres du gouvernement = décider de ce qu'on fait du statut de la parole des membre gouvernement (qui sont eux même députés à d'autre moment)
+- [ ] lié point précédent : aviser pour ceux qui ont pas de parti_affiliation mais bien un groupeabrev
 - [ ] remonter les éventuelles modif du code depuis exploration matthias
-- [ ] décider de ce qu'on fait du statut de la parole des membre gouvernement (qui sont eux même députés à d'autre moment)
 
 ## 1-data-extraction
 
 ### stabiliser l'extraction
 
 - [ ] stabiliser le tout en comparant entre fichiers de plusieurs législatures pour être sur que leur structure reste cohérente
-- [ ] et donc intégrer 15ème législature (cf matthias)
-- [X] Remarque : en fait j'aurai probablement pu cibler directement juste les textes qui ont un texte stime= qui semblent être ceux des vrais gens quand du texte venant juste de complément mise en page et contexte a pas de stime ? -\> non finalement car des scories et des NA qui sont bien des prises de paroles -> et en plus absent de la 15ème législature
 - [ ] une fois avisé, stabiliser les noms des variables (pas de maj, probablement plutôt reprendre noms de base (id_syceron) ? etc.)
-
-### sinon voir des alternatives
-
-- [X] check xmltodict ? (<https://github.com/martinblech/xmltodict>) -\> essayé, meeehhhhh
 
 ## 2-clean&filter
 
 - garder en tête : import des fichiers et dtypes : pb des ID et autres vus comme floats
+- [ ] Aviser du cas des membres du gouvernement = décider de ce qu'on fait du statut de la parole des membre gouvernement (qui sont eux même députés à d'autre moment)
+- [ ] lié point précédent : aviser pour ceux qui ont pas de parti_affiliation mais bien un groupeabrev
 - **TODO: regroup without interruption ?**
 - Reprendre en compte le fait de vouloir joindre les interventions victimes d'interruptions ?
 
 ### filtrer interventions
 
-- [ ] finalement garder code parole plus large (voir matthias et filtrer sur code style normal) car dans description fichier AN et dans 15ème des trucs qui peuvent être gardés. Filtrer ensuite président et présidente permet d'exclure pas mal des phrases de transition/donner la parole etc.
+- [ ] aviser pour les codes parole avis du gvt etc.
 
 ### Match info députés
 
-- **(ou déplacer plus tard dans le code pour éviter traiter données pour rien ?)** > IDÉE : en fait on veut le match sur tout si jamais après on veut faire des % par total intervention des groupes etc.
-- [ ] aviser pour les données assemblée lorsque passera historique avec enjeux appartenance groupe à un temps t (cf les députés qui changent de groupe, et notamment avec apparition LREM)
-- [ ] anticiper : possible pb des membres gouvernement sans fonction député (et donc pas de match dans base ?)
-  - Vérifier les valeurs manquantes
-  - 9400 et quelques manquantes (mais doublons de personnes = nb interventions, pas gens qui manquent)
-  - Normalement des membres gouv pas élus avant ? Voir un jour si il y a une base avec tous les ID ?
-  - Sinon renvoyer une info gouv / sans attache ?
-  - si fait ça, le faire aussi pour les autres où il y a un match (et perte d'info)
-  - ou, renvoyer la couleur politique du gouv ? (pour pas mélanger dans une catégorie gouv de droite et gauche)
-  - Honnêtement, quasi juste que des membres du gouv sans mandat, le reste (avec un - dedans) sont des gens auditionnés.
-  - Se contenter d'un GOUV. Mais alors retourner aussi ça pour les autres concernés membre de gouv mais encien mandant ? pense pas
-    - préciser une affiliation si existe ailleurs (genre être maire rép sans être député et donc sort pas dans la base assemblée ?)
-    - ou alors encore juste mettre l'affiliation maj de leur gouv.
-    - Si vraiment pb, créer une catégorie non-affilié (qui existe peut-être ailleurs ?- Mais ils sont 27, pas un drame (même si beaucoup d'interventions))
-- [x] JOIN INTRODUIT UN SOUCIS D'ÉCRITURE/LECTURE ENSUITE DU CSV QUI AUGMENTE NB LIGNES. Resolu pour l'instant avec quotes.
-- [ ] Virer les trucs qu'on veut pas et voir si améliore au pire ?
-- [ ] Même si resolu pour l'instant avec quotes, voir quand même d'ou vient dans les données du join
+- [ ] anticiper : possible pb des membres gouvernement avec ou sans fonction député. = est-ce qu'on veut leur affiliation partisanne dans tous les cas, ou une catégorie membre gouvernement, etc.
+- [ ] possiblement avoir dans ce cas une variable supplémentaire quand intervention commme membre du gouv au pire en fait ?
+- [ ] visiblement a peu près toutes les infos "manquantes" concernent des membres du gouv sans jamais de mandat (si pas de groupeabrev) (ou sans affiliation lors de l'intervention pour parti_affiliation). Le reste des interventions, c'est soit des orateurs qui sont des gens auditionnés (avec un - dedans), ou des codes paroles spécifiques.
 
-PB JOIN : exemple de trucs qui avaient l'air de faire merder autour de Eric Martineau, <www.ericmartineauavecvous.fr> (etc.) qui dans un autre test se retrouvent dans seance ref session ref et un missing dans UID.
+- [ ] Gérer les edge cases individuels (voir-dessous):
+- [ ] 
+Cas des députés FN-RN en NI lors de la 15e faute d’être assez pour avoir un groupe parlementaire : 
+Bruno Bilde PA720822
+Emmanuel Blairy  PA720668
+Sébastien Chenu PA720468
+Marine Le Pen PA720614
+Nicolas Meizonnet PA719436
+Catherine Pujol PA720802
+Emmanuelle Ménard (élue RN sans y être adhérente) PA719608
+Ludovic Pajot  PA720606
+Myriane Houplain
+Gilbert Collard PA606212
+Louis Aliot PA720798
 
-``` markdown
-eric.martineau@assemblee-nationale.fr,"@EricMartineau72
-","Eric Martineau",www.ericmartineauavecvous.fr
-```
+### Nettoyage
+
+Nettoyer les noms de députés (parfois des balises, espaces, groupes, qualité) car on s'en sert possiblement, ou feinter juste sur l'ID_Orateur et renvoyer un nom clean avec)
 
 ## 3-identify-republic
 
 ### nettoyer les textes ?
 
-- [x] nettoyer les balises
-- [x] nettoyer les parenthèses (applaudissements, etc.)
-- [x] ÉVITER DE PASSER EN LOWCASE (utile pour l'identification avec regex, ou sinon ne pas la faire sur le même texte)
-- [ ] repérer ce qu'il y a d'autre, etc.
-- [ ] Pour pays : voir les remarques et avancées matthias sur enjeu apostrophes et \b (qui en réalité pour arménie était peut lié à l'apostrophe ?)
-- [ ] for "fun" : https://www.insee.fr/fr/information/7766585
+- [] RAS ?
 
 ### stabiliser regex
 
@@ -87,6 +73,7 @@ eric.martineau@assemblee-nationale.fr,"@EricMartineau72
 
 ### Bert, etc
 
+- [ ] Aviser les possibles embeddings alibaba et explo topic modelling depuis activetigger
 - [ ] **decider du focus sentence/paragraph/intervention/etc.**
 - [ ] Tester Flaubert et autres, qwen, etc. ALibaba = cry in GPU, , etc. Aviser dans colab ou humanum ?
   - [ ] Qwen pour sa Context Length ? + est multilingue ?
