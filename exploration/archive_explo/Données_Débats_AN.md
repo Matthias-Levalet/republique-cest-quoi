@@ -222,3 +222,13 @@ Option test A :
 2. Supprimer toutes les prises de paroles de la présidence car celles-ci ont une nature en grande majorité (voir comment quantifier) formelles
 
 ==> Regarder ensuite la taille des interventions (en excluant celles des interruptions) pour voir ce qui reste 
+
+
+
+Structure des comptes rendus XML de l’Assemblée nationale
+D’après les sources officielles, les comptes rendus des débats en séance publique sont disponibles en XML et suivent un schéma précis :
+
+Chaque séance est structurée en <point> de différents niveaux (nivpoint="1", nivpoint="2", etc.).
+Les paragraphes (<paragraphe>) sont imbriqués sous ces points.
+Les points de niveau 1 (nivpoint="1") correspondent généralement aux grandes parties de l’ordre du jour (par exemple, un projet de loi, une question au gouvernement, etc.).
+Les points de niveau 2 et 3 correspondent à des sous-parties ou des interventions spécifiques.
