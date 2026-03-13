@@ -12,6 +12,7 @@
 - compagnie républicaine de,5
 - police nationale républicaine de proximité,7
 - la Garde républicaine de la,1
+- gardes républicains Nous,1
 - police républicaine et,9 -> plus touchy, du sens de la qualifier comme ça dans les débats
 
 ## lois ?
@@ -69,6 +70,7 @@
 ## autres ?
 - L Est républicain non,1
 - L Est républicain Quand on,1
+- le Républicain n,1
 - otages républicains espagnols,2
 - axe République-Bastille je,1 (géo parisienne ? ahaha, mais apparait qu'une fois)
 
@@ -88,7 +90,7 @@
 - pour reconquête machin peut-être quartier reconquête républicaine ?
 
 ## Pour l'instant : 
-- vérif contexte 1 jusqu'à 3500 (n<1 à partir de 1622)
+- vérif contexte 1 jusqu'à 4000 (n<1 à partir de 1622)
 - vérif contexte 2 jusqu'à 3000 (n<1 à partir de 1565)
 - vérif contexte 5 jusqu'à je sais plus
 
