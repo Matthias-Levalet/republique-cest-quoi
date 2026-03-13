@@ -53,6 +53,9 @@ Nettoyer les noms de députés (parfois des balises, espaces, groupes, qualité)
 
 ## 3-identify-republic
 
+- TODO: vérifier "République Sudafricaine" (cf liste pays)
+
+
 ### nettoyer les textes ?
 
 - [] RAS ?
@@ -89,3 +92,4 @@ Nettoyer les noms de députés (parfois des balises, espaces, groupes, qualité)
 - on peut faire des envois en batch ?
 - need to check prompt struct to be sure of what is going to ollama
 - en profiter pour comparer des modèles entre eux et leur perf ?
+

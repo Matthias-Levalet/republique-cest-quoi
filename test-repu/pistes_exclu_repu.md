@@ -1,0 +1,94 @@
+# Identification possibles exclusions
+
+## CRS/POLICE
+- des compagnies républicaines de sécurité,10
+- les compagnies républicaines de sécurité,8
+- aux compagnies républicaines de sécurité,3
+- une compagnie républicaine de sécurité,3
+- deux compagnies républicaines de sécurité,2
+- CRS compagnies républicaines de sécurité,2
+- quatre compagnies républicaines de sécurité,2
+- nationale républicaine de,7
+- compagnie républicaine de,5
+- police nationale républicaine de proximité,7
+- la Garde républicaine de la,1
+- police républicaine et,9 -> plus touchy, du sens de la qualifier comme ça dans les débats
+
+## lois ?
+- respect des principes de la République et de lutte contre le
+- nouvelle organisation territoriale de la République et MAPTAM de modernisation de
+- de la République dite loi,66
+- de la République loi NOTRe,10
+- de la République dite NOTRe,9
+- de la République NOTRe à,1
+- intégration républicaine CIR,5
+- d intégration républicain le CIR,1
+- d intégration républicaine le CIR,1
+- de la République en Nouvelle-Calédonie,8 -> un nom de loi ?
+- de République écologique,3 -> loi ?
+- de la République en Polynésie,6 -> risque nom de loi ?
+- de la République dite séparatisme,2
+- pour une République numérique
+- d intégration républicaine à Mayotte,2
+- de la République et MAPTAM,2
+
+## Groupes
+- groupe communiste républicain citoyen et,8
+- groupe Communiste républicain citoyen et,6
+- CRCE communiste républicain citoyen et,1
+- Communiste républicain citoyen,6
+- groupe socialiste républicain et citoyen,3
+- Parti républicain américain,1
+- groupeLes Républicains ne,1 -> soucis espace et donc regex \b exclu pas ?
+- Grâce aux Républicains,5 -> plus d'ex republicains en discussion
+- députés Républicains n,1
+- Macronistes Républicains lepénistes,1
+- députés Républicains il,1
+- élus Républicains nous,1 -> ?
+
+
+
+## Pays ?
+- et la République d Irlande,7
+- de la République d Artsakh,6
+- Union des républiques socialistes soviétiques,4
+- de la République démocratique allemande,2
+- de la République d Irlande,2
+- de la République de Macédoine,2
+- à la République socialiste soviétique,1
+- aussi la République arabe sahraouie,1
+- de la République romaine Nihil,1
+- la République romaine,4
+- dans la république de Haïti,1
+- des républiques socialistes,4
+- les ex-républiques soviétiques,1
+- l ex-République yougoslave,1
+- la République ukrainienne,1 (parfois des maj qui merdent ? ou juste on avait pas ?)
+
+
+## autres ?
+- L Est républicain non,1
+- L Est républicain Quand on,1
+- otages républicains espagnols,2
+- axe République-Bastille je,1 (géo parisienne ? ahaha, mais apparait qu'une fois)
+
+## Discussion et remarques
+- est-ce que occurences Ve République sont genre très loi et rappel de loi ?  -> mais compliqué à virer tellement c'est large en vrai 
+- par contre : la forme républicaine du gouvernement revient souvent et semble être une forme de rappel à la la loi ou je ne sait pas quoi (article 89 constitution ?)
+- blablabla république dite blalabla (dans des formes différentes selon les virugles et tout, pour identifier les noms de loi ?)
+- pour une République numérique
+- d engagement républicain (un nom de loi ? pacte d'engagement blabla bla ? truc asso ? aviser pour pas virer si important) Et surtout, le fait même qu'il y ait république dans le nom est un signal en soit. Ça se justifie de dire : non, on a viré l'essentiel problématique, mais si les lois contiennent républicain, ça a du sens aussi.
+- cf pacte/engagement/reconquête répuclicain/e -> pour moi faut garder, mais si spécifique loi on peut en causer.
+- de la République et MAPTAM
+- **aux Républicains,12** (peut-être parfois sans majuscule ?) / les bancs républicains de cet,2 / les parlementaires Républicains qui y,1 / parlementaires Républicains qui,1 / le sénateur républicain 106 millions,1 / collègues Républicains parce,2 / députés Républicains n,1 -> AVISER POUR GROUPE LES RÉPUBLICAINS ? MAIS RISQUE DE SUPPR DES TRUCS VALIDES
+- République sociale revient, vérif si loi ?
+- L Est républicain non,1 / L Est républicain Quand on,1 -> journal ?
+- j'ai un Président la République sur la,1 qui traine, mais sans doute car le texte est flagué pour un autre truc valable
+- socialiste et républicain ? (groupe ?)
+- pour reconquête machin peut-être quartier reconquête républicaine ?
+
+## Pour l'instant : 
+- vérif contexte 1 jusqu'à 3500 (n<1 à partir de 1622)
+- vérif contexte 2 jusqu'à 3000 (n<1 à partir de 1565)
+- vérif contexte 5 jusqu'à je sais plus
+
