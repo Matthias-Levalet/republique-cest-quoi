@@ -1,6 +1,7 @@
 # Identification possibles exclusions
 
 ## CRS/POLICE
+
 - des compagnies républicaines de sécurité,10
 - les compagnies républicaines de sécurité,8
 - aux compagnies républicaines de sécurité,3
@@ -12,10 +13,13 @@
 - compagnie républicaine de,5
 - police nationale républicaine de proximité,7
 - la Garde républicaine de la,1
+- Garde républicaine,1
+- Garde républicaine entre,1
 - gardes républicains Nous,1
 - police républicaine et,9 -> plus touchy, du sens de la qualifier comme ça dans les débats
 
 ## lois ?
+
 - respect des principes de la République et de lutte contre le
 - nouvelle organisation territoriale de la République et MAPTAM de modernisation de
 - de la République dite loi,66
@@ -32,8 +36,12 @@
 - pour une République numérique
 - d intégration républicaine à Mayotte,2
 - de la République et MAPTAM,2
+- reconquête républicaine s,1
+- reconquête républicaine concernent,1
+- reconquête républicaine Des,1
 
 ## Groupes
+
 - groupe communiste républicain citoyen et,8
 - groupe Communiste républicain citoyen et,6
 - CRCE communiste républicain citoyen et,1
@@ -46,11 +54,14 @@
 - Macronistes Républicains lepénistes,1
 - députés Républicains il,1
 - élus Républicains nous,1 -> ?
-
+- hémicycle Républicains au,1 ???
+- Républicains ex-Républicains et,1 ??
 
 
 ## Pays ?
+
 - et la République d Irlande,7
+- Irlande républicaine une,1
 - de la République d Artsakh,6
 - Union des républiques socialistes soviétiques,4
 - de la République démocratique allemande,2
@@ -59,15 +70,27 @@
 - à la République socialiste soviétique,1
 - aussi la République arabe sahraouie,1
 - de la République romaine Nihil,1
+- grave république romaine,1
 - la République romaine,4
 - dans la république de Haïti,1
 - des républiques socialistes,4
 - les ex-républiques soviétiques,1
 - l ex-République yougoslave,1
 - la République ukrainienne,1 (parfois des maj qui merdent ? ou juste on avait pas ?)
+- la République sahraouie,1
+- la République bolivarienne,1
+- gouvernement républicain afghan,1
+- La République girondine,1 ? #lesgigi
+- votre république bananière,1 # débat possible : imp mais on a viré soviétique 
+
+
+
+
+
 
 
 ## autres ?
+
 - L Est républicain non,1
 - L Est républicain Quand on,1
 - le Républicain n,1
@@ -75,22 +98,25 @@
 - axe République-Bastille je,1 (géo parisienne ? ahaha, mais apparait qu'une fois)
 
 ## Discussion et remarques
-- est-ce que occurences Ve République sont genre très loi et rappel de loi ?  -> mais compliqué à virer tellement c'est large en vrai 
+
+- est-ce que occurrences Ve République sont genre très loi et rappel de loi ?  -> mais compliqué à virer tellement c'est large en vrai 
 - par contre : la forme républicaine du gouvernement revient souvent et semble être une forme de rappel à la la loi ou je ne sait pas quoi (article 89 constitution ?)
-- blablabla république dite blalabla (dans des formes différentes selon les virugles et tout, pour identifier les noms de loi ?)
+- blablabla république dite blalabla (dans des formes différentes selon les virgules et tout, pour identifier les noms de loi ?)
 - pour une République numérique
-- d engagement républicain (un nom de loi ? pacte d'engagement blabla bla ? truc asso ? aviser pour pas virer si important) Et surtout, le fait même qu'il y ait république dans le nom est un signal en soit. Ça se justifie de dire : non, on a viré l'essentiel problématique, mais si les lois contiennent républicain, ça a du sens aussi.
+- d engagement républicain (un nom de loi ? pacte d'engagement blabla bla ? truc associatif ? aviser pour pas virer si important) Et surtout, le fait même qu'il y ait république dans le nom est un signal en soit. Ça se justifie de dire : non, on a viré l'essentiel problématique, mais si les lois contiennent républicain, ça a du sens aussi.
 - cf pacte/engagement/reconquête répuclicain/e -> pour moi faut garder, mais si spécifique loi on peut en causer.
+- reconquête républicaine y a peut être une loi ?
+- pour reconquête machin peut-être **quartier reconquête républicaine** ?
+- République sociale revient, vérif si loi ?
 - de la République et MAPTAM
 - **aux Républicains,12** (peut-être parfois sans majuscule ?) / les bancs républicains de cet,2 / les parlementaires Républicains qui y,1 / parlementaires Républicains qui,1 / le sénateur républicain 106 millions,1 / collègues Républicains parce,2 / députés Républicains n,1 -> AVISER POUR GROUPE LES RÉPUBLICAINS ? MAIS RISQUE DE SUPPR DES TRUCS VALIDES
-- République sociale revient, vérif si loi ?
 - L Est républicain non,1 / L Est républicain Quand on,1 -> journal ?
-- j'ai un Président la République sur la,1 qui traine, mais sans doute car le texte est flagué pour un autre truc valable
+- j'ai un Président la République sur la,1 qui traîne, mais sans doute car le texte est flagué pour un autre truc valable
 - socialiste et républicain ? (groupe ?)
-- pour reconquête machin peut-être quartier reconquête républicaine ?
+- votre république bananière,1 # débat possible : pour moi c'est imp, mais on a viré soviétique 
 
-## Pour l'instant : 
-- vérif contexte 1 jusqu'à 4000 (n<1 à partir de 1622)
-- vérif contexte 2 jusqu'à 3000 (n<1 à partir de 1565)
-- vérif contexte 5 jusqu'à je sais plus
+## Pour l'instant
 
+- j'ai vérifié le contexte 1 jusqu'à 6230/6230 (n<1 à partir de 1622) = DONE
+- j'ai vérifié le contexte 2 jusqu'à 3000 (n<1 à partir de 1565)
+- j'ai vérifié le contexte 5 jusqu'à je sais plus
