@@ -20,7 +20,7 @@
 
 ## lois ?
 
-- respect des principes de la République et de lutte contre le
+- respect des principes de la République et de lutte contre le -> loi séparatisme sous un autre nom
 - nouvelle organisation territoriale de la République et MAPTAM de modernisation de
 - de la République dite loi,66
 - de la République loi NOTRe,10
@@ -39,6 +39,11 @@
 - reconquête républicaine s,1
 - reconquête républicaine concernent,1
 - reconquête républicaine Des,1
+- quartier(s) reconquête républicaine -> environ 90 total
+- contrat d'intégration républicaine -> 40, sans doute plus avec variations
+- Haut-commissaire/haut-commissariat de la République en Nouvelle-Calédonie -> 8 ?.
+- contrat d'engagement républicain -> 415, mais pas mal qui restent (passe de 11429 à 11371 interv)
+- décider dans ce cas pour forme républicaine du gouvernement (art 89 constitution)
 
 ## Groupes
 
@@ -49,7 +54,7 @@
 - groupe socialiste républicain et citoyen,3
 - Parti républicain américain,1
 - groupeLes Républicains ne,1 -> soucis espace et donc regex \b exclu pas ?
-- Grâce aux Républicains,5 -> plus d'ex republicains en discussion
+- Grâce aux Républicains,5 -> plus d'ex républicains en discussion
 - députés Républicains n,1
 - Macronistes Républicains lepénistes,1
 - députés Républicains il,1
@@ -83,12 +88,6 @@
 - La République girondine,1 ? #lesgigi
 - votre république bananière,1 # débat possible : imp mais on a viré soviétique 
 
-
-
-
-
-
-
 ## autres ?
 
 - L Est républicain non,1
@@ -99,21 +98,21 @@
 
 ## Discussion et remarques
 
-- est-ce que occurrences Ve République sont genre très loi et rappel de loi ?  -> mais compliqué à virer tellement c'est large en vrai 
+- est-ce que occurrences Ve République sont genre très loi et rappel de loi ?  -> mais compliqué à virer tellement c'est large en vrai
 - par contre : la forme républicaine du gouvernement revient souvent et semble être une forme de rappel à la la loi ou je ne sait pas quoi (article 89 constitution ?)
 - blablabla république dite blalabla (dans des formes différentes selon les virgules et tout, pour identifier les noms de loi ?)
 - pour une République numérique
 - d engagement républicain (un nom de loi ? pacte d'engagement blabla bla ? truc associatif ? aviser pour pas virer si important) Et surtout, le fait même qu'il y ait république dans le nom est un signal en soit. Ça se justifie de dire : non, on a viré l'essentiel problématique, mais si les lois contiennent républicain, ça a du sens aussi.
-- cf pacte/engagement/reconquête répuclicain/e -> pour moi faut garder, mais si spécifique loi on peut en causer.
+- cf pacte/engagement/reconquête républicain/e -> pour moi faut garder, mais si spécifique loi on peut en causer.
 - reconquête républicaine y a peut être une loi ?
 - pour reconquête machin peut-être **quartier reconquête républicaine** ?
-- République sociale revient, vérif si loi ?
+- République sociale revient, vérif si loi ? -> vu, non c'est ok.
 - de la République et MAPTAM
 - **aux Républicains,12** (peut-être parfois sans majuscule ?) / les bancs républicains de cet,2 / les parlementaires Républicains qui y,1 / parlementaires Républicains qui,1 / le sénateur républicain 106 millions,1 / collègues Républicains parce,2 / députés Républicains n,1 -> AVISER POUR GROUPE LES RÉPUBLICAINS ? MAIS RISQUE DE SUPPR DES TRUCS VALIDES
 - L Est républicain non,1 / L Est républicain Quand on,1 -> journal ?
 - j'ai un Président la République sur la,1 qui traîne, mais sans doute car le texte est flagué pour un autre truc valable
 - socialiste et républicain ? (groupe ?)
-- votre république bananière,1 # débat possible : pour moi c'est imp, mais on a viré soviétique 
+- votre république bananière,1 # débat possible : pour moi c'est imp, mais on a viré soviétique
 
 ## Pour l'instant
 
