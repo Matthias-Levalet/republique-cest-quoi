@@ -89,3 +89,24 @@ Serait presque plutôt l'idée d'un papier méthodo en vrai :
 - on peut faire des envois en batch ?
 - need to check prompt struct to be sure of what is going to ollama
 - en profiter pour comparer des modèles entre eux et leur perf ?
+
+
+
+## Vrac et test vérif LLM :
+
+# TODO: s'assurer que le passage vers lxml est ok
+# TODO: VÉRIFIER QUE LA RÉCUP ID_ACTEUR EST OK ET SUFFISANTE
+# TODO: cf Vérif id_orateur vs id_acteur ? visiblement je l'ai fait, vérif, nb2
+# TODO: s'assurer que l'extraction marche bien avec la 15ème législature
+# TODO: déduplication ? -> poposé un truc déjà, vérif (pas sur soit utile)
+# TODO: vérifier si on a pas d'autres doublons de fichier mal placés dans les législatures
+# (cf df_16 = df_16[df_16["UID"] != "CRSANR5L16S2021O1N144"])
+# TODO: check si possible automatiser à la lecture de tous les uid vs seance ref, etc. ?
+
+
+### id_acteur vs id_orateur — point d'attention
+À vérifier Des cas id_acteur="PA0" existent en L15 (8 cas dans L15-014, davantage en L15-020) mais pas en L16. Ce sont des interventions collectives ou anonymes ("Un député du groupe LR"). Le id_orateur vaut 0 ou un id réel (605518). Si vous comptez sur id_acteur pour joindre un référentiel acteur, ces lignes seront orphelines.
+À vérifier En L15, id_orateur (issu de <orateur><id>) est un numéro brut ex: 720622, tandis que id_acteur (attribut du paragraphe) vaut PA720622. Le code extrait les deux séparément — vérifiez que votre logique de jointure normalise bien (ex: id_orateur = "PA" + id_orateur) pour comparer les deux colonnes. 
+
+### FutureWarning lxml
+Warning La condition if orateur is not None déclenche un FutureWarning lxml sur les éléments vides (<orateurs/>). Remplacer les tests if orateur par if orateur is not None — ce qui est déjà le cas dans votre code, mais lxml avertit que le test de vérité sur un élément peut changer. Sécuriser avec if orateur is not None and len(orateur) si nécessaire. 
