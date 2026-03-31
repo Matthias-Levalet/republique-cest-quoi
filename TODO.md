@@ -2,14 +2,13 @@
 
 ## Général
 
-- [ ] TODO: cf Vérif id_orateur vs id_acteur ? visiblement je l'ai fait, vérif, nb2
-
 ## 1-data-extraction
 
-### stabiliser l'extraction
-
-- [ ] stabiliser le tout en comparant entre fichiers de plusieurs législatures pour être sur que leur structure reste cohérente
-- [ ] une fois avisé, stabiliser les noms des variables (pas de maj, probablement plutôt reprendre noms de base (id_syceron) ? etc.)
+- [ ] TODO: s'assurer que l'extraction marche bien avec la 15ème législature
+- [ ] TODO: déduplication ? -> poposé un truc déjà, vérif (pas sur soit utile)
+- [ ] TODO: vérifier si on a pas d'autres doublons de fichier mal placés dans les législatures
+- [ ] (cf df_16 = df_16[df_16["UID"] != "CRSANR5L16S2021O1N144"])
+- [ ] TODO: check si possible automatiser à la lecture de tous les uid vs seance ref, etc. ?
 
 ## 2-clean&filter
 
@@ -18,6 +17,11 @@
 - [ ] Aviser du cas des membres du gouvernement = décider de ce qu'on fait du statut de la parole des membre gouvernement (qui sont eux même députés à d'autre moment)
 - [ ] lié point précédent : aviser pour ceux qui ont pas de parti_affiliation mais bien un groupeabrev
 - [ ] 
+
+### id_acteur vs id_orateur — point d'attention
+À vérifier Des cas id_acteur="PA0" existent en L15 (8 cas dans L15-014, davantage en L15-020) mais pas en L16. Ce sont des interventions collectives ou anonymes ("Un député du groupe LR"). Le id_orateur vaut 0 ou un id réel (605518). Si vous comptez sur id_acteur pour joindre un référentiel acteur, ces lignes seront orphelines.
+À vérifier En L15, id_orateur (issu de <orateur><id>) est un numéro brut ex: 720622, tandis que id_acteur (attribut du paragraphe) vaut PA720622. Le code extrait les deux séparément — vérifiez que votre logique de jointure normalise bien (ex: id_orateur = "PA" + id_orateur) pour comparer les deux colonnes.
+
 
 ### filtrer interventions
 
@@ -46,6 +50,14 @@ Louis Aliot PA720798
 ### Nettoyage
 
 Nettoyer les noms de députés (parfois des balises, espaces, groupes, qualité) car on s'en sert possiblement, ou feinter juste sur l'ID_Orateur et renvoyer un nom clean avec
+
+
+pb possible voir nb2:
+Créer une nouvelle variable d’affiliation politique par groupe parlementaire + gouvernement séparé
+df["groupe&gvt_affiliation"] = df["groupe_députés_affiliation"].fillna("GVT")
+TODO: LM vérifier ça avec matthias : on est sur que les NA = gouv ?
+genre y a pas plein d'autres cas interv extérieurs etc ?
+-> puis genre tous les cas de membre du gouv identifiés avec ancienne affiliation si on fait ?
 
 ## 3-identify-republic
 
@@ -89,24 +101,3 @@ Serait presque plutôt l'idée d'un papier méthodo en vrai :
 - on peut faire des envois en batch ?
 - need to check prompt struct to be sure of what is going to ollama
 - en profiter pour comparer des modèles entre eux et leur perf ?
-
-
-
-## Vrac et test vérif LLM :
-
-# TODO: s'assurer que le passage vers lxml est ok
-# TODO: VÉRIFIER QUE LA RÉCUP ID_ACTEUR EST OK ET SUFFISANTE
-# TODO: cf Vérif id_orateur vs id_acteur ? visiblement je l'ai fait, vérif, nb2
-# TODO: s'assurer que l'extraction marche bien avec la 15ème législature
-# TODO: déduplication ? -> poposé un truc déjà, vérif (pas sur soit utile)
-# TODO: vérifier si on a pas d'autres doublons de fichier mal placés dans les législatures
-# (cf df_16 = df_16[df_16["UID"] != "CRSANR5L16S2021O1N144"])
-# TODO: check si possible automatiser à la lecture de tous les uid vs seance ref, etc. ?
-
-
-### id_acteur vs id_orateur — point d'attention
-À vérifier Des cas id_acteur="PA0" existent en L15 (8 cas dans L15-014, davantage en L15-020) mais pas en L16. Ce sont des interventions collectives ou anonymes ("Un député du groupe LR"). Le id_orateur vaut 0 ou un id réel (605518). Si vous comptez sur id_acteur pour joindre un référentiel acteur, ces lignes seront orphelines.
-À vérifier En L15, id_orateur (issu de <orateur><id>) est un numéro brut ex: 720622, tandis que id_acteur (attribut du paragraphe) vaut PA720622. Le code extrait les deux séparément — vérifiez que votre logique de jointure normalise bien (ex: id_orateur = "PA" + id_orateur) pour comparer les deux colonnes. 
-
-### FutureWarning lxml
-Warning La condition if orateur is not None déclenche un FutureWarning lxml sur les éléments vides (<orateurs/>). Remplacer les tests if orateur par if orateur is not None — ce qui est déjà le cas dans votre code, mais lxml avertit que le test de vérité sur un élément peut changer. Sécuriser avec if orateur is not None and len(orateur) si nécessaire. 
