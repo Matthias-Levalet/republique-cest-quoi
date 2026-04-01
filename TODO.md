@@ -16,11 +16,6 @@
 - [ ] garder en tête : import des fichiers et dtypes : pb des ID et autres vus comme floats
 - [ ] Aviser du cas des membres du gouvernement = décider de ce qu'on fait du statut de la parole des membre gouvernement (qui sont eux même députés à d'autre moment)
 - [ ] lié point précédent : aviser pour ceux qui ont pas de parti_affiliation mais bien un groupeabrev
-- [ ] 
-
-### id_acteur vs id_orateur — point d'attention
-À vérifier Des cas id_acteur="PA0" existent en L15 (8 cas dans L15-014, davantage en L15-020) mais pas en L16. Ce sont des interventions collectives ou anonymes ("Un député du groupe LR"). Le id_orateur vaut 0 ou un id réel (605518). Si vous comptez sur id_acteur pour joindre un référentiel acteur, ces lignes seront orphelines.
-À vérifier En L15, id_orateur (issu de <orateur><id>) est un numéro brut ex: 720622, tandis que id_acteur (attribut du paragraphe) vaut PA720622. Le code extrait les deux séparément — vérifiez que votre logique de jointure normalise bien (ex: id_orateur = "PA" + id_orateur) pour comparer les deux colonnes.
 
 
 ### filtrer interventions
@@ -47,17 +42,17 @@ Myriane Houplain
 Gilbert Collard PA606212
 Louis Aliot PA720798
 
-### Nettoyage
+### catégories (membres gouv, etc.)
 
-Nettoyer les noms de députés (parfois des balises, espaces, groupes, qualité) car on s'en sert possiblement, ou feinter juste sur l'ID_Orateur et renvoyer un nom clean avec
-
-
-pb possible voir nb2:
 Créer une nouvelle variable d’affiliation politique par groupe parlementaire + gouvernement séparé
 df["groupe&gvt_affiliation"] = df["groupe_députés_affiliation"].fillna("GVT")
 TODO: LM vérifier ça avec matthias : on est sur que les NA = gouv ?
 genre y a pas plein d'autres cas interv extérieurs etc ?
 -> puis genre tous les cas de membre du gouv identifiés avec ancienne affiliation si on fait ?
+possible autre moyen de choper :
+-> oui peut-être : ID mandat en -1 semble souvent = ministre (pas rapporteur, etc.)
+-> qualite_orateur et semble également un bon indicateur : ministre, rapporteur, etc. (mais pas que)
+-> code parole ne colle pas (avis gvt, avis com etc, mais couvre pas leurs autres interventions)
 
 ## 3-identify-republic
 
