@@ -12,21 +12,33 @@
 
 ## 2-clean&filter
 
+- [ ] TODO: on parle dans l'intro d'exclure congrès + lamartine. C'est fait ? pas directement non ?
+- [ ] Ou alors c'est fait en mode pas explicite mais bien le cas par les différents filtres ?
 - [ ] TODO: cf Vérif id_orateur vs id_acteur ? visiblement je l'ai fait, vérif, nb2
 - [ ] garder en tête : import des fichiers et dtypes : pb des ID et autres vus comme floats
 - [ ] Aviser du cas des membres du gouvernement = décider de ce qu'on fait du statut de la parole des membre gouvernement (qui sont eux même députés à d'autre moment)
 - [ ] lié point précédent : aviser pour ceux qui ont pas de parti_affiliation mais bien un groupeabrev
 
-
 ### filtrer interventions
 
 - [ ] aviser pour les codes parole avis du gvt etc.
+- [ ] = cf = TODO: on parle dans l'intro d'exclure congrès + lamartine. C'est fait ? pas directement non ?
 
 ### Match info députés
 
 - [ ] anticiper : possible pb des membres gouvernement avec ou sans fonction député. = est-ce qu'on veut leur affiliation partisanne dans tous les cas, ou une catégorie membre gouvernement, etc.
 - [ ] possiblement avoir dans ce cas une variable supplémentaire quand intervention comme membre du gouv au pire en fait ?
 - [ ] visiblement a peu près toutes les infos "manquantes" concernent des membres du gouv sans jamais de mandat (si pas de groupeabrev) (ou sans affiliation lors de l'intervention pour parti_affiliation). Le reste des interventions, c'est soit des orateurs qui sont des gens auditionnés (avec un - dedans), ou des codes paroles spécifiques.
+  
+Cf revoir ce que j'avais dans missing_info.ipynb:
+"""
+Honnêtement, quasi juste que des membres du gouv sans mandat, le reste (avec un - dedans) sont des gens auditionnés.
+- Se contenter d'un GOUV (mais alors retourner aussi ça pour les autres concernés membre de gouv mais encien mandant ? pense pas)
+- préciser une affiliation si existe ailleurs (genre être maire rép sans être député et donc sort pas dans la base assemblée ?)
+- ou alors encore juste mettre l'affiliation maj de leur gouv.
+- Si vraiment pb, créer une catégorie non-affilié (qui existe peut-être ailleurs ?
+- Mais ils sont 27, pas un drame (même si beaucoup d'interventions)
+"""
 
 - [ ] Gérer les edge cases individuels (voir-dessous):
 Cas des députés FN-RN en NI lors de la 15e faute d’être assez pour avoir un groupe parlementaire : 
