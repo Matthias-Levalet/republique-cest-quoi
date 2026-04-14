@@ -19,9 +19,6 @@
 
 ## 2-clean&filter
 
-- [ ] TODO: on parle dans l'intro d'exclure congrès + lamartine. C'est fait ? pas directement non ?
-- [ ] Ou alors c'est fait en mode pas explicite mais bien le cas par les différents filtres ?
-- [ ] TODO: cf Vérif id_orateur vs id_acteur ? visiblement je l'ai fait, vérif, nb2
 - [ ] garder en tête : import des fichiers et dtypes : pb des ID et autres vus comme floats
 - [ ] Aviser du cas des membres du gouvernement = décider de ce qu'on fait du statut de la parole des membre gouvernement (qui sont eux même députés à d'autre moment)
 - [ ] lié point précédent : aviser pour ceux qui ont pas de parti_affiliation mais bien un groupeabrev
@@ -115,3 +112,15 @@ Serait presque plutôt l'idée d'un papier méthodo en vrai :
 - on peut faire des envois en batch ?
 - need to check prompt struct to be sure of what is going to ollama
 - en profiter pour comparer des modèles entre eux et leur perf ?
+
+
+En détail : 
+« [Ll]es Républicains » 6686 ; « aux Républicains » (51); « [Dd]es Républicains » (428); « [Cc]ollègue[s]? Républicains » (26) « sénateurs Républicains »(2); « députés Républicains » (6); « entre Républicains » (4) « ex-Républicains » (1); « anciens Républicains » (1), « seuls Républicains » (1); « parlementaires Républicains » (1), « élus Républicains » (2); « groupeLes Républicains » (1); « Les Républicain » (4); « [Nn]ous Républicains » (2); « certains Républicains » (4); « élus Républicains » (2); « nos amis Républicains » (1); « droite, Républicains et macronistes » (1); « Républicains-Front national » (1); « Macronistes, Républicains, lepénistes »(1); « Rassemblement national, Républicains et macronistes » (1): (Attention, enlever sensitif à la casse) 
+
+
+
+Ligne de code : 
+
+r"\b[Ll]es Républicains|[Dd]es Républicains|aux Républicains|sénateurs Républicains|députés Républicains|entre Républicains|[Cc]ollègue[s]? Républicain[s]?|ex-Républicains|anciens Républicains|seuls Républicains|parlementaires Républicains|élus Républicains|groupeLes Républicains|Les Républicain|[Nn]ous? Républicains|certains Républicains|élus Républicains|nos amis Républicains|droite, Républicains et macronistes|Républicains-Front national|Républicains, lepénistes|Rassemblement national, Républicains\b",
+    #re.I,
+e
