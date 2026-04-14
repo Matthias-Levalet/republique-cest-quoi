@@ -19,14 +19,8 @@
 
 ## 2-clean&filter
 
-- [ ] garder en tête : import des fichiers et dtypes : pb des ID et autres vus comme floats
 - [ ] Aviser du cas des membres du gouvernement = décider de ce qu'on fait du statut de la parole des membre gouvernement (qui sont eux même députés à d'autre moment)
 - [ ] lié point précédent : aviser pour ceux qui ont pas de parti_affiliation mais bien un groupeabrev
-
-### filtrer interventions
-
-- [ ] aviser pour les codes parole avis du gvt etc.
-- [ ] = cf = TODO: on parle dans l'intro d'exclure congrès + lamartine. C'est fait ? pas directement non ?
 
 ### Match info députés
 
@@ -44,6 +38,9 @@ Honnêtement, quasi juste que des membres du gouv sans mandat, le reste (avec un
 - Mais ils sont 27, pas un drame (même si beaucoup d'interventions)
 """
 
+### catégories (membres gouv, etc.)
+
+
 - [ ] Gérer les edge cases individuels (voir-dessous):
 Cas des députés FN-RN en NI lors de la 15e faute d’être assez pour avoir un groupe parlementaire : 
 Bruno Bilde PA720822
@@ -58,17 +55,20 @@ Myriane Houplain
 Gilbert Collard PA606212
 Louis Aliot PA720798
 
-### catégories (membres gouv, etc.)
 
-Créer une nouvelle variable d’affiliation politique par groupe parlementaire + gouvernement séparé
-df["groupe&gvt_affiliation"] = df["groupe_députés_affiliation"].fillna("GVT")
-TODO: LM vérifier ça avec matthias : on est sur que les NA = gouv ?
-genre y a pas plein d'autres cas interv extérieurs etc ?
--> puis genre tous les cas de membre du gouv identifiés avec ancienne affiliation si on fait ?
-possible autre moyen de choper :
--> oui peut-être : ID mandat en -1 semble souvent = ministre (pas rapporteur, etc.)
--> qualite_orateur et semble également un bon indicateur : ministre, rapporteur, etc. (mais pas que)
--> code parole ne colle pas (avis gvt, avis com etc, mais couvre pas leurs autres interventions)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## 3-identify-republic
 
