@@ -4,11 +4,18 @@
 
 ## 1-data-extraction
 
-- [ ] TODO: s'assurer que l'extraction marche bien avec la 15ème législature
-- [ ] TODO: déduplication ? -> poposé un truc déjà, vérif (pas sur soit utile)
-- [ ] TODO: vérifier si on a pas d'autres doublons de fichier mal placés dans les législatures
-- [ ] (cf df_16 = df_16[df_16["UID"] != "CRSANR5L16S2021O1N144"])
-- [ ] TODO: check si possible automatiser à la lecture de tous les uid vs seance ref, etc. ?
+## À voir
+
+- TODO: déduplication ? -> proposé un truc déjà, vérif (pas sur soit utile)
+  - plus tard : # choisir la clé la plus pertinente
+  - (["uid", "id_syceron", "texte"] VS uid + id_syceron seulement)
+  - en réalité encore des choses qui ont double entrée pour même ID_paragraphe
+  - mais avec texte différent = des didascalies, texte italique, etc.
+  - si pas de Texte, 370 lignes supprimées (mais qui vireraient sans doute au cleaning des données)
+- TODO: vérifier si on a pas d'autres doublons de fichier mal placés dans les législatures
+  - check si possible automatiser à la lecture de tous les uid vs seance ref, etc. ?
+- TODO: plus tard, aviser récupération des points de contexte parents(cf tentative Matthias)
+
 
 ## 2-clean&filter
 
