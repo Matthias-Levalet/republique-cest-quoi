@@ -19,61 +19,30 @@
 
 ## 2-clean&filter
 
-- [ ] Aviser du cas des membres du gouvernement = décider de ce qu'on fait du statut de la parole des membre gouvernement (qui sont eux même députés à d'autre moment)
-- [ ] lié point précédent : aviser pour ceux qui ont pas de parti_affiliation mais bien un groupeabrev
-
-### Match info députés
-
-- [ ] anticiper : possible pb des membres gouvernement avec ou sans fonction député. = est-ce qu'on veut leur affiliation partisanne dans tous les cas, ou une catégorie membre gouvernement, etc.
-- [ ] possiblement avoir dans ce cas une variable supplémentaire quand intervention comme membre du gouv au pire en fait ?
-- [ ] visiblement a peu près toutes les infos "manquantes" concernent des membres du gouv sans jamais de mandat (si pas de groupeabrev) (ou sans affiliation lors de l'intervention pour parti_affiliation). Le reste des interventions, c'est soit des orateurs qui sont des gens auditionnés (avec un - dedans), ou des codes paroles spécifiques.
-  
-Cf revoir ce que j'avais dans missing_info.ipynb:
-"""
-Honnêtement, quasi juste que des membres du gouv sans mandat, le reste (avec un - dedans) sont des gens auditionnés.
-- Se contenter d'un GOUV (mais alors retourner aussi ça pour les autres concernés membre de gouv mais encien mandant ? pense pas)
-- préciser une affiliation si existe ailleurs (genre être maire rép sans être député et donc sort pas dans la base assemblée ?)
-- ou alors encore juste mettre l'affiliation maj de leur gouv.
-- Si vraiment pb, créer une catégorie non-affilié (qui existe peut-être ailleurs ?
-- Mais ils sont 27, pas un drame (même si beaucoup d'interventions)
-"""
-
-### catégories (membres gouv, etc.)
-
-
-- [ ] Gérer les edge cases individuels (voir-dessous):
-Cas des députés FN-RN en NI lors de la 15e faute d’être assez pour avoir un groupe parlementaire : 
-Bruno Bilde PA720822
-Emmanuel Blairy  PA720668
-Sébastien Chenu PA720468
-Marine Le Pen PA720614
-Nicolas Meizonnet PA719436
-Catherine Pujol PA720802
-Emmanuelle Ménard (élue RN sans y être adhérente) PA719608
-Ludovic Pajot  PA720606
-Myriane Houplain
-Gilbert Collard PA606212
-Louis Aliot PA720798
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- [ ] Aviser conflits noms quand pas bons gens identifiés (fuzzyfuzz) et/ou id_acteur!=id_orateur
+- [ ] Aviser choix variables d'affiliation
+- [ ] voir la liste que je sors des sans affiliations (pas nombreux)
+- [ ] Aviser cas gouvernement
+- [ ] Aviser cas affiliation multiples (ex gauche ans groupe comme RN, etc.)
+- [ ] Aviser cas houplain NI/RN
+- [ ] REGROUPEMENT INTERVENTIONS FOIRE
 
 ## 3-identify-republic
 
 - TODO: vérifier "République Sudafricaine" (cf liste pays)
 - Et aviser avec la nouvelle remontée d'exclusions possibles.
+
+En détail : 
+« [Ll]es Républicains » 6686 ; « aux Républicains » (51); « [Dd]es Républicains » (428); « [Cc]ollègue[s]? Républicains » (26) « sénateurs Républicains »(2); « députés Républicains » (6); « entre Républicains » (4) « ex-Républicains » (1); « anciens Républicains » (1), « seuls Républicains » (1); « parlementaires Républicains » (1), « élus Républicains » (2); « groupeLes Républicains » (1); « Les Républicain » (4); « [Nn]ous Républicains » (2); « certains Républicains » (4); « élus Républicains » (2); « nos amis Républicains » (1); « droite, Républicains et macronistes » (1); « Républicains-Front national » (1); « Macronistes, Républicains, lepénistes »(1); « Rassemblement national, Républicains et macronistes » (1): (Attention, enlever sensitif à la casse) 
+
+
+
+Ligne de code : 
+
+r"\b[Ll]es Républicains|[Dd]es Républicains|aux Républicains|sénateurs Républicains|députés Républicains|entre Républicains|[Cc]ollègue[s]? Républicain[s]?|ex-Républicains|anciens Républicains|seuls Républicains|parlementaires Républicains|élus Républicains|groupeLes Républicains|Les Républicain|[Nn]ous? Républicains|certains Républicains|élus Républicains|nos amis Républicains|droite, Républicains et macronistes|Républicains-Front national|Républicains, lepénistes|Rassemblement national, Républicains\b",
+    #re.I,
+
+
 
 ### nettoyer les textes ?
 
@@ -112,15 +81,3 @@ Serait presque plutôt l'idée d'un papier méthodo en vrai :
 - on peut faire des envois en batch ?
 - need to check prompt struct to be sure of what is going to ollama
 - en profiter pour comparer des modèles entre eux et leur perf ?
-
-
-En détail : 
-« [Ll]es Républicains » 6686 ; « aux Républicains » (51); « [Dd]es Républicains » (428); « [Cc]ollègue[s]? Républicains » (26) « sénateurs Républicains »(2); « députés Républicains » (6); « entre Républicains » (4) « ex-Républicains » (1); « anciens Républicains » (1), « seuls Républicains » (1); « parlementaires Républicains » (1), « élus Républicains » (2); « groupeLes Républicains » (1); « Les Républicain » (4); « [Nn]ous Républicains » (2); « certains Républicains » (4); « élus Républicains » (2); « nos amis Républicains » (1); « droite, Républicains et macronistes » (1); « Républicains-Front national » (1); « Macronistes, Républicains, lepénistes »(1); « Rassemblement national, Républicains et macronistes » (1): (Attention, enlever sensitif à la casse) 
-
-
-
-Ligne de code : 
-
-r"\b[Ll]es Républicains|[Dd]es Républicains|aux Républicains|sénateurs Républicains|députés Républicains|entre Républicains|[Cc]ollègue[s]? Républicain[s]?|ex-Républicains|anciens Républicains|seuls Républicains|parlementaires Républicains|élus Républicains|groupeLes Républicains|Les Républicain|[Nn]ous? Républicains|certains Républicains|élus Républicains|nos amis Républicains|droite, Républicains et macronistes|Républicains-Front national|Républicains, lepénistes|Rassemblement national, Républicains\b",
-    #re.I,
-e
