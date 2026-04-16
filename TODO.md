@@ -5,7 +5,7 @@
 ## 1-data-extraction
 
 ## À voir
-
+- TODO : check nb extract contre fichiers nosdeputés (en virant les italiques etc.)
 - TODO: déduplication ? -> proposé un truc déjà, vérif (pas sur soit utile)
   - plus tard : # choisir la clé la plus pertinente
   - (["uid", "id_syceron", "texte"] VS uid + id_syceron seulement)
