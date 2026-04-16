@@ -4,72 +4,45 @@
 
 ## 1-data-extraction
 
-- [ ] TODO: s'assurer que l'extraction marche bien avec la 15ème législature
-- [ ] TODO: déduplication ? -> poposé un truc déjà, vérif (pas sur soit utile)
-- [ ] TODO: vérifier si on a pas d'autres doublons de fichier mal placés dans les législatures
-- [ ] (cf df_16 = df_16[df_16["UID"] != "CRSANR5L16S2021O1N144"])
-- [ ] TODO: check si possible automatiser à la lecture de tous les uid vs seance ref, etc. ?
+## À voir
+- TODO : check nb extract contre fichiers nosdeputés (en virant les italiques etc.)
+- TODO: déduplication ? -> proposé un truc déjà, vérif (pas sur soit utile)
+  - plus tard : # choisir la clé la plus pertinente
+  - (["uid", "id_syceron", "texte"] VS uid + id_syceron seulement)
+  - en réalité encore des choses qui ont double entrée pour même ID_paragraphe
+  - mais avec texte différent = des didascalies, texte italique, etc.
+  - si pas de Texte, 370 lignes supprimées (mais qui vireraient sans doute au cleaning des données)
+- TODO: vérifier si on a pas d'autres doublons de fichier mal placés dans les législatures
+  - check si possible automatiser à la lecture de tous les uid vs seance ref, etc. ?
+- TODO: plus tard, aviser récupération des points de contexte parents(cf tentative Matthias)
+
 
 ## 2-clean&filter
 
-- [ ] TODO: on parle dans l'intro d'exclure congrès + lamartine. C'est fait ? pas directement non ?
-- [ ] Ou alors c'est fait en mode pas explicite mais bien le cas par les différents filtres ?
-- [ ] TODO: cf Vérif id_orateur vs id_acteur ? visiblement je l'ai fait, vérif, nb2
-- [ ] garder en tête : import des fichiers et dtypes : pb des ID et autres vus comme floats
-- [ ] Aviser du cas des membres du gouvernement = décider de ce qu'on fait du statut de la parole des membre gouvernement (qui sont eux même députés à d'autre moment)
-- [ ] lié point précédent : aviser pour ceux qui ont pas de parti_affiliation mais bien un groupeabrev
-
-### filtrer interventions
-
-- [ ] aviser pour les codes parole avis du gvt etc.
-- [ ] = cf = TODO: on parle dans l'intro d'exclure congrès + lamartine. C'est fait ? pas directement non ?
-
-### Match info députés
-
-- [ ] anticiper : possible pb des membres gouvernement avec ou sans fonction député. = est-ce qu'on veut leur affiliation partisanne dans tous les cas, ou une catégorie membre gouvernement, etc.
-- [ ] possiblement avoir dans ce cas une variable supplémentaire quand intervention comme membre du gouv au pire en fait ?
-- [ ] visiblement a peu près toutes les infos "manquantes" concernent des membres du gouv sans jamais de mandat (si pas de groupeabrev) (ou sans affiliation lors de l'intervention pour parti_affiliation). Le reste des interventions, c'est soit des orateurs qui sont des gens auditionnés (avec un - dedans), ou des codes paroles spécifiques.
-  
-Cf revoir ce que j'avais dans missing_info.ipynb:
-"""
-Honnêtement, quasi juste que des membres du gouv sans mandat, le reste (avec un - dedans) sont des gens auditionnés.
-- Se contenter d'un GOUV (mais alors retourner aussi ça pour les autres concernés membre de gouv mais encien mandant ? pense pas)
-- préciser une affiliation si existe ailleurs (genre être maire rép sans être député et donc sort pas dans la base assemblée ?)
-- ou alors encore juste mettre l'affiliation maj de leur gouv.
-- Si vraiment pb, créer une catégorie non-affilié (qui existe peut-être ailleurs ?
-- Mais ils sont 27, pas un drame (même si beaucoup d'interventions)
-"""
-
-- [ ] Gérer les edge cases individuels (voir-dessous):
-Cas des députés FN-RN en NI lors de la 15e faute d’être assez pour avoir un groupe parlementaire : 
-Bruno Bilde PA720822
-Emmanuel Blairy  PA720668
-Sébastien Chenu PA720468
-Marine Le Pen PA720614
-Nicolas Meizonnet PA719436
-Catherine Pujol PA720802
-Emmanuelle Ménard (élue RN sans y être adhérente) PA719608
-Ludovic Pajot  PA720606
-Myriane Houplain
-Gilbert Collard PA606212
-Louis Aliot PA720798
-
-### catégories (membres gouv, etc.)
-
-Créer une nouvelle variable d’affiliation politique par groupe parlementaire + gouvernement séparé
-df["groupe&gvt_affiliation"] = df["groupe_députés_affiliation"].fillna("GVT")
-TODO: LM vérifier ça avec matthias : on est sur que les NA = gouv ?
-genre y a pas plein d'autres cas interv extérieurs etc ?
--> puis genre tous les cas de membre du gouv identifiés avec ancienne affiliation si on fait ?
-possible autre moyen de choper :
--> oui peut-être : ID mandat en -1 semble souvent = ministre (pas rapporteur, etc.)
--> qualite_orateur et semble également un bon indicateur : ministre, rapporteur, etc. (mais pas que)
--> code parole ne colle pas (avis gvt, avis com etc, mais couvre pas leurs autres interventions)
+- [ ] Aviser conflits noms quand pas bons gens identifiés (fuzzyfuzz) et/ou id_acteur!=id_orateur
+- [ ] Aviser choix variables d'affiliation
+- [ ] voir la liste que je sors des sans affiliations (pas nombreux)
+- [ ] Aviser cas gouvernement
+- [ ] Aviser cas affiliation multiples (ex gauche ans groupe comme RN, etc.)
+- [ ] Aviser cas houplain NI/RN
+- [ ] REGROUPEMENT INTERVENTIONS FOIRE
 
 ## 3-identify-republic
 
 - TODO: vérifier "République Sudafricaine" (cf liste pays)
 - Et aviser avec la nouvelle remontée d'exclusions possibles.
+
+En détail : 
+« [Ll]es Républicains » 6686 ; « aux Républicains » (51); « [Dd]es Républicains » (428); « [Cc]ollègue[s]? Républicains » (26) « sénateurs Républicains »(2); « députés Républicains » (6); « entre Républicains » (4) « ex-Républicains » (1); « anciens Républicains » (1), « seuls Républicains » (1); « parlementaires Républicains » (1), « élus Républicains » (2); « groupeLes Républicains » (1); « Les Républicain » (4); « [Nn]ous Républicains » (2); « certains Républicains » (4); « élus Républicains » (2); « nos amis Républicains » (1); « droite, Républicains et macronistes » (1); « Républicains-Front national » (1); « Macronistes, Républicains, lepénistes »(1); « Rassemblement national, Républicains et macronistes » (1): (Attention, enlever sensitif à la casse) 
+
+
+
+Ligne de code : 
+
+r"\b[Ll]es Républicains|[Dd]es Républicains|aux Républicains|sénateurs Républicains|députés Républicains|entre Républicains|[Cc]ollègue[s]? Républicain[s]?|ex-Républicains|anciens Républicains|seuls Républicains|parlementaires Républicains|élus Républicains|groupeLes Républicains|Les Républicain|[Nn]ous? Républicains|certains Républicains|élus Républicains|nos amis Républicains|droite, Républicains et macronistes|Républicains-Front national|Républicains, lepénistes|Rassemblement national, Républicains\b",
+    #re.I,
+
+
 
 ### nettoyer les textes ?
 
