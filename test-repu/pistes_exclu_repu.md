@@ -1,5 +1,11 @@
 # Identification possibles exclusions
 
+# TODO: reminder
+-> faudra que nos exclusions on pense aux virgules etc.
+Cf dans ce que j’ai renvoyé dans les contextes elles sont supprimées
+(Pas dans le nettoyage à proprement parler mais dans la tokenisation que je fais à l’arrache)
+i.e. :  motif \b[\w-]+\b -> garde surtout lettres/chiffres/_/tiret, pas la virgule
+
 ## CRS/POLICE
 
 - des compagnies républicaines de sécurité,10
@@ -11,7 +17,7 @@
 - quatre compagnies républicaines de sécurité,2
 - nationale républicaine de,7
 - compagnie républicaine de,5
-- police nationale républicaine de proximité,7
+- police nationale républicaine de proximité,7 -> plus touchy ??
 - la Garde républicaine de la,1
 - Garde républicaine,1
 - Garde républicaine entre,1
@@ -46,7 +52,8 @@
 - décider dans ce cas pour forme républicaine du gouvernement (art 89 constitution)
 
 ## Groupes
-
+en vrai : Communiste, républicain, citoyen et écologiste
+->  -> aviser avec et sans virgules selon nettoyage texte + feintes dans la graphie utilisée
 - groupe communiste républicain citoyen et,8
 - groupe Communiste républicain citoyen et,6
 - CRCE communiste républicain citoyen et,1
