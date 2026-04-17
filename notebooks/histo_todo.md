@@ -52,3 +52,61 @@ Fichier retraçant les choix sur les todo
   - 4 si il faut les ajouter en "doute"
   - 5 forcer les affil restantes par dessus avec groupeAbrev.
   - 6 et au pire donc pour la var affil complète, réimposer les groupes pour le gouv
+
+
+- TODO : check nb extract contre fichiers nosdeputés (en virant les italiques etc.)
+- TODO: déduplication ? -> proposé un truc déjà, vérif (pas sur soit utile)
+  - plus tard : # choisir la clé la plus pertinente
+  - (["uid", "id_syceron", "texte"] VS uid + id_syceron seulement)
+  - en réalité encore des choses qui ont double entrée pour même ID_paragraphe
+  - mais avec texte différent = des didascalies, texte italique, etc.
+  - si pas de Texte, 370 lignes supprimées (mais qui vireraient sans doute au cleaning des données)
+- TODO: vérifier si on a pas d'autres doublons de fichier mal placés dans les législatures
+  - check si possible automatiser à la lecture de tous les uid vs seance ref, etc. ?
+- TODO : ON PEUT CHOPER LA DUPLICATION DE CAS PAR L'ID_SYCERON ET TEXTES !!
+- TODO : tests congrès et pb séances doublons.
+
+# TODO : exclusion fichiers jo :
+- Avant exclusion des fichiers doublons / congrès :
+- Shape du df chargé :  (1128128, 29)
+- Shape du df après pré-nettoyage et pré-filtrage :  (683680, 32)
+- après :
+- Shape du df chargé :  (1127838, 29)
+- Shape du df après pré-nettoyage et pré-filtrage :  (683489, 32)
+
+sans rien :
+ Extraction terminée : 791311 lignes consolidées
+
+
+Groupes dupliqués distincts : 260
+Lignes supprimées prévues : 260
+concat 791311 + 337041 -> 1128352 lignes ; après déduplication 1128092 lignes
+
+ Export CSV : (1128092 lignes)
+ 
+En virant congrès mais gardant le fichier doublon 15/16:
+
+Suppression UID ciblés - df_15 : 213 ligne(s)
+Suppression UID ciblés - df_16 : 77 ligne(s)
+
+ Export CSV df_16: (336964 lignes)
+
+ Export CSV df_15: (791098 lignes)
+
+Groupes dupliqués distincts : 217
+Lignes supprimées prévues : 217
+concat 791098 + 336964 -> 1128062 lignes ; après déduplication 1127845 lignes
+
+ Export CSV : (1127845 lignes)
+
+en virant tous les fichiers avant :
+Export CSV df_16: (336740 lignes)
+
+ Export CSV df_15: (791098 lignes)
+
+Pas de doublons avec les clés choisies
+concat 791098 + 336740 -> 1127838 lignes
+
+dedup rate/manque 7 lignes :
+moins 224 par supr fichier vs moins 217 par deduplication = manque sans doute quelques lignes qui sont pas doublonnées du fichier (les débuts annonce, ou snas texte etc.)
+-> plus propre de virer après identification
