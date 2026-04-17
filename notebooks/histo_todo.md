@@ -33,3 +33,14 @@ Fichier retraçant les choix sur les todo
   - 14 si sur affiliation après avoir forcé groupeAbrev
   - 67 si fait avant (sur affiliation_mandat_députés)
   - == FAIRE AVANT !!!
+  - 
+
+- TODO : cf FAIRE plus restrictif ?
+  - depuis l'affil députés, pour éviter de rater des cas ou on aurait forcé un groupe à un ministre et qu'on flague pas qu'il est pas identifié comme ministre sur une intervention où il l'est
+  - -> FAIT
+- TODO: comparer ce que ça donne pour gouv entre affiliation_mandat_députés et affiliation_et_gouv pour voir si ça correspond bien
+  - = cf on en trouvait sans doute comme ça des vides dans affiliation_mandat_députés qui étaient en fait des membres du gouv et que là on recode selon leur affiliation et pas en GOUV si l'info qualité orateur est pas bonne
+  - pas identifié ministre machin car info manquante, autre statut comme rapporteur, etc.
+  - ->  FAIT
+- TODO: géréer les cas limites gouv quand sont commissaires, etc. (EDM, etc.)
+  - -> normalement fait en prenant cas NA encadrés par GOUV
