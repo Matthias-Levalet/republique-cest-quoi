@@ -9,7 +9,7 @@
 
 
 ## 2-clean&filter
-
+- Aviser dernières exclusions de filtrage
 - [ ] Aviser conflits noms quand pas bons gens identifiés (fuzzyfuzz) et/ou id_acteur!=id_orateur
 - [ ] Aviser choix variables d'affiliation
 - [ ] voir la liste que je sors des sans affiliations (pas nombreux)
@@ -22,6 +22,7 @@
 
 - TODO: vérifier "République Sudafricaine" (cf liste pays)
 - Et aviser avec la nouvelle remontée d'exclusions possibles.
+- TODO : ajout identifications matthias
 
 En détail : 
 « [Ll]es Républicains » 6686 ; « aux Républicains » (51); « [Dd]es Républicains » (428); « [Cc]ollègue[s]? Républicains » (26) « sénateurs Républicains »(2); « députés Républicains » (6); « entre Républicains » (4) « ex-Républicains » (1); « anciens Républicains » (1), « seuls Républicains » (1); « parlementaires Républicains » (1), « élus Républicains » (2); « groupeLes Républicains » (1); « Les Républicain » (4); « [Nn]ous Républicains » (2); « certains Républicains » (4); « élus Républicains » (2); « nos amis Républicains » (1); « droite, Républicains et macronistes » (1); « Républicains-Front national » (1); « Macronistes, Républicains, lepénistes »(1); « Rassemblement national, Républicains et macronistes » (1): (Attention, enlever sensitif à la casse) 
