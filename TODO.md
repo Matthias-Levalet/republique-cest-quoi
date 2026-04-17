@@ -5,15 +5,6 @@
 ## 1-data-extraction
 
 ## À voir
-- TODO : check nb extract contre fichiers nosdeputés (en virant les italiques etc.)
-- TODO: déduplication ? -> proposé un truc déjà, vérif (pas sur soit utile)
-  - plus tard : # choisir la clé la plus pertinente
-  - (["uid", "id_syceron", "texte"] VS uid + id_syceron seulement)
-  - en réalité encore des choses qui ont double entrée pour même ID_paragraphe
-  - mais avec texte différent = des didascalies, texte italique, etc.
-  - si pas de Texte, 370 lignes supprimées (mais qui vireraient sans doute au cleaning des données)
-- TODO: vérifier si on a pas d'autres doublons de fichier mal placés dans les législatures
-  - check si possible automatiser à la lecture de tous les uid vs seance ref, etc. ?
 - TODO: plus tard, aviser récupération des points de contexte parents(cf tentative Matthias)
 
 
