@@ -44,3 +44,11 @@ Fichier retraçant les choix sur les todo
   - ->  FAIT
 - TODO: géréer les cas limites gouv quand sont commissaires, etc. (EDM, etc.)
   - -> normalement fait en prenant cas NA encadrés par GOUV
+
+- TODO: autre option enchainement -> c'est ce qui est fait au final !
+  - 1 tempo dynamique
+  - 2 var affil_gouv : en ajoutant les cas qualite_orateur
+  - 3 identifier les cas limites quand gouv + info manquante parfois
+  - 4 si il faut les ajouter en "doute"
+  - 5 forcer les affil restantes par dessus avec groupeAbrev.
+  - 6 et au pire donc pour la var affil complète, réimposer les groupes pour le gouv
