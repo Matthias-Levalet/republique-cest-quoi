@@ -29,3 +29,7 @@ Fichier retraçant les choix sur les todo
 - TODO : on pourrait imaginer une dernière étape de check nom original vs final renvoyé pour gérer les cas limites ?
   - semble ok jusque là, aviser en fonction si gros souci ?
 
+- TODO : recodage automatique temporel si NA entre GOUV le même jour :
+  - 14 si sur affiliation après avoir forcé groupeAbrev
+  - 67 si fait avant (sur affiliation_mandat_députés)
+  - == FAIRE AVANT !!!
