@@ -6,6 +6,7 @@
 
 ## À voir
 - TODO: plus tard, aviser récupération des points de contexte parents(cf tentative Matthias)
+- [ ] REGROUPEMENT INTERVENTIONS FOIRE -> nouvelle version semble okayish
 
 
 ## 2-clean&filter
@@ -15,12 +16,13 @@
 - [ ] voir la liste que je sors des sans affiliations (pas nombreux)
 - [ ] Aviser cas gouvernement
 - [ ] Aviser cas affiliation multiples (ex gauche ans groupe comme RN, etc.)
-- [ ] Aviser cas houplain NI/RN
-- [ ] REGROUPEMENT INTERVENTIONS FOIRE
+- [X] Aviser cas houplain NI/RN
+- TODO : aviser lamartine et pb soucis identification
 
 ## 3-identify-republic
 
 - TODO: vérifier "République Sudafricaine" (cf liste pays)
+- TODO : ajouter les nouveux cas identifiés
 - Et aviser avec la nouvelle remontée d'exclusions possibles.
 
 
@@ -31,6 +33,7 @@
 ## 4-analysis ?
 
 - [ ] repartir de ce qu'a fait matthias, mettre à plat, vérifier, stabiliser, améliorer, etc.
+- [ ] envisager stat en nb occurrence, % des interventions, et même chose hors interruption(doc actualiser numérateur et dénominateur)
 
 ### dates
 
@@ -46,7 +49,8 @@
 
 ## Pistes, etc.
 
-
+# TODO
+- TODO lamartine : en réalité vérifier avec matthias y avait des possibles soucis
 seances_lamartine = [
     "CRSANR5L16S2023O1N201",
     "CRSANR5L16S2024O1N124",
