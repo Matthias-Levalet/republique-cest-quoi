@@ -6,7 +6,10 @@
 
 ## À voir
 - TODO: plus tard, aviser récupération des points de contexte parents(cf tentative Matthias)
-- [ ] REGROUPEMENT INTERVENTIONS FOIRE -> nouvelle version semble okayish
+- REGROUPEMENT INTERVENTIONS FOIRE -> nouvelle version semble okayish
+- toujours un mini écrat, semble plus rentable de pas trier les fichiers par numéro ordre  :
+  - les interventions sont déjà dans l'ordre, les id numérotés semblent pas super stables ?
+  - et donc au final le résultat semble meilleur sans réappliquer de tri. Mais pq cet écart ?
 
 
 ## 2-clean&filter
@@ -22,8 +25,9 @@
 ## 3-identify-republic
 
 - TODO: vérifier "République Sudafricaine" (cf liste pays)
-- TODO : ajouter les nouveux cas identifiés
+- TODO : ajouter les nouveaux cas identifiés
 - Et aviser avec la nouvelle remontée d'exclusions possibles.
+- check "\t" vs rien dans liste pays république
 
 
 ### nettoyer les textes ?
