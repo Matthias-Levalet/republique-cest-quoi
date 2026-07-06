@@ -236,7 +236,6 @@ def traiter_dossier_compte_rendu_lxml(
         return pd.DataFrame()
 
 
-
 # %% [markdown]
 # ## 1.2 Extraction des données des XML et export CSV
 
@@ -424,12 +423,13 @@ df["code_parole"] = df["code_parole"].fillna("non_précisé")
 # # cf surtout des interruptions et ne change pas grand chose au regroup d'interventions
 # + quand erreur pas forcément de changement d'ID entre ou d'interv.
 
-# # Mais par principe la trace si on veut garder :
-# # Stabiliser le id_orateur pour être au format AN
-# df["id_orateur"] = "PA" + df["id_orateur"]
-# # Remplacer les valeurs manquantes de id_acteur par id_orateur quand disponible
-# df["id_acteur_originel"] = df["id_acteur"]  # garder une trace
-# df["id_acteur"] = df["id_acteur"].combine_first(df["id_orateur"])
+# TODO :notre regroupement était cassé, le mettre au cas où :
+# Mais par principe la trace si on veut garder :
+# Stabiliser le id_orateur pour être au format AN
+df["id_orateur"] = "PA" + df["id_orateur"]
+# Remplacer les valeurs manquantes de id_acteur par id_orateur quand disponible
+df["id_acteur_originel"] = df["id_acteur"]  # garder une trace
+df["id_acteur"] = df["id_acteur"].combine_first(df["id_orateur"])
 
 
 """
@@ -483,7 +483,7 @@ COLS_META = [
 ]
 
 # ---------------------------------------------------------------------------
-# Fonction principale
+# ========== Fonction principale ==========
 # ---------------------------------------------------------------------------
 
 
