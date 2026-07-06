@@ -120,9 +120,7 @@ def extraire_paragraphes_lxml(fichier_xml: str) -> pd.DataFrame:
             # garder apparent pour éventuels choix ou recodages des noms plutôt que des machins type `**meta`
             rows.append(
                 {
-                    # ========================
-                    # Métadonnées de la séance
-                    # ========================
+                    # ===== Métadonnées de la séance =====
                     "uid": meta["uid"],
                     "SeanceRef": meta["SeanceRef"],
                     "SessionRef": meta["SessionRef"],
@@ -135,9 +133,7 @@ def extraire_paragraphes_lxml(fichier_xml: str) -> pd.DataFrame:
                     "session": meta["session"],
                     "nomFichierJo": meta["nomFichierJo"],
                     "presidentSeance": meta["presidentSeance"],
-                    # ========================
-                    # Données du point parent (contexte)
-                    # ========================
+                    # ===== Données du point parent (contexte) =====
                     "point_titre": point_title,
                     "point_type": point_type,
                     # 'Sous_titre': '',  # not in this version, get back to original if needed
@@ -146,9 +142,7 @@ def extraire_paragraphes_lxml(fichier_xml: str) -> pd.DataFrame:
                     # 'Sujet_point': '', # not in this version, get back to original if needed
                     # "point_valeur_ptsodj": point_valeur_ptsodj,
                     # "point_id": point_id,
-                    # ========================
-                    # données du paragraphe
-                    # ========================
+                    # ===== données du paragraphe =====
                     "valeur_ptsodj": paragraphe.get("valeur_ptsodj"),
                     "ordinal_prise": paragraphe.get("ordinal_prise"),
                     "ordre_absolu_seance": paragraphe.get("ordre_absolu_seance"),
@@ -159,9 +153,7 @@ def extraire_paragraphes_lxml(fichier_xml: str) -> pd.DataFrame:
                     "code_parole": paragraphe.get("code_parole"),
                     "id_syceron": paragraphe.get("id_syceron"),
                     "roledebat": paragraphe.get("roledebat"),
-                    # ========================
-                    # données orateur + texte
-                    # ========================
+                    # ===== données orateur + texte =====
                     "nom_orateur": nom_orateur,
                     "qualite_orateur": qualite_orateur,
                     "id_orateur": id_orateur,
