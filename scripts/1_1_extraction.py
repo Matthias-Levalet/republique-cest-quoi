@@ -6,10 +6,12 @@
 # Écrit `extract_15.csv` et `extract_16.csv`, utilisés par l'étape suivante (1-2).
 
 # %%
+# TODO: check against NosDéputés/RegardsCitoyens <3
+# TODO: exclure lamartine ?
+
 # TODO: plus tard, aviser récupération des points de contexte parents (cf tentative Matthias)
 # TODO: est-ce que les séquences d'interruption peuvent être identifiées directement
 # depuis xml car elles seraient dans un bloc <interExtraction> ?
-# TODO: check against NosDéputés/RegardsCitoyens <3
 
 # %%
 import os
