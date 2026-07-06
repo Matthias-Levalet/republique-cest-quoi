@@ -10,30 +10,17 @@
 - toujours un mini écrat, semble plus rentable de pas trier les fichiers par numéro ordre  :
   - les interventions sont déjà dans l'ordre, les id numérotés semblent pas super stables ?
   - et donc au final le résultat semble meilleur sans réappliquer de tri. Mais pq cet écart ?
-- EXCLURE LAMARTINE OU PAS ?
+  - tester avec le id_syceron ?
+- TODO : EXCLURE LAMARTINE OU PAS ?
 
 ## 2-clean&filter
-- [ ] Aviser dernières exclusions de filtrage
-- [ ] Aviser conflits noms quand pas bons gens identifiés (fuzzyfuzz) et/ou id_acteur!=id_orateur
-- [ ] # TODO : les autres repérés dans le identif.csv et ajout_id_acteur.csv (si pas déjà dans identif)
 - [ ] # TODO: syceron 2827575 2827576 2827577 = M. Lionel Tivoli = PA793298 ?
-- [ ] LES PASSER id acteur EN PA0, remettre un nomorateurclean neutre/vide ET BASTA !!!!!!!!
-
-
-
-
-
-
-
-
-
-
-- [ ] Aviser choix variables d'affiliation
 - [ ] voir la liste que je sors des sans affiliations (pas nombreux)
 - [ ] Aviser cas gouvernement
 - [ ] Aviser cas affiliation multiples (ex gauche sans groupe comme RN, etc.)
 - [X] Aviser cas houplain NI/RN
 - TODO : aviser lamartine et pb soucis identification
+- passé de 3 cas limite a 2 après le fuzzy ? why ? breneel, boyer, machin
 
 ## 3-identify-republic
 
@@ -44,16 +31,8 @@
 
 ### nettoyer les textes ?
 
+- [X] ENJEU DES ACCENTS À TESTER ! fait avec unicodedata, pas de diff
 - [ ] RAS ?
-- [ ] ENJEU DES ACCENTS À TESTER !
-
-import re
-import unicodedata
-
-texte = unicodedata.normalize("NFC", texte)
-
-if re.search(r"républi", texte, re.IGNORECASE):
-    print("Trouvé")
 
 ## 4-analysis ?
 
