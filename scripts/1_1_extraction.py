@@ -17,19 +17,17 @@ import glob
 from lxml import etree
 import pandas as pd
 
-PATH_XML_16 = "../data/raw/16-xml/compteRendu/"
 PATH_XML_15 = "../data/raw/15-xml/compteRendu/"
+PATH_XML_16 = "../data/raw/16-xml/compteRendu/"
 
-PATH_SORTIE_16 = "../data/interim/extract_16.csv"
 PATH_SORTIE_15 = "../data/interim/extract_15.csv"
+PATH_SORTIE_16 = "../data/interim/extract_16.csv"
 
 # %% [markdown]
 # ## Fonctions d'extraction
 
 
 # %%
-
-
 # ==================================================================
 # FONCTIONS D'EXTRACTION DES DONNÉES
 # ==================================================================
@@ -176,7 +174,6 @@ def traiter_dossier_compte_rendu_lxml(
     """
     Traite tous les fichiers XML d'un dossier avec la fonction extraire_paragraphes_lxml().
     """
-    # fichiers = glob.glob(os.path.join(dossier_path, pattern))
     # lecture des fichiers avec un sorted pour reproductibilité
     fichiers = sorted(glob.glob(os.path.join(dossier_path, pattern)))
 
@@ -211,8 +208,16 @@ def traiter_dossier_compte_rendu_lxml(
 # ## Traitement des législatures souhaitées
 
 # %%
+# ==================================================================
+# TRAITEMENT DES LÉGISLATURES SOUHAITÉES
+# ==================================================================
+
+# ========== Traitement des législatures ==========
+
 df_16 = traiter_dossier_compte_rendu_lxml(PATH_XML_16)
 df_15 = traiter_dossier_compte_rendu_lxml(PATH_XML_15)
+
+# ========== Nettoyage fichiers doublons et congrès ==========
 
 # %% [markdown]
 # ## Nettoyage fichiers doublons et congrès
@@ -246,6 +251,7 @@ print(
 for uid in uids_trouvees_16:
     print(f"  - {uid}")
 
+# puis suppression des lignes correspondantes
 n15_avant, n16_avant = len(df_15), len(df_16)
 df_15 = df_15[~df_15["uid"].isin(uids_a_exclure)]
 df_16 = df_16[~df_16["uid"].isin(uids_a_exclure)]
@@ -257,8 +263,9 @@ print(f"Suppression UID ciblés - df_16 : {n16_avant - len(df_16)} ligne(s)")
 # ## Export
 
 # %%
-df_16.to_csv(PATH_SORTIE_16, index=False, encoding="utf-8")
-print(f"\n Export CSV df_16: ({df_16.shape[0]} lignes) -> {PATH_SORTIE_16}")
-
+# exports
 df_15.to_csv(PATH_SORTIE_15, index=False, encoding="utf-8")
 print(f"\n Export CSV df_15: ({df_15.shape[0]} lignes) -> {PATH_SORTIE_15}")
+
+df_16.to_csv(PATH_SORTIE_16, index=False, encoding="utf-8")
+print(f"\n Export CSV df_16: ({df_16.shape[0]} lignes) -> {PATH_SORTIE_16}")
