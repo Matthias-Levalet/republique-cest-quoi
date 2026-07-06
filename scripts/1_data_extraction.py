@@ -363,12 +363,12 @@ if mask_removed.sum() == 0:
 else:
     # lignes que l'on vire
     removed = df_concat[mask_removed].copy()
-    # toutes les lignes impliquées dans un doublon, y compris celle qu'on garde
-    mask_any = df_concat.duplicated(subset=dup_key, keep=False)
-    # si besoin investigation :
-    # groupes doublons = lignes dupliquées regroupées et triées
+    # # si besoin investigation :
+    # # toutes les lignes impliquées dans un doublon, y compris celle qu'on garde
+    # mask_any = df_concat.duplicated(subset=dup_key, keep=False)
+    # # groupes doublons = lignes dupliquées regroupées et triées
     # dupe_groups = df_concat[mask_any].sort_values(by=dup_key)
-    # les survivants (si jamais on veut les voir, pas utilisé directement ici)
+    # # les survivants (si jamais on veut les voir, pas utilisé directement ici)
     # kept_in_groups = df_concat[~mask_removed & mask_any]
 
     print(f"Groupes dupliqués distincts  : {mask_removed.sum()}")
@@ -422,7 +422,7 @@ df["code_parole"] = df["code_parole"].fillna("non_précisé")
 # # les recodages "manuels" de PA repérés par ailleurs (voir autre notebook)
 # # ne changent rien non plus ici
 # # cf surtout des interruptions et ne change pas grand chose au regroup d'interventions
-# # + quand erreur pas forcément de changement d'ID entre ou d'interv.
+# + quand erreur pas forcément de changement d'ID entre ou d'interv.
 
 # # Mais par principe la trace si on veut garder :
 # # Stabiliser le id_orateur pour être au format AN
