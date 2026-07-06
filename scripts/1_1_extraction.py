@@ -8,7 +8,7 @@
 # %%
 # TODO: plus tard, aviser récupération des points de contexte parents (cf tentative Matthias)
 # TODO: est-ce que les séquences d'interruption peuvent être identifiées directement
-#       depuis xml car elles seraient dans un bloc <interExtraction> ?
+# depuis xml car elles seraient dans un bloc <interExtraction> ?
 # TODO: check against NosDéputés/RegardsCitoyens <3
 
 # %%
@@ -217,7 +217,6 @@ def traiter_dossier_compte_rendu_lxml(
 df_16 = traiter_dossier_compte_rendu_lxml(PATH_XML_16)
 df_15 = traiter_dossier_compte_rendu_lxml(PATH_XML_15)
 
-# ========== Nettoyage fichiers doublons et congrès ==========
 
 # %% [markdown]
 # ## Nettoyage fichiers doublons et congrès
@@ -227,6 +226,8 @@ df_15 = traiter_dossier_compte_rendu_lxml(PATH_XML_15)
 # ciblée de fichiers, voir 1-2).
 
 # %%
+# ========== Nettoyage fichiers doublons et congrès ==========
+
 uids_a_exclure = {
     "CRSANR5L16S2021O1N144",  # "faux" fichier en 16e (doublon de "CRSANR5L15S2021O1N144" de 2021)
     "CRSJOCGR5L15S2017E1N001",  # JO "Congrès du Parlement du 3 juillet 2017"
@@ -263,7 +264,7 @@ print(f"Suppression UID ciblés - df_16 : {n16_avant - len(df_16)} ligne(s)")
 # ## Export
 
 # %%
-# exports
+# ========== Exports ==========
 df_15.to_csv(PATH_SORTIE_15, index=False, encoding="utf-8")
 print(f"\n Export CSV df_15: ({df_15.shape[0]} lignes) -> {PATH_SORTIE_15}")
 
