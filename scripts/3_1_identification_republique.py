@@ -186,6 +186,7 @@ def count_lexical_outside_excl(text):
 
     NOTE : on pourrait optimiser in_excl() via spans triés + bisect, pas
     indispensable ici et plus complexe.
+    + probablement pas rentable car pas assez occurrences par texte ?
     """
     if pd.isna(text) or not pattern_lexical.search(text):
         return 0
