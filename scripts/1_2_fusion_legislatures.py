@@ -20,8 +20,22 @@ PATH_SORTIE = "../data/interim/extract_15_16_concat.csv"
 # concaténation de df_15 et df_16
 # ==================================================================
 
-df_15 = pd.read_csv(PATH_ENTREE_15, encoding="utf-8")
-df_16 = pd.read_csv(PATH_ENTREE_16, encoding="utf-8")
+df_15 = pd.read_csv(
+    PATH_ENTREE_15,
+    low_memory=False,
+    dtype={
+        "id_orateur": str
+    },  # éviter identification en float avant d'avoir ajouté le "PA"
+)
+
+df_16 = pd.read_csv(
+    PATH_ENTREE_16,
+    low_memory=False,
+    dtype={
+        "id_orateur": str
+    },  # éviter identification en float avant d'avoir ajouté le "PA"
+)
+
 
 # %%
 df_concat = pd.concat([df_15, df_16], ignore_index=True, sort=False)
