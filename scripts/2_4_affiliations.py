@@ -290,13 +290,13 @@ df["affiliation_et_gouv"] = df["affiliation_et_gouv"].replace(RECODAGE_AFFILIATI
 # Et gérer les nouvelles dénominations propres groupeAbrev
 df["affiliation_et_gouv"] = df["affiliation_et_gouv"].replace(RECODAGE_GROUPE_ABREV)
 
-print("=== Cas concernés par le fallback via groupeAbrev ===")
+print("\n=== Cas concernés par le fallback via groupeAbrev ===")
 print("Nombre d'interventions concernées :", mask_fallback.sum())
 print(
     "Nombre d'id_acteur uniques concernés :",
     df.loc[mask_fallback, "id_acteur"].nunique(dropna=True),
 )
-print("\nListe des orateurs concernés :")
+print("Liste des orateurs concernés :")
 print(df.loc[mask_fallback, "nom_orateur_clean"].dropna().unique())
 
 # %% [markdown]
@@ -317,7 +317,7 @@ condition_NI_RN = (df["id_acteur"].isin(LISTE_NI_RN)) & (
 
 df.loc[condition_NI_RN, "affiliation_et_gouv"] = "RN"
 
-print("Lignes recodées RN :", condition_NI_RN.sum())
+print("\nLignes recodées RN :", condition_NI_RN.sum())
 print(
     "Affiliation recodées pour",
     df.loc[condition_NI_RN, "id_acteur"].nunique(),
@@ -334,7 +334,7 @@ print("Ceci ne modifie pas le nb sans affiliation_et_gouv : simple recodage NI v
 mask_na = df["affiliation_et_gouv"].isna()
 na_ids = df.loc[mask_na, "id_acteur"]
 
-print("Interventions restantes sans affiliation :", int(mask_na.sum()))
+print("\nInterventions restantes sans affiliation :", int(mask_na.sum()))
 print(" - dont PA0 :", int((mask_na & df["id_acteur"].eq("PA0")).sum()))
 print(" - hors PA0 :", int((mask_na & ~df["id_acteur"].eq("PA0")).sum()))
 print(
