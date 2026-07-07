@@ -350,16 +350,3 @@ df_match.to_csv(
     # quoting=csv.QUOTE_ALL,  # not needed anymore ?
 )
 
-
-# %%
-# vérification écriture/lecture ok
-print("df_match shape:", df_match.shape)
-
-df_test = pd.read_csv("../data/interim/df_repu.csv", low_memory=False)
-
-print("df_test shape (après export import): ", df_test.shape)
-
-# %%
-print(liste_pays)
-
-# %%
