@@ -1074,7 +1074,7 @@ if mask_congres.any():
 
 # %%
 # Export du csv nettoyé
-df.to_csv("../data/interim/data_cleaning_full.csv", index=False)
+df.to_csv("../data/interim/interventions_nettoyees.csv", index=False)
 
 # # NB: certaines col du df_deputes introduisent une erreur à l'import/export
 # # Elles ne sont pas utilisées ici, mais si besoin de les utiliser
