@@ -62,9 +62,9 @@ print("Shape après garde-fou texte manquant/vide : ", df.shape)
 # Logique de l'identification des mentions valides de République :
 # - regex sur le champ lexical "républi"
 # - mais exclusion de certains termes (positions, pas de chaînage) car les
-#   termes exclus peuvent apparaître aussi avec les termes voulus (les idées
-#   républicaines sont menacées par Les Républicains) : chaîner risquerait
-#   de virer des occurrences qu'on aurait voulu garder.
+# termes exclus peuvent apparaître aussi avec les termes voulus (les idées
+# républicaines sont menacées par Les Républicains) : chaîner risquerait
+# de virer des occurrences qu'on aurait voulu garder.
 
 # %%
 # préparer les pays à exclure
@@ -130,7 +130,7 @@ pattern_excl_case_insensitive = re.compile(
     r"|(?:\badministration générale de la république\b)"
     r"|(?:\bgouvernement de la république française\b)"  # pas de pluriel dans corpus
     r"|(?:\bInstitut supérieur des langues de la République française\b)"
-    r"|(?:\bHaut-commissariat de la République\b)"  # expression utilisée pour parler des préfets en Kanaky et Polynésie française uniquement
+    r"|(?:\bHaut-commissariat de la République\b)"  # préfets en Kanaky et Polynésie française uniquement
     r"|(?:\bHaut-commissaire de la République\b)"  # ibid
     r"|(?:\bcompagnies? républicaines? de sécurité\b)"
     r"|(?:\bgarde républicaine\b)"
@@ -171,40 +171,24 @@ pattern_excl_case_insensitive = re.compile(
 # République romaine = 5 ????
 
 
-def contains_lexical_outside_excl(text):
-    """
-    Renvoie True si le texte contient au moins une occurrence du champ
-    lexical "républi" en dehors des zones d'exclusion.
-    NOTE : on pourrait optimiser via spans triés + bisect (et fusionner les
-    positions d'exclusion), pas indispensable ici et plus complexe.
-    """
-    # si pas de match lexical inutile d'aller plus loin
-    if not pattern_lexical.search(text):
-        return False
-    # Collecter les spans exclus
-    # en ajoutant les exclusions sensibles et insensibles à la casse
-    excl_positions = [m.span() for m in pattern_excl_case_sensitive.finditer(text)] + [
-        m.span() for m in pattern_excl_case_insensitive.finditer(text)
-    ]
-
-    # Fonction pour vérifier si une position est dans une zone exclue
-    def in_excl(pos):
-        for start, end in excl_positions:
-            if start <= pos < end:
-                return True
-        return False
-
-    for match in pattern_lexical.finditer(text):
-        if not in_excl(match.start()):
-            return True
-    return False
-
-
+#
 def count_lexical_outside_excl(text):
-    """Compte les occurrences valides du champ lexical (hors zones d'exclusion)."""
-    if pd.isna(text):
-        return 0
+    """
+    Compte les occurrences valides du champ lexical "républi" (hors zones
+    d'exclusion). Early-exit via pattern_lexical.search() avant de calculer
+    les positions d'exclusion (coûteux, notamment la liste de pays) : utile
+    car la grande majorité des textes ne contiennent aucune occurrence.
 
+    NOTE : l'ancienne fonction contains_lexical_outside_excl() a été
+    supprimée (07/07/2026) : elle est strictement équivalente à
+    (count_lexical_outside_excl(text) > 0), donc redondante. Équivalence
+    vérifiée par test, même nombre de matchs.
+
+    NOTE : on pourrait optimiser in_excl() via spans triés + bisect, pas
+    indispensable ici et plus complexe.
+    """
+    if pd.isna(text) or not pattern_lexical.search(text):
+        return 0
     # Trouver les positions des expressions exclues
     excl_positions = [m.span() for m in pattern_excl_case_sensitive.finditer(text)] + [
         m.span() for m in pattern_excl_case_insensitive.finditer(text)
@@ -217,42 +201,65 @@ def count_lexical_outside_excl(text):
                 return True
         return False
 
-    # Compter les occurrences valides
-    count = 0
-    for match in pattern_lexical.finditer(text):
-        if not in_excl(match.start()):
-            count += 1
-    return count
+    return sum(1 for m in pattern_lexical.finditer(text) if not in_excl(m.start()))
 
+
+# Ancienne fonction bool (07/07/2026) : redondante avec count_lexical_outside_excl() > 0, donc supprimée.
+# gardée pour référence
+# (et si besoin d'appliquer à un gros volume sans compter toutes les occurences = plus rapide)
+# def contains_lexical_outside_excl(text):
+#     """
+#     Renvoie True si le texte contient au moins une occurrence du champ
+#     lexical "républi" en dehors des zones d'exclusion.
+#     NOTE : on pourrait optimiser via spans triés + bisect (et fusionner les
+#     positions d'exclusion), pas indispensable ici et plus complexe.
+#     """
+#     # si pas de match lexical inutile d'aller plus loin
+#     if not pattern_lexical.search(text):
+#         return False
+#     # Collecter les spans exclus
+#     # en ajoutant les exclusions sensibles et insensibles à la casse
+#     excl_positions = [m.span() for m in pattern_excl_case_sensitive.finditer(text)] + [
+#         m.span() for m in pattern_excl_case_insensitive.finditer(text)
+#     ]
+
+#     # Fonction pour vérifier si une position est dans une zone exclue
+#     def in_excl(pos):
+#         for start, end in excl_positions:
+#             if start <= pos < end:
+#                 return True
+#         return False
+
+#     for match in pattern_lexical.finditer(text):
+#         if not in_excl(match.start()):
+#             return True
+#     return False
 
 # %%
 # bloc d'essai
-mon_texte = "Les députés Républicains ont voté une loi grâce à l'institut de la famille et république."
-print("Test bloc d'essai :", contains_lexical_outside_excl(mon_texte))
+mon_texte = "Les députés Républicains sont très républicains. Vive la république !"
+print(
+    "Test bloc d'essai (nb mentions valides) :", count_lexical_outside_excl(mon_texte)
+)
 
 # %% [markdown]
 # ## Application
+# nb : une seule fonction (count_lexical_outside_excl) suffit désormais.
+# repu_match_valide est dérivé de façon vectorisée à partir du comptage,
+# sans second passage sur le texte (voir note dans count_lexical_outside_excl).
 
 # %%
-
-# ========== Appliquer identification mentions valides ==========
-df["repu_match_valide"] = df["texte"].apply(contains_lexical_outside_excl)
+# ========== Appliquer comptage et identification mentions valides ==========
+df["nombre_mentions_repu"] = df["texte"].apply(count_lexical_outside_excl)
+df["repu_match_valide"] = df["nombre_mentions_repu"] > 0
 print(df["repu_match_valide"].value_counts())
 
 # %%
 # NOTE : après tests, pas de différence côté accents (normalisation unicodedata NFC) :
 # import unicodedata
 # df["texte_nfc"] = df["texte"].apply(lambda x: unicodedata.normalize("NFC", x))
-# df["repu_match_valide_nfc"] = df["texte_nfc"].apply(contains_lexical_outside_excl)
+# df["repu_match_valide_nfc"] = df["texte_nfc"].apply(count_lexical_outside_excl) > 0
 # print(df["repu_match_valide_nfc"].value_counts())
-
-# %%
-# ========== Comptage mentions valides ==========
-
-# TODO : pourrait fusionner avec contains_lexical_outside_excl pour éviter de
-# parcourir le texte deux fois ; gardé séparé pour l'instant pour clarté et test.
-
-df["nombre_mentions_repu"] = df["texte"].apply(count_lexical_outside_excl)
 
 # %% [markdown]
 # ## Exports
