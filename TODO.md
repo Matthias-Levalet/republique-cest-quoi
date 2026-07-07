@@ -20,7 +20,6 @@
 - [ ] Aviser cas affiliation multiples (ex gauche sans groupe comme RN, etc.)
 - [X] Aviser cas houplain NI/RN
 - TODO : aviser lamartine et pb soucis identification
-- passé de 3 cas limite a 2 après le fuzzy ? why ? breneel, boyer, machin
 
 ## 3-identify-republic
 
