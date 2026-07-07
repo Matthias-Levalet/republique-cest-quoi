@@ -178,11 +178,11 @@ Mais en fait ce sont presque 100% des interruptions avec souvent plusieurs locut
 id_orateur en renvoie (mal) un seul -> on préfère garder le PA0 (neutre)
 """
 
-# Stabiliser le id_orateur pour être au format AN
-df["id_orateur"] = "PA" + df["id_orateur"]
-# Remplacer les valeurs manquantes de id_acteur par id_orateur quand disponible
-df["id_acteur_originel"] = df["id_acteur"]  # garder une trace
-df["id_acteur"] = df["id_acteur"].combine_first(df["id_orateur"])
+# # Stabiliser le id_orateur pour être au format AN
+# df["id_orateur"] = "PA" + df["id_orateur"]
+# # Remplacer les valeurs manquantes de id_acteur par id_orateur quand disponible
+# df["id_acteur_originel"] = df["id_acteur"]  # garder une trace
+# df["id_acteur"] = df["id_acteur"].combine_first(df["id_orateur"])
 
 
 # ========== Recoder par noms les plus fréquents et nettoyer ==========
