@@ -96,15 +96,16 @@ def nettoyer_texte(texte):
     # Balises de bloc > espace (éviter collage de mots)
     texte = re.sub(
         r"</(?:p|div|li|td|th|tr|h[1-6])>\s*<", " <", texte, flags=re.IGNORECASE
-    )
+    )  # TODO : redondant <[^>]+> ?
     # Sauts de ligne HTML > espace
     texte = re.sub(r"<br\s*/?>", " ", texte, flags=re.IGNORECASE)
     # Supprimer les balises HTML/XML restantes
-    texte = re.sub(r"<[^>]+>", " ", texte)
+    texte = re.sub(r"<[^>]+>", " ", texte)  # Redondant avec point plus haut ?
     # Supprimer contenu entre parenthèses
     # NOTE : CHOIX FORT SELON CE QUI VEUT ÊTRE ÉTUDIÉ
     # Supprime des didascalies ("Applaudissements", etc.)
     # mais aussi tout autre contenu entre parenthèses
+    # TODO : problème des parenthèses imbriquées (parfois sur (e)) > mais genre 2 occurences sur 16°Legislature
     texte = re.sub(r"\([^()]*\)", "", texte)
     # Uniformiser apostrophes (utile pour regex)
     texte = texte.replace("’", "'").replace("\u02bc", "'")
