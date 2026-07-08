@@ -7,6 +7,8 @@
 
 # %%
 import re
+import html
+import unicodedata
 import pandas as pd
 
 PATH_ENTREE = "../data/interim/interventions_regroupees.csv"
@@ -83,19 +85,33 @@ print(f"Shape après exclusion code_grammaire : {df.shape}")
 
 # nettoyage basique du texte
 
-
+# TODO : vérif test suite modif fonction
 def nettoyer_texte(texte):
-    """Nettoyage basique du texte d'une intervention."""
     if not isinstance(texte, str):
-        return texte
-    # Supprimer les balises HTML/XML
-    texte = re.sub(r"<[^>]+>", "", texte)
+        return ""
+    # Normaliser les caractères Unicode
+    texte = unicodedata.normalize("NFC", texte)  # TODO sans doute overkill
+    # Décoder les entités HTML
+    texte = html.unescape(texte)
+    # Balises de bloc > espace (éviter collage de mots)
+    texte = re.sub(
+        r"</(?:p|div|li|td|th|tr|h[1-6])>\s*<", " <", texte, flags=re.IGNORECASE
+    )
+    # Sauts de ligne HTML > espace
+    texte = re.sub(r"<br\s*/?>", " ", texte, flags=re.IGNORECASE)
+    # Supprimer les balises HTML/XML restantes
+    texte = re.sub(r"<[^>]+>", " ", texte)
     # Supprimer contenu entre parenthèses
-    texte = re.sub(r"\([^)]*\)", "", texte)
-    # Supprimer les espaces multiples
+    # NOTE : CHOIX FORT SELON CE QUI VEUT ÊTRE ÉTUDIÉ
+    # Supprime des didascalies ("Applaudissements", etc.)
+    # mais aussi tout autre contenu entre parenthèses
+    texte = re.sub(r"\([^()]*\)", "", texte)
+    # Uniformiser apostrophes (utile pour regex)
+    texte = texte.replace("’", "'").replace("\u02bc", "'")
+    # Normaliser les espaces (après unescape(), couvre \xa0, \t, \n)
+    # et supprimer les espaces multiples
     texte = re.sub(r"\s+", " ", texte).strip()
-    # uniformise pour avoir les bons apostrophes (nécessaire pour regex)
-    texte = texte.replace("’", "'")
+
     return texte
 
 
