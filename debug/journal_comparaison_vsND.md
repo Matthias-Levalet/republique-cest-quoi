@@ -63,3 +63,10 @@ aide à mourir soit vraiment collégiale
 
 ### df_only_extract_with_speaker
 des fichiers spécifiques ? CRSANR5L15S2018E1N007
+
+
+### Repérage des textes des pnum/id soit disant absents vs fichier opposé
+fast_only_extract_with_speaker -> found: 899 / 1569
+fast_only_ND_with_speaker     -> found: 382 / 838
+
+# TODO : aller creuser les cas pas trouver pour voir
