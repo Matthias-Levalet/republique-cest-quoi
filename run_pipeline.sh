@@ -22,7 +22,9 @@ for etape in "${etapes[@]}"; do
 done
 
 echo ""
-echo "Pipeline complet"
+echo "=============================="
+echo "=== Pipeline sh complet ==="
+echo "=============================="
 
 # Pour exécuter : 
 # chmod +x run_pipeline.sh

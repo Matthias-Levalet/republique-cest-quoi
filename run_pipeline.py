@@ -15,14 +15,13 @@ etapes = [
 ]
 
 for etape in etapes:
-    print(f"\n{'='*40}\n=== {etape} ===\n{'='*40}")
+    print(f"\n{'=' * 40}\n=== {etape} ===\n{'=' * 40}")
     subprocess.run(
         [sys.executable, etape],
-        cwd=scripts,          # exécuter depuis scripts/ pour que ../data/ fonctionne
-        check=True
+        cwd=scripts,  # exécuter depuis scripts/ pour que ../data/ fonctionne
+        check=True,
     )
 
-print("\nPipeline complet !")
-
+print(f"\n{'=' * 40}\n=== Pipeline py complet ! ===\n{'=' * 40}")
 # pour exécuter :
 # python run_pipeline.py
