@@ -59,7 +59,7 @@ COLS_META = [
     "session",
     "nomFichierJo",
     "presidentSeance",
-    "point_titre",
+    "point_structure_complete",
     "point_type",
     "valeur_ptsodj",
     "ordinal_prise",
