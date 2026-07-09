@@ -11,7 +11,7 @@ import html
 import unicodedata
 import pandas as pd
 
-PATH_ENTREE = "../data/interim/interventions_regroupees.csv"
+PATH_ENTREE = "../data/interim/1_3_interventions_regroupees.csv"
 PATH_SORTIE = "../data/interim/2_1_filtrage_nettoyage.csv"
 
 # Codes grammaires à exclure après les premiers filtres

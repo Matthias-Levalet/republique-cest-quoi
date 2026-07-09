@@ -8,8 +8,8 @@
 # %%
 import pandas as pd
 
-PATH_ENTREE = "../data/interim/extract_15_16_concat.csv"
-PATH_SORTIE = "../data/interim/interventions_regroupees.csv"
+PATH_ENTREE = "../data/interim/1_2_extract_15_16_concat.csv"
+PATH_SORTIE = "../data/interim/1_3_interventions_regroupees.csv"
 
 # %%
 df = pd.read_csv(

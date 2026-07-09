@@ -22,8 +22,8 @@ import pandas as pd
 PATH_XML_15 = "../data/raw/15-xml/compteRendu/"
 PATH_XML_16 = "../data/raw/16-xml/compteRendu/"
 
-PATH_SORTIE_15 = "../data/interim/extract_15.csv"
-PATH_SORTIE_16 = "../data/interim/extract_16.csv"
+PATH_SORTIE_15 = "../data/interim/1_1_extract_15.csv"
+PATH_SORTIE_16 = "../data/interim/1_1_extract_16.csv"
 
 # %% [markdown]
 # ## Fonctions d'extraction

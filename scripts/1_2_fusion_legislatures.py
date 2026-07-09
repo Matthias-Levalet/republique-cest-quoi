@@ -7,9 +7,9 @@
 # %%
 import pandas as pd
 
-PATH_ENTREE_15 = "../data/interim/extract_15.csv"
-PATH_ENTREE_16 = "../data/interim/extract_16.csv"
-PATH_SORTIE = "../data/interim/extract_15_16_concat.csv"
+PATH_ENTREE_15 = "../data/interim/1_1_extract_15.csv"
+PATH_ENTREE_16 = "../data/interim/1_1_extract_16.csv"
+PATH_SORTIE = "../data/interim/1_2_extract_15_16_concat.csv"
 
 # %% [markdown]
 # ## Concaténation
