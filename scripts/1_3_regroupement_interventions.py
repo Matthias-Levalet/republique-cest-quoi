@@ -24,10 +24,8 @@ print("Shape du df chargé : ", df.shape)
 # Changer les missing values pour non_précisé (majoritaire) dans code_parole
 df["code_parole"] = df["code_parole"].fillna("non_précisé")
 
-# TODO:  retester si nécessaire ou non avec évolution du code
-# ie avant n'était pas le cas mais notre regroupement était cassé faut dire
-
 # Stabiliser le id_orateur pour être au format AN
+# NOTE : pas indispensable ici mais permet de stabiliser les id dès ici
 df["id_orateur"] = "PA" + df["id_orateur"]
 # Remplacer les valeurs manquantes de id_acteur par id_orateur quand disponible
 df["id_acteur_originel"] = df["id_acteur"]  # garder une trace
