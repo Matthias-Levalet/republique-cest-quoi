@@ -35,6 +35,7 @@ print("Shape du df chargé : ", df.shape)
 # fichier qui n'aurait pas déjà été nettoyé par 2-1.
 
 # %%
+# TODO : la modifier suite changement fonction dans 2-1
 # def nettoyer_texte(texte):
 #     if not isinstance(texte, str):
 #         return texte
@@ -171,7 +172,7 @@ pattern_excl_case_insensitive = re.compile(
 # République romaine = 5 ????
 
 
-#
+# Fonction de décompte des occurrences
 def count_lexical_outside_excl(text):
     """
     Compte les occurrences valides du champ lexical "républi" (hors zones
