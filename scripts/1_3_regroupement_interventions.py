@@ -6,12 +6,6 @@
 # Exporte `interventions_regroupees.csv`, utilisé par le pipeline de nettoyage (voir 2-x).
 
 # %%
-# TODO: check les ordres absolu_seance (str vs int) et pourquoi de Rugy pose
-# souci sur CRSANR5L15S2019O1N196 (probable question au gouv comme ministre,
-# semble plutôt lié à un typage/ordre de tri -> cf investigation dédiée
-# hors pipeline si besoin de creuser).
-
-# %%
 import pandas as pd
 
 PATH_ENTREE = "../data/interim/extract_15_16_concat.csv"
@@ -94,12 +88,12 @@ def regrouper(df: pd.DataFrame) -> pd.DataFrame:
       - lignes d'intervention fusionnées (nb_fragments >= 1)
       - lignes d'interruption conservées telles quelles (nb_fragments = NaN)
 
-    nb traçabilité : plusieurs tentatives de tri préalable (par ordinal_prise,
+    NOTE :nb traçabilité : plusieurs tentatives de tri préalable (par ordinal_prise,
     ordre_absolu_seance, id_syceron convertis en numérique) ont été testées
     et donnaient des résultats différents (et pas nécessairement meilleurs :
     voir investigation dédiée hors pipeline). Le choix retenu ici est de ne
     PAS trier avant regroupement et de garder l'ordre du csv d'entrée.
-    # TODO : AVISER !!!!!
+    TODO : AVISER !!!!!
     """
     cols_utiles = list(dict.fromkeys(COLS_META + ["texte"]))
     work = df[cols_utiles].copy()
