@@ -35,21 +35,31 @@ print("Shape du df chargé : ", df.shape)
 # fichier qui n'aurait pas déjà été nettoyé par 2-1.
 
 # %%
-# TODO : la modifier suite changement fonction dans 2-1
 # def nettoyer_texte(texte):
 #     if not isinstance(texte, str):
-#         return texte
-#     # Supprimer les balises HTML/XML
-#     texte = re.sub(r"<[^>]+>", "", texte)
+#         return ""
+#     # Normaliser les caractères Unicode
+#     texte = unicodedata.normalize("NFC", texte)
+#     # Décoder les entités HTML
+#     texte = html.unescape(texte)
+#     # Supprimer les balises HTML/XML > espace (éviter collage de mots)
+#     texte = re.sub(r"<[^>]+>", " ", texte)
 #     # Supprimer contenu entre parenthèses
-#     texte = re.sub(r"\([^)]*\)", "", texte)
-#     # Supprimer les espaces multiples
+#     # NOTE : CHOIX FORT SELON CE QUI VEUT ÊTRE ÉTUDIÉ
+#     # Supprime des didascalies ("Applaudissements", etc.)
+#     # mais aussi tout autre contenu entre parenthèses
+#     # ne gère pas les parenthèses imbriquées mais sont extrêmement rares (parfois sur (e))
+#     texte = re.sub(r"\([^()]*\)", "", texte)
+#     # Uniformiser apostrophes (utile pour regex)
+#     texte = texte.replace("’", "'").replace("\u02bc", "'")
+#     # Normaliser les espaces (après unescape(), couvre \xa0, \t, \n)
+#     # et supprimer les espaces multiples
 #     texte = re.sub(r"\s+", " ", texte).strip()
-#     # uniformise pour avoir les bons apostrophes (nécessaire pour regex)
-#     texte = texte.replace("’", "'")
+
 #     return texte
-#
-# df["texte_brut"] = df["texte"]
+
+
+# df["texte_brut"] = df["texte"]  # garder une version brute du texte
 # df["texte"] = df["texte"].apply(nettoyer_texte)
 
 # Garde-fou générique (indépendant du nettoyage) : au cas où des lignes
