@@ -34,8 +34,68 @@ PATH_SORTIE_16 = "../data/interim/extract_16.csv"
 # FONCTIONS D'EXTRACTION DES DONNÉES
 # ==================================================================
 
+# ======== Fonctions extraction infos depuis fichier XML =========
 
-# ======== Fonction extraction infos depuis fichier XML =========
+
+# Fonction extraction de la hiérarchie complète des points parents
+def extraire_hierarchie(paragraphe, ns):
+    """
+    Remonte la hiérarchie des points parents d'un paragraphe.
+    Retourne une liste ordonnée du niveau le plus haut au plus bas.
+    """
+    hierarchy = []
+    node = paragraphe.getparent()
+
+    while node is not None:
+        if node.tag == f"{{{ns['ns']}}}point":
+            texte = node.find("ns:texte", namespaces=ns)
+            hierarchy.append(
+                {
+                    "niveau": int(node.get("nivpoint", 0)),
+                    "code": node.get("code_grammaire"),
+                    "titre": (
+                        "".join(texte.itertext()).strip() if texte is not None else ""
+                    ),
+                    "valeur_ptsodj": node.get("valeur_ptsodj"),
+                    "art": node.get("art"),
+                    "adt": node.get("adt"),
+                    "bibard": node.get("bibard"),
+                }
+            )
+        node = node.getparent()
+
+    hierarchy.reverse()  # du plus haut au plus bas
+    return hierarchy
+
+
+# Transformation hiérarchie vers colones
+def _hierarchie_to_colonnes(hierarchy):
+    """
+    Transforme la liste de hiérarchie en colonnes exploitables :
+    - point_structure_complete : "titre1 > titre2 > titre3"
+    - point_niveau_1/2/3 : titres par niveau
+    """
+    titres = [h["titre"] for h in hierarchy if h["titre"]]
+    structure = " > ".join(titres)
+
+    return {
+        "point_structure_complete": structure,
+        "point_nb_niveaux": len(hierarchy),
+        "point_niveau_1": hierarchy[0]["titre"] if len(hierarchy) > 0 else "",
+        "point_niveau_2": hierarchy[1]["titre"] if len(hierarchy) > 1 else "",
+        "point_niveau_3": hierarchy[2]["titre"] if len(hierarchy) > 2 else "",
+        # parent direct du paragraphe (peut être vide si <point> sans <texte>) : amendements, etc. ?
+        "point_niveau_last": hierarchy[-1]["titre"] if hierarchy else "",
+        # dernier niveau avec un titre non vide (fallback pour amendements etc.)
+        "point_niveau_last_known": next(
+            (h["titre"] for h in reversed(hierarchy) if h["titre"]), ""
+        ),
+        "point_bibard": hierarchy[-1].get("bibard") if hierarchy else None,
+        "point_art": hierarchy[-1].get("art") if hierarchy else None,
+    }
+
+
+# Fonction d'extraction des infos pour les paragraphes
 def extraire_paragraphes_lxml(fichier_xml: str) -> pd.DataFrame:
     """
     Extrait les paragraphes d'un fichier XML de compte rendu en utilisant lxml.
@@ -67,27 +127,12 @@ def extraire_paragraphes_lxml(fichier_xml: str) -> pd.DataFrame:
         rows = []
 
         for paragraphe in root.xpath(".//ns:paragraphe", namespaces=ns):
-            # Naviguer vers le <point> parent et récupérer les infos
-            point = paragraphe.getparent()
-            while point is not None and point.tag != f"{{{ns['ns']}}}point":
-                point = point.getparent()
+            # TODO : check cet ajout de la hiérarchie complète
+            hierarchy = extraire_hierarchie(paragraphe, ns)
+            hier_cols = _hierarchie_to_colonnes(hierarchy)
 
-            point_type = point.get("code_grammaire") if point is not None else None
-
-            # utiliser itertext() pour reconstruire le contenu complet
-            # (findtext() ignore les sous-balises et perd du texte)
-            texte_point = (
-                point.find("ns:texte", namespaces=ns) if point is not None else None
-            )
-            point_title = (
-                "".join(texte_point.itertext()).strip()
-                if texte_point is not None
-                else None
-            )
-
-            # # Plus pris pour l'instant (ie niveau du point, on a toujours niveau paragraphe plus bas):
-            # point_id = point.get("id_syceron") if point is not None else None
-            # point_valeur_ptsodj = point.get("valeur_ptsodj") if point is not None else None
+            # point_type = code_grammaire du <point> parent direct (= dernier niveau hiérarchie)
+            point_type = hierarchy[-1]["code"] if hierarchy else None
 
             texte_elem = paragraphe.find("ns:texte", namespaces=ns)
             texte = (
@@ -133,15 +178,17 @@ def extraire_paragraphes_lxml(fichier_xml: str) -> pd.DataFrame:
                     "session": meta["session"],
                     "nomFichierJo": meta["nomFichierJo"],
                     "presidentSeance": meta["presidentSeance"],
-                    # ===== Données du point parent (contexte) =====
-                    "point_titre": point_title,
+                    # ===== données contexte - points parents / Hiérarchie complète =====
+                    "point_structure_complete": hier_cols["point_structure_complete"],
+                    "point_nb_niveaux": hier_cols["point_nb_niveaux"],
+                    "point_niveau_1": hier_cols["point_niveau_1"],
+                    "point_niveau_2": hier_cols["point_niveau_2"],
+                    "point_niveau_3": hier_cols["point_niveau_3"],
+                    "point_niveau_last": hier_cols["point_niveau_last"],
+                    "point_niveau_last_known": hier_cols["point_niveau_last_known"],
                     "point_type": point_type,
-                    # 'Sous_titre': '',  # not in this version, get back to original if needed
-                    # 'Contexte_hierarchique': '',  # not in this version, get back to original if needed
-                    # 'Section_courante': '',  # not in this version, get back to original if needed
-                    # 'Sujet_point': '', # not in this version, get back to original if needed
-                    # "point_valeur_ptsodj": point_valeur_ptsodj,
-                    # "point_id": point_id,
+                    "point_bibard": hier_cols["point_bibard"],  # TODO : virer ?
+                    "point_art": hier_cols["point_art"],  # TODO : virer ?
                     # ===== données du paragraphe =====
                     "valeur_ptsodj": paragraphe.get("valeur_ptsodj"),
                     "ordinal_prise": paragraphe.get("ordinal_prise"),
