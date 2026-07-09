@@ -17,7 +17,7 @@ from IPython.display import display  # ruff casse les pieds
 
 PATH_ENTREE = "../data/interim/2_3_match_deputes.csv"
 PATH_AFFILIATIONS = "../data/raw/id-dep/datan_affiliations.csv"
-PATH_SORTIE = "../data/interim/interventions_nettoyees.csv"
+PATH_SORTIE = "../data/interim/2_4_interventions_nettoyees.csv"
 
 
 # nb : ici choix de recoder avec les principaux noms sur la législature des

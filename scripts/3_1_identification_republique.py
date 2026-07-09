@@ -13,7 +13,7 @@ import re
 
 # TODO: aviser si vire id_orateur et utiliser id_acteur partout
 
-PATH_ENTREE = "../data/interim/interventions_nettoyees.csv"
+PATH_ENTREE = "../data/interim/2_4_interventions_nettoyees.csv"
 PATH_SORTIE_PROPORTION = "../data/interim/df_repu_proportion.csv"
 PATH_SORTIE_MATCHES = "../data/interim/df_repu.csv"
 PATH_LISTE_PAYS = "../data/raw/liste_pays_republique_stable.txt"
