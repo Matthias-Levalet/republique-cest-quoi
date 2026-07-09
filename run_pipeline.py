@@ -1,0 +1,28 @@
+import subprocess
+import sys
+from pathlib import Path
+
+scripts = Path(__file__).parent / "scripts"
+
+etapes = [
+    "1_1_extraction.py",
+    "1_2_fusion_legislatures.py",
+    "1_3_regroupement_interventions.py",
+    "2_1_filtrage.py",
+    "2_2_identification_acteurs.py",
+    "2_3_match_deputes.py",
+    "2_4_affiliations.py",
+]
+
+for etape in etapes:
+    print(f"\n{'='*40}\n=== {etape} ===\n{'='*40}")
+    subprocess.run(
+        [sys.executable, etape],
+        cwd=scripts,          # exécuter depuis scripts/ pour que ../data/ fonctionne
+        check=True
+    )
+
+print("\nPipeline complet !")
+
+# pour exécuter :
+# python run_pipeline.py
