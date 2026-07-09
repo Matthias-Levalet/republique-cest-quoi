@@ -236,6 +236,7 @@ uids_a_exclure = {
     "CRSANR5L15S2017O1N001",  # doublon AN JO "Congrès du Parlement du 3 juillet 2017"
     "CRSJOCGR5L15S2018E1N001",  # JO "Congrès du Parlement du 9 juillet 2018"
     "CRSCGR5L16S2024O1N001",  # CG "Congrès du Parlement du 4 mars 2024"
+    "CRSANR5L15S2022O1N168",  # séance spéciale congrès intervention Zelensky
 }
 
 # Pour affichage (pas indispensable)
