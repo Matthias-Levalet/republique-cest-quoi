@@ -169,7 +169,7 @@ pattern_excl_case_insensitive = re.compile(
 # République yougoslave
 # République démocratique d'Arménie
 # Républiques du Bénin et du Sénégal = 2
-# République romaine = 5 ????
+# République romaine = 5 ???? -> on supprime pas
 
 
 # Fonction de décompte des occurrences
