@@ -85,27 +85,21 @@ print(f"Shape après exclusion code_grammaire : {df.shape}")
 
 # nettoyage basique du texte
 
-# TODO : vérif test suite modif fonction
+
 def nettoyer_texte(texte):
     if not isinstance(texte, str):
         return ""
     # Normaliser les caractères Unicode
-    texte = unicodedata.normalize("NFC", texte)  # TODO sans doute overkill
+    texte = unicodedata.normalize("NFC", texte)
     # Décoder les entités HTML
     texte = html.unescape(texte)
-    # Balises de bloc > espace (éviter collage de mots)
-    texte = re.sub(
-        r"</(?:p|div|li|td|th|tr|h[1-6])>\s*<", " <", texte, flags=re.IGNORECASE
-    )  # TODO : redondant <[^>]+> ?
-    # Sauts de ligne HTML > espace
-    texte = re.sub(r"<br\s*/?>", " ", texte, flags=re.IGNORECASE)
-    # Supprimer les balises HTML/XML restantes
-    texte = re.sub(r"<[^>]+>", " ", texte)  # Redondant avec point plus haut ?
+    # Supprimer les balises HTML/XML > espace (éviter collage de mots)
+    texte = re.sub(r"<[^>]+>", " ", texte)
     # Supprimer contenu entre parenthèses
     # NOTE : CHOIX FORT SELON CE QUI VEUT ÊTRE ÉTUDIÉ
     # Supprime des didascalies ("Applaudissements", etc.)
     # mais aussi tout autre contenu entre parenthèses
-    # TODO : problème des parenthèses imbriquées (parfois sur (e)) > mais genre 2 occurences sur 16°Legislature
+    # ne gère pas les parenthèses imbriquées mais sont extrêmement rares (parfois sur (e))
     texte = re.sub(r"\([^()]*\)", "", texte)
     # Uniformiser apostrophes (utile pour regex)
     texte = texte.replace("’", "'").replace("\u02bc", "'")
