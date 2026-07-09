@@ -15,6 +15,7 @@
 
 ## 2-clean&filter
 - [ ] # TODO: syceron 2827575 2827576 2827577 = M. Lionel Tivoli = PA793298 ?
+- [ ] # TODO : vérif cas de nom orateur sans nom orateur clean
 - [ ] voir la liste que je sors des sans affiliations (pas nombreux)
 - [ ] Aviser cas gouvernement
 - [ ] Aviser cas affiliation multiples (ex gauche sans groupe comme RN, etc.)

@@ -146,6 +146,8 @@ print(df.loc[mask_pb_id, COLS_CHECK].sort_values("id_syceron").to_string(index=F
 df.loc[mask_pb_id, "id_acteur"] = df.loc[mask_pb_id, "id_orateur"]
 print(f"\nLignes corrigées dans df : {mask_pb_id.sum()}")
 
+# TODO : ajouter les possibles 
+
 # Recalculer le nom le plus fréquent après correction des identifiants acteurs
 # = réactualiser (puisqu'on en a modifié, pourrait changer le plus fréquent)
 most_frequent_name = calculer_nom_plus_frequent(df)

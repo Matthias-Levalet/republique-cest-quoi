@@ -379,3 +379,6 @@ print("Export vers :", PATH_SORTIE)
 # NB : certaines colonnes de df_deputes introduisent une erreur à l'import/export
 # (adresses/réseaux sociaux contenant des sauts de ligne). Non utilisées ici,
 # mais si besoin : forcer QUOTE_ALL au to_csv résout le problème.
+
+# TODO : check des derniers cas sans affil
+# TODO : possible exclusion des externes + PA1051 (ancien dep mais externe)
