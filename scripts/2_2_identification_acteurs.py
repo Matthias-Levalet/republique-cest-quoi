@@ -119,17 +119,19 @@ most_frequent_name = calculer_nom_plus_frequent(df)
 df["nom_orateur_clean"] = df.apply(get_most_frequent_name, axis=1).apply(nettoyer_nom)
 
 # %% [markdown]
-# ## Correction automatique des erreurs id_acteur
+# ## Correction automatique et manuelle des erreurs id_acteur
 # nb : cas problématiques id_acteur != id_orateur & nom_orateur !=
 # nom_orateur_clean -> on considère que le texte du CR fait foi, donc que
 # id_orateur est le bon identifiant, qu'on utilise pour écraser id_acteur.
 # Si id_acteur != id_orateur mais que les noms sont similaires, l'erreur
 # porte sur id_orateur (non utilisé ensuite, donc sans conséquence ici).
+# Cas manuels : quelques cas limites identifiés par inspection manuelle,
+# ici des intervenants mal identifiés en PA externes.
 
 # %%
 # ========== Correction automatique des erreurs id_acteur =============
 
-# Mask des cas problématiques id_acteur vs id_orateur et noms différents
+# Mask auto des cas problématiques id_acteur vs id_orateur et noms différents
 mask_pb_id = (
     df["id_acteur"].notna()
     & df["id_orateur"].notna()
@@ -139,14 +141,45 @@ mask_pb_id = (
     & (df["nom_orateur"].apply(nettoyer_nom) != df["nom_orateur_clean"])
 )  # nettoyer pour commensurabilité
 
-print("\nSituations problématiques id_acteur vs id_orateur avant correction :\n")
+print("\nSituations problématiques id_acteur vs id_orateur avant correction auto :\n")
 print(df.loc[mask_pb_id, COLS_CHECK].sort_values("id_syceron").to_string(index=False))
 
-# Correction : id_acteur <- id_orateur
+# Correction auto : id_acteur <- id_orateur
 df.loc[mask_pb_id, "id_acteur"] = df.loc[mask_pb_id, "id_orateur"]
-print(f"\nLignes corrigées dans df : {mask_pb_id.sum()}")
+print(f"\nLignes corrigées auto dans df : {mask_pb_id.sum()}")
 
-# TODO : ajouter les possibles 
+# ========== Correction manuelle des erreurs id_acteur =============
+
+# Identification manuelle des cas limites mal identifiés avec PA externe
+corrections_manuelles = {
+    "PA-121339": "PA721764",  # Olivia Grégoire (quand présidente d’une commission spéciale)
+    "PA-107289": "PA719930",  # Boris Vallaud
+    "PA-1260": "PA332523",  # Marie-Christine Dalloz (quand rapporteure spéciale)
+    "PA-125019": "PA736201",  # Sophie Taillé-Polian
+}
+
+# Appliquer les corrections manuelles (on touche pas à id_orateur, juste id_acteur)
+mask_manuel_all = df["id_acteur"].isin(
+    corrections_manuelles.keys()
+)  # pour affichage log
+print("\nCorrections manuelles à appliquer :\n", corrections_manuelles)
+
+for ancien_id, nouvel_id in corrections_manuelles.items():
+    mask_manuel = df["id_acteur"] == ancien_id
+    if mask_manuel.any():
+        # Récupérer tous les noms uniques associés à cet ancien_id
+        noms_associes = df.loc[mask_manuel, "nom_orateur"].unique()
+        # Appliquer la correction manuelle
+        df.loc[mask_manuel, "id_acteur"] = nouvel_id
+        print(
+            f"Correction manuelle : {ancien_id} -> {nouvel_id} "
+            f"→ {mask_manuel.sum()} ligne(s) modifiée(s) "
+            f"(noms associés : {', '.join(noms_associes)})"
+        )
+    else:
+        print(f"Aucune ligne trouvée pour l'ID {ancien_id} (correction ignorée)")
+
+# ========== Re-calcul nom_orateur_clean =============
 
 # Recalculer le nom le plus fréquent après correction des identifiants acteurs
 # = réactualiser (puisqu'on en a modifié, pourrait changer le plus fréquent)
@@ -154,9 +187,18 @@ most_frequent_name = calculer_nom_plus_frequent(df)
 # et ré-appliquer la récup (= la fonction change pas)
 df["nom_orateur_clean"] = df.apply(get_most_frequent_name, axis=1).apply(nettoyer_nom)
 
-print("\nSituations après correction :\n")
+# Affichage diag
+print("\nSituations après correction auto :\n")
 print(
     df.loc[mask_pb_id, COLS_CHECK]
+    .drop_duplicates("id_syceron")
+    .sort_values("id_syceron")
+    .to_string(index=False)
+)
+
+print("\nSituations après correction manuelle :\n")
+print(
+    df.loc[mask_manuel_all, COLS_CHECK]
     .drop_duplicates("id_syceron")
     .sort_values("id_syceron")
     .to_string(index=False)
