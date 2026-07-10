@@ -326,6 +326,39 @@ print(
 )
 print("Ceci ne modifie pas le nb sans affiliation_et_gouv : simple recodage NI vers RN")
 
+# %%
+# ========= Gestion des cas intervenants externes ==========
+
+
+# Masque pour les externes (id_acteur contient '-')
+# + PA1051 (vrai externe, ancien député Jean-Paul Delevoye)
+mask_externes = df["affiliation_et_gouv"].isna() & (
+    df["id_acteur"].fillna("").str.contains("-", regex=False)
+    | (df["id_acteur"] == "PA1051")  # Ajout manuel de Jean-Paul Delevoye
+)
+
+# Mise à jour de l'affiliation pour ces cas
+df.loc[mask_externes, "affiliation_et_gouv"] = "Externe"
+
+# Vérification des modifications
+print("\n=== Affiliations corrigées pour les externes ===")
+print(f"Nombre d'interventions concernées : {mask_externes.sum()}")
+print(
+    f"Nombre d'id_acteur uniques concernés : {df.loc[mask_externes, 'id_acteur'].nunique()}"
+)
+
+# Affichage des lignes modifiées (pour vérification)
+print("\nLignes modifiées (exemples) :")
+print(
+    df.loc[
+        mask_externes,
+        ["id_acteur", "nom_orateur_clean", "qualite_orateur", "affiliation_et_gouv"],
+    ]
+    .drop_duplicates("id_acteur")
+    .sort_values("id_acteur")
+    .to_string(index=False)
+)
+
 # %% [markdown]
 # ## Diagnostic des affiliations manquantes restantes
 
@@ -341,6 +374,7 @@ print(" - hors PA0 :", int((mask_na & ~df["id_acteur"].eq("PA0")).sum()))
 print(
     "Nombre restant d'id_acteur uniques ayant des affiliations manquantes :",
     na_ids.nunique(dropna=True),
+    "(égal à 1 si reste que PA0, >1 sinon)",
 )
 
 # repérage des (propables) externes (id_acteur avec '-' = intervenants non-AN)
@@ -360,15 +394,7 @@ print(
     f" - dont {df.loc[mask_pa_class, 'id_acteur'].nunique()} id_acteur unique(s) PA classique sans affiliation"
 )
 
-display(
-    df.loc[
-        mask_pa_class,
-        ["id_acteur", "nom_orateur", "nom_orateur_clean", "qualite_orateur"],
-    ]
-    .value_counts()
-    .reset_index()
-    .rename(columns={0: "nb_interventions"})
-)
+
 # %% [markdown]
 # ## Export
 
@@ -379,6 +405,3 @@ print("Export vers :", PATH_SORTIE)
 # NB : certaines colonnes de df_deputes introduisent une erreur à l'import/export
 # (adresses/réseaux sociaux contenant des sauts de ligne). Non utilisées ici,
 # mais si besoin : forcer QUOTE_ALL au to_csv résout le problème.
-
-# TODO : check des derniers cas sans affil
-# TODO : possible exclusion des externes + PA1051 (ancien dep mais externe)
