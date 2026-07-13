@@ -179,13 +179,32 @@ def extraire_paragraphes_lxml(fichier_xml: str) -> pd.DataFrame:
             point_type = (
                 hierarchy_nivpoint[-1].get("code") if hierarchy_nivpoint else None
             )
-
+            # texte du paragraphe
+            # TODO : tester et explorer les textes suite intégration modif
             texte_elem = paragraphe.find("ns:texte", namespaces=ns)
-            texte = (
-                "".join(texte_elem.itertext()).strip()
-                if texte_elem is not None
-                else None
-            )
+            if texte_elem is not None:
+                for br in texte_elem.findall(".//ns:br", namespaces=ns):
+                    # itertext() ignore les balises <br/> ; on insère donc un espace
+                    # dans leur tail pour conserver la séparation entre les mots.
+                    # NB : pas besoin de lstrip() du tail existant (<br/> ne sont visiblement
+                    # pas suivis d'espace/saut de ligne dans le XML source ;
+                    # et c'est au pire géré par le \s+ de nettoyer_texte (1_2)
+                    br.tail = " " + (
+                        br.tail or ""
+                    )  # br.tail = suite texte, or "" gère cas où tail est None
+
+                texte = "".join(texte_elem.itertext()).strip()
+            else:
+                texte = None
+            # TODO : supr après test et quand matthias aura vu
+            # NOTE : anciennement mais mini bug sur les br (supprimeait
+            # texte = (
+            #     "".join(texte_elem.itertext()).strip()
+            #     if texte_elem is not None
+            #     else None
+            # )
+
+            # stime du paragraphe (attribut de <texte>, pas de <paragraphe>)
             stime = texte_elem.get("stime") if texte_elem is not None else None
 
             # Récupérer les informations de l'orateur
