@@ -23,5 +23,6 @@ for etape in etapes:
     )
 
 print(f"\n{'=' * 40}\n=== Pipeline py complet ! ===\n{'=' * 40}")
+
 # pour exécuter :
 # python run_pipeline.py
