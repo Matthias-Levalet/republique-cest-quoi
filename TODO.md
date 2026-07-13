@@ -22,7 +22,7 @@
 - [X] récupération des points de contexte parents(cf tentative Matthias) = DONE
 - [ ] check par matthias si contexte est OK.
 - [ ] check repu against ND
-- [ ] # TODO : check si implementation gestion <br/> est ok
+- [ ] IMPORTANT : check si implementation gestion balises <br/> ET italique est ok
 
 
 ## 2-clean&filter
