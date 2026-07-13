@@ -46,36 +46,19 @@ df["id_acteur"] = df["id_acteur"].combine_first(df["id_orateur"])
 CODES_INTERRUPTION = {"INTERRUPTION_1_10"}
 
 # Colonnes invariantes dans un groupe (on garde la valeur de la 1ère ligne)
-COLS_META = [
-    "uid",
-    "SeanceRef",
-    "SessionRef",
-    "dateSeance",
-    "dateSeanceJour",
-    "numSeanceJour",
-    "numSeance",
-    "typeAssemblee",
-    "legislature",
-    "session",
-    "nomFichierJo",
-    "presidentSeance",
-    "point_structure_complete",
-    "point_type",
-    "valeur_ptsodj",
-    "ordinal_prise",
-    "ordre_absolu_seance",
-    "id_acteur",
-    "id_mandat",
-    "code_grammaire",
-    "code_style",
-    "code_parole",
-    "id_syceron",
-    "roledebat",
-    "nom_orateur",
-    "qualite_orateur",
-    "id_orateur",
-    "stime",
-]
+COLS_META = [c for c in df.columns if c != "texte"]
+
+# NOTE : La liste explicite permet : 1/ d'exclure certaines colonnes du df
+# de sortie, ou 2/ d'exclure une colonne qui ne serait pas invariante au sein
+# d'un groupe – elle ne doit alors pas rester en méta, sous peine de perdre
+# silencieusement sa variation intra-groupe (sauf choix conscient et assumé).
+
+# NOTE : Pas véritablement utilisé ici : on garde en réalité toutes les cols
+# sauf texte, qui est réintroduite dès cols_utiles — aucune n'est filtrée.
+# Choix volontaire de garder l'info de la 1ère ligne (utile pour trace), les
+# cas particuliers étant gérés à part : id_syceron par ex. renvoie la liste
+# de ceux rencontrés dans les fragments, tout en gardant l'originel en méta
+# (cf. id_syceron_fragments).
 
 # ========== Fonction principale ==========
 
