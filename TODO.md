@@ -43,6 +43,8 @@
 - [ ] ajouter les nouveaux cas identifiés
 - [ ] aviser avec la nouvelle remontée d'exclusions possibles.
 - [ ] check repu against ND
+- [X] ON PERD DES OCCURRENCES AVEC LE NETTOYAGE TEXTE -> normal, espaces multiples mal gérés par regex si pas nettoyé avant
+  
 
 # NOTE : quelques (~10) "république islamique" sans précision pour parler de l'Iran
 # mais risque de supprimer d'autres occurrences que l'on veut garder
