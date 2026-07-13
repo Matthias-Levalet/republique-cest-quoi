@@ -29,6 +29,11 @@ Les IDs présents uniquement dans l’un ou l’autre des DataFrames corresponde
 
 - **Bruit** : didascalies, adoptions d’amendements, etc.
 - **Absence d’intervenant** : lignes sans `parlementaire`, `personnalite`, `id_acteur`, `nom_orateur`, ou `id_orateur`.
+- La **gestion différenciée du découpage** des interventions directement dans les fichiers source (y compris ND vs xml assemblée) :
+  - chez nous certaines didascalies passent comme dans en parenthèses dans l'intervention (cf structure des xml)
+  - chez ND elles renvoient une autre intervention (pas vraie interruption), puis reprise intervention -> et donc **augmente artificiellement** le nombre par **effet de découpage**. Propre aux fichiers sources et leur gestion des (*didascalies*)
+- Introduit des **Pnum qui ne correspondent plus à un réel id_syceron** = intervention comprise **dans un bloc plus large** (qu'on retrouve bien en groupe chez nous)
+
 
 | DataFrame             | Lignes sans intervenant | Total lignes uniques | % de bruit |
 | --------------------- | ----------------------- | -------------------- | ---------- |
@@ -41,7 +46,8 @@ Les IDs présents uniquement dans l’un ou l’autre des DataFrames corresponde
 
 ### `df_only_ND_no_speaker` (Lignes sans `parlementaire` ET sans `personnalite`)
 
--> OK c'est des trucs deg, y compris des codes titres "<p>Après l'article 3</p>" / <p>Rappel au règlement</p>
+-> OK c'est des trucs deg, y compris des codes titres "`<p>Après l'article 3</p>`" / `<p>Rappel au règlement</p>`
+-> = ND renvoie parfois comme texte d'une intervention ce qui chez nous est seulement un niveau de point
 
 - **Contenu** :
   - Textes non attribuables : codes titres (`<p>Après l'article 3</p>`, `<p>Rappel au règlement</p>`), didascalies, etc.
@@ -52,11 +58,12 @@ Les IDs présents uniquement dans l’un ou l’autre des DataFrames corresponde
 ### `df_only_extract_no_speaker` (Lignes sans `id_acteur`, `nom_orateur`, `id_orateur`)
 
 -> ok c'est deg aussi : des parenthèses, des signatures (Le Directeur du service du compte rendu de la séance etc.)
+-> On vire de toute façon ça dans notre filtrage maison
 
 - **Contenu** :
   - Parentheses, signatures (*"Le Directeur du service du compte rendu de la séance"*).
   - Suspensions/reprises de séance, points de suspension (`........`).
-  - **2 interventions cheloues** (mais parmis 60K) :
+  - 2 interventions **cheloues** (mais ok parmi 60K) :
     > *"On connaît la lourdeur et l’ampleur des responsabilités relatives à la charge de diriger une association ; or il nous semble qu’avec cette rédaction de l’alinéa 13, vous n’avez pas trouvé le bon équilibre, celui susceptible de garantir le respect plein et entier de la liberté d’association."*  
     > *"L’amélioration de la situation sanitaire a permis à la conférence des présidents de faire évoluer nos règles de fonctionnement : tous les députés peuvent de nouveau être présents dans l’hémicycle. Dès lors qu’il ne sera pas possible de respecter les règles de distance physique, les députés et les ministres devront porter un masque, sauf quand ils prendront la parole. Les huissiers tiennent des masques à leur disposition."*
 
@@ -100,7 +107,7 @@ Les IDs présents uniquement dans l’un ou l’autre des DataFrames corresponde
 fast_only_extract_with_speaker -> found: 899 / 1569
 fast_only_ND_with_speaker -> found: 382 / 838
 
---- Décompte SANS les cas 'congres' ---
+--- Décompte SANS les cas 'congres' ---  
 fast_only_ND_with_speaker -> found (sans congres): 330 / 478
 
 | Jeu de données                                  | Trouvés (`found=True`) | Total   | % de correspondance |
