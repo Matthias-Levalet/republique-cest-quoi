@@ -35,6 +35,9 @@ print("Shape du df chargé : ", df.shape)
 # fichier qui n'aurait pas déjà été nettoyé par 2_1.
 
 # %%
+# NOTE : après tests, pas de différence après normalisation unicodedata NFC :
+# Néanmoins conservé pour harmonisation des données
+
 # Trace fonction nettoyage (voir 2_1_filtrage.py)
 # def nettoyer_texte(texte):
 #     if not isinstance(texte, str):
@@ -268,13 +271,6 @@ print(
 df["nombre_mentions_repu"] = df["texte"].apply(count_lexical_outside_excl)
 df["repu_match_valide"] = df["nombre_mentions_repu"] > 0
 print(df["repu_match_valide"].value_counts())
-
-# %%
-# NOTE : après tests, pas de différence côté accents (normalisation unicodedata NFC) :
-# import unicodedata
-# df["texte_nfc"] = df["texte"].apply(lambda x: unicodedata.normalize("NFC", x))
-# df["repu_match_valide_nfc"] = df["texte_nfc"].apply(count_lexical_outside_excl) > 0
-# print(df["repu_match_valide_nfc"].value_counts())
 
 # %% [markdown]
 # ## Exports
