@@ -12,22 +12,22 @@ NOTE : colle pas pile à la shape df avec Nan,
 
 | Source                                    | Shape       | False       | True   |
 |--------------------------------------------|------------:|------------:|-------:|
-| Fichier NosDéputés (ND15+16_interventions_hemicycle_rich.tsv)      | 1391207   | 1377345   | 13675 (13675 aussi nettoyé) |
-| Extraction brute (1_2_extract_15_16_concat.csv)        | 1127829   | 1113965   | 13820 (13097 nettoyé) |
-| Fichier maison (2_4_interventions_nettoyees)          | 517023   | 506104   | (11300 brut) 10833 (net = de base) |
+| Fichier NosDéputés (ND15+16_interventions_hemicycle_rich.tsv)      | 1391207   | 1377532 (1377532)   | 13675 (13675 nettoyé) |
+| Extraction brute (1_2_extract_15_16_concat.csv)        | 1127829   | 1114011 (1114734)   | 13818 (13095 nettoyé) |
+| Fichier maison (2_4_interventions_nettoyees)          | 517023   | (506192) 505725   | (11298 brut) 10831 (net = de base) |
 
 **TODO** :  ~600 manquants entre "NosDéputés" et "extraction brute" sur texte nettoyé
 
 **NOTE** : écart sur même regex entre texte nettoyé et texte brut :
 espaces multiples non normalisés dans texte_brut.
 "le Président de                            la République" -> pas exclu car des espaces, etc.
-repu_match_valide (texte nettoyé) : True      10876
-repu_match_valide (texte_brut) : True      11336
+repu_match_valide (texte nettoyé) : True      10831
+repu_match_valide (texte_brut) : True      11298
 
 ### Match après exclusions sans orateurs
 df_brut_with_speaker shape :  (1027685, 41)
-repu_match_valide counts : True       13819
-repu_match_valide_net counts : True       13097
+repu_match_valide counts : True       13817
+repu_match_valide_net counts : True       13095
 
 df_ND1516_with_speaker shape :  (1088105, 20)
 repu_match_valide counts : True       13623
@@ -39,6 +39,8 @@ NOTE : colle pas pile à la shape df avec Nan etc.
 
 Pour référence, `pattern_lexical = re.compile(r"républi", re.I)` seul,
 sans passer par `contains_lexical_outside_excl` :
+
+(NOTE : avant modif extraction et gestion balises, mais doit pas compter ici car pas exclusion)
 
 | Source                                    | False       | True   |
 |--------------------------------------------|------------:|-------:|
@@ -60,6 +62,7 @@ cette période, ou méthode de comptage différente).
 Exploration des cas LIMITES :
 
 ### comparaison absence par pnum vs_idsyceron
+
 Pas forcément la vraie/seule source différence mais aide comparaison par pnum / id_syceron
 (cf exploration manuelle de `nd_pnum_absentes_de_brut_match.csv`)
 
@@ -72,7 +75,6 @@ Pas forcément la vraie/seule source différence mais aide comparaison par pnum 
   - voir ex dessous (Respect des principes de la République, Valeurs républicaines à l'école, etc.)
   - cf pnum 2337471, 2384869, 2385355, 2388583, 2388644, 2390359, 2391120, 2391958, 2393319, 2394501, 2394572, 2396343, 2397284, 2399758, 2402544, 2403554, 2404746, 2405372, 2407066, 2407841, 2408605, 2410818, 2411493, 2416482, 2567101, 2568277, 2569825, 2569941, 2571429, 2571899, 2572873, 2574330, 2597558, 2771128, 2975816, 2976329, 3096183, 3121590, 3194896, 3453420, 1581096, 1611606, 1626627, 1805669, 2239001, 2239014
 
-
 Exemple :
 ```
 <p>Prééminence des lois de la République</p>, <p>Respect des principes de la République</p>, <p>respect des principes de la république</p>, <p>Convention relative à la nationalité entre la République française et le royaume d'Espagne</p>, <p>Dissolution des groupuscules fascistes et antirépublicains</p>, <p>État de l'école de la République</p>, <p>Fonds Marianne pour la République</p>, <p>Valeurs républicaines à l'école</p>, <p>Arc républicain et extrême droite</p>, <p>Prestation de serment d'une juge suppléante à la Cour de la République</p>,
@@ -84,15 +86,15 @@ Attaques contre les élus de la République, Attaques contre la République et l
 
 cf. exploration manuelle de `nd_snippets_absent_de_brut.csv`
 
-- des cas ou snippet peut pas bien comparer car normalisation des textes (avant même fonction nettoyage collent pas) ?
-- TODO souci fonction nettoyage qui marche bien mais qui plante dans le fichier extract ?
-- fait pour br et italique -> retester
-- 
-- ex : dans ND
+- CHECK : des cas ou snippet peut pas bien comparer car **normalisation des textes** (avant même fonction nettoyage collent pas) ?
+  - TODO souci fonction nettoyage qui marche bien mais qui plante dans le fichier extract ?
+  - fait pour br et italique -> retester
+- Snippet échoue car texte extract **contient des parenthèses**, (virent avec nettoyage) -> mais **match pas avec format ND** qui renvoie **interventions séparées** si parenthèses de didascalies
+  - Nombre de snippets ND absents de brut avec parenthèses : 32
+  - Nombre de snippets brut absents de ND avec parenthèses : 2032
+- Même idée **points suspension** ?
+  - **TODO** : ajout check points de suspesions d'un coté comme de l'autre, permettrait identifier interventions découpées différemment ?
+  
 
-- CRSANR5L15S2017E1N003,,,20170706093000000,jeudi 06 juillet 2017,1,3,AN,15,Première session extraordinaire 2017,20171003,Présidence de M. François de Rugy,Prorogation de l’état d’urgence > Discussion générale,2,Prorogation de l’état d’urgence,Discussion générale,,Discussion générale,Discussion générale,,,DISC_GENERALE_1,1,12,452,PA720454,PM722968,DISC_GENERALE_2_3,NORMAL,PAROLE_1_2,982987,,M. Dimitri Houbron,,720454.0,,"…pour inscrire dans le droit commun des mesures efficaces assurant la protection de **nos concitoyens.N’oublions** pas ceux qui perdent la vie dans ces actes terroristes ! N’oublions pas que les victimes du terrorisme sont notre démocratie et notre innocence ! N’oublions pas que nous devons la sécurité à nos concitoyens, que nous, élus de la République, sommes responsables ! Je vois un pays splendide et un peuple de génie résister à cet abîme ; je vois les êtres pour lesquels nous nous sommes engagés, apaisés, déterminés et libres. Ce que nous allons accomplir aujourd’hui est bien meilleur que tous nos actes passés. (Applaudissements sur les bancs du groupe REM.)","…pour inscrire dans le droit commun des mesures efficaces assurant la protection de nos concitoyens.N'oublions pas ceux qui perdent la vie dans ces actes terroristes ! N'oublions pas que les victimes du terrorisme sont notre démocratie et notre innocence ! N'oublions pas que nous devons la sécurité à nos concitoyens, que nous, élus de la République, sommes responsables ! Je vois un pays splendide et un peuple de génie résister à cet abîme ; je vois les êtres pour lesquels nous nous sommes engagés, apaisés, déterminés et libres. Ce que nous allons accomplir aujourd'hui est bien meilleur que tous nos actes passés.",1,True,…pour inscrire dans le droit commun des mesures efficaces assurant la protection de nos concitoyens.N'oublions pas ceux qui perdent la vie dans ces ac,False
-
-# VRAIS CHECK À FAIRE :
-
-
-CRSANR5L15S2017E1N003,,,20170706093000000,jeudi 06 juillet 2017,1,3,AN,15,Première session extraordinaire 2017,20171003,Présidence de M. François de Rugy,Prorogation de l’état d’urgence > Discussion générale,2,Prorogation de l’état d’urgence,Discussion générale,,Discussion générale,Discussion générale,,,DISC_GENERALE_1,1,12,452,PA720454,PM722968,DISC_GENERALE_2_3,NORMAL,PAROLE_1_2,982987,,M. Dimitri Houbron,,720454.0,,"…pour inscrire dans le droit commun des mesures efficaces assurant la protection de nos concitoyens.N’oublions pas ceux qui perdent la vie dans ces actes terroristes ! N’oublions pas que les victimes du terrorisme sont notre démocratie et notre innocence ! N’oublions pas que nous devons la sécurité à nos concitoyens, que nous, élus de la République, sommes responsables ! Je vois un pays splendide et un peuple de génie résister à cet abîme ; je vois les êtres pour lesquels nous nous sommes engagés, apaisés, déterminés et libres. Ce que nous allons accomplir aujourd’hui est bien meilleur que tous nos actes passés. (Applaudissements sur les bancs du groupe REM.)","…pour inscrire dans le droit commun des mesures efficaces assurant la protection de nos concitoyens.N'oublions pas ceux qui perdent la vie dans ces actes terroristes ! N'oublions pas que les victimes du terrorisme sont notre démocratie et notre innocence ! N'oublions pas que nous devons la sécurité à nos concitoyens, que nous, élus de la République, sommes responsables ! Je vois un pays splendide et un peuple de génie résister à cet abîme ; je vois les êtres pour lesquels nous nous sommes engagés, apaisés, déterminés et libres. Ce que nous allons accomplir aujourd'hui est bien meilleur que tous nos actes passés.",1,True,…pour inscrire dans le droit commun des mesures efficaces assurant la protection de nos concitoyens.N'oublions pas ceux qui perdent la vie dans ces ac,False
+ex parenthèses : 
+CRSANR5L15S2017E1N012,,,20170713150000000,jeudi 13 juillet 2017,2,12,AN,15,Première session extraordinaire 2017,20171012,Présidence de M. François de Rugy,Renforcement du dialogue social > Discussion des articles (suite) > Après l’article 3 (suite),4,Renforcement du dialogue social,Discussion des articles (suite),Après l’article 3 (suite),,Après l’article 3 (suite),(n[[o]] 19),Après_ 3,DISC_ARTICLES_3_1,1,1,62,PA717379,PM723282,DISC_ARTICLES_1_30_1,NORMAL,PAROLE_1_2,991112,,M. Sylvain Maillard,,717379.0,,"Je tenais à saluer votre première présidence de séance, monsieur le président. (Applaudissements sur les bancs des groupes REM et MODEM.) Nous sommes fiers de vous voir à cette place. Vous êtes le plus jeune vice-président de l’histoire de la VeRépublique. Félicitations ! Nous comptons sur vous. (Applaudissements sur les bancs du groupe REM.)","Je tenais à saluer votre première présidence de séance, monsieur le président. Nous sommes fiers de vous voir à cette place. Vous êtes le plus jeune vice-président de l'histoire de la VeRépublique. Félicitations ! Nous comptons sur vous.",1,True,"Je tenais à saluer votre première présidence de séance, monsieur le président. Nous sommes fiers de vous voir à cette place. Vous êtes le plus jeune v",False
