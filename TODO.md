@@ -4,23 +4,37 @@
 
 ## 1-data-extraction
 
+## Global
+
+- passer tout sous UV
+- finaliser pipeline
+- ajouter infos sur téléchargement fichiers et ou option exécution code
+- ajouter liste pays txt pour reproductibilité
+
 ## À voir
-- TODO: plus tard, aviser récupération des points de contexte parents(cf tentative Matthias)
-- REGROUPEMENT INTERVENTIONS FOIRE -> nouvelle version semble okayish
-- toujours un mini écrat, semble plus rentable de pas trier les fichiers par numéro ordre  :
+
+- [ ] SOUCIS REGROUPEMENT INTERVENTIONS FOIRE -> nouvelle version semble okayish
+  - toujours un mini écart, semble plus stable de pas trier les fichiers par numéro ordre  :
   - les interventions sont déjà dans l'ordre, les id numérotés semblent pas super stables ?
   - et donc au final le résultat semble meilleur sans réappliquer de tri. Mais pq cet écart ?
-  - tester avec le id_syceron ?
-- TODO : EXCLURE LAMARTINE OU PAS ?
+  - tester avec le id_syceron ? -> test réalisé, c'est naze.
+- [X] EXCLURE LAMARTINE OU PAS ? -> DONE = non : passage des acteurs restant en externes
+- [X] récupération des points de contexte parents(cf tentative Matthias) = DONE
+- [ ] check par matthias si contexte est OK.
+
 
 ## 2-clean&filter
-- [ ] # TODO: syceron 2827575 2827576 2827577 = M. Lionel Tivoli = PA793298 ?
-- [ ] # TODO : vérif cas de nom orateur sans nom orateur clean
-- [ ] voir la liste que je sors des sans affiliations (pas nombreux)
-- [ ] Aviser cas gouvernement
-- [ ] Aviser cas affiliation multiples (ex gauche sans groupe comme RN, etc.)
+- [X] voir la liste que je sors des sans affiliations (pas nombreux)
+- [X] Aviser cas gouvernement
+- [X] Aviser cas affiliation multiples (ex gauche sans groupe comme RN, etc.)
 - [X] Aviser cas houplain NI/RN
-- TODO : aviser lamartine et pb soucis identification
+- [X] Aviser lamartine et pb soucis identification -> DONE avec le passage en externes
+- [ ] syceron 2827575 2827576 2827577 = M. Lionel Tivoli = PA793298 ?
+  - [X] sans doute pas : cas ultra spécifique et doit y en avoir d'autres (voir point suivant)
+  - [X] désormais géré par le fait que conserve une trace sur-imprimée de nom_orateur sur nom_orateur_clean quand on en a pas si PA0
+- [X] Vérif cas de nom orateur sans nom orateur clean plus qu'1 (cf depuis gestion en cas de PA0)
+- [X] Vérif cas de nom orateur clean sans nom orateur -> pas concluant ~13 cas (président séances autres mal identif (chenu, laporte)
+
 
 ## 3-identify-republic
 
@@ -52,31 +66,3 @@
 - [ ] aviser genAI sur le nom des topics ? -> meh.
 
 ## Pistes, etc.
-
-# TODO
-- TODO lamartine : en réalité vérifier avec matthias y avait des possibles soucis
-seances_lamartine = [
-    "CRSANR5L16S2023O1N201",
-    "CRSANR5L16S2024O1N124",
-    "CRSANR5L16S2024O1N098",
-    "CRSANR5L16S2024O1N095",
-    "CRSANR5L16S2024O1N063",
-    "CRSANR5L16S2023O1N226",
-    "CRSANR5L16S2023O1N128",
-    "CRSANR5L16S2023O1N200",
-    "CRSANR5L16S2023O1N156",
-    "CRSANR5L16S2024O1N125",
-    "CRSANR5L15S2021O1N207",
-    "CRSANR5L16S2024O1N184",
-    "CRSANR5L16S2024O1N171",
-    "CRSANR5L16S2024O1N167",
-    "CRSANR5L16S2024O1N166",
-    "CRSANR5L16S2024O1N130",
-    "CRSANR5L16S2024O1N129",
-    "CRSANR5L15S2020O1N119",
-    "CRSANR5L16S2023O1N106",
-    "CRSANR5L15S2022O1N139",
-    "CRSANR5L15S2022O1N112",
-    "CRSANR5L15S2021O1N258",
-    "CRSANR5L15S2020O1N137",
-]
