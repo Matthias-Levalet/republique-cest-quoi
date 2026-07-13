@@ -1,6 +1,6 @@
 # %% [markdown]
 # # 1-2 - Fusion des législatures
-# Lit `extract_15.csv` et `extract_16.csv` (issus de 1-1), les concatène,
+# Lit `1_1_extract_15.csv` et `1_1_extract_16.csv` (issus de 1_1), les concatène,
 # déduplique en fallback, et exporte `extract_15_16_concat.csv` utilisé par
 # l'étape suivante (1-3).
 

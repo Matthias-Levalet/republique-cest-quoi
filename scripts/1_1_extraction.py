@@ -3,7 +3,7 @@
 # Extrait les paragraphes des comptes rendus de l'Assemblée nationale à partir
 # des fichiers XML (lxml), pour les 15e et 16e législatures.
 # Exclut les uids identifiés comme doublons/congrès et exporte un csv par législature.
-# Écrit `extract_15.csv` et `extract_16.csv`, utilisés par l'étape suivante (1-2).
+# Écrit `1_1_extract_15.csv` et `1_1_extract_16.csv`, utilisés par l'étape suivante (1_2).
 
 # %%
 # TODO: check against NosDéputés/RegardsCitoyens <3

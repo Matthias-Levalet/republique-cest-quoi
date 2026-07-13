@@ -1,6 +1,6 @@
 # %% [markdown]
 # # 2-4 - Affiliations parlementaires et gouvernementales
-# Lit `2_3_match_deputes.csv` (issu de 2-3). Logique suivie :
+# Lit `2_3_match_deputes.csv` (issu de 2_3). Logique suivie :
 # 1. récupérer le groupe à la date d'intervention si dispo
 #    -> var affiliation_mandat_députés
 # 2. ajouter les affiliations gouvernementales
@@ -9,7 +9,7 @@
 # 3. fallback sur dernière affiliation connue (groupe/groupeAbrev)
 #    -> var affiliation_et_gouv complétée
 #    - correction des affiliations NI/RN
-# Écrit `data_cleaning_full.csv`, l'export final du pipeline de nettoyage.
+# Écrit `2_4_interventions_nettoyees.csv`, l'export final du pipeline de nettoyage.
 
 # %%
 import pandas as pd

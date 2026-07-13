@@ -1,9 +1,9 @@
 # %% [markdown]
 # # 2-1 - Filtrage des interventions et nettoyage des textes
-# Lit `interventions_regroupees.csv` (issu de 1-3).
+# Lit `1_3_interventions_regroupees.csv` (issu de 1-3).
 # Exclut les interventions non exploitables (président.e, styles non NORMAL,
 # codes grammaires inutiles), nettoie les textes et exclut les vides/parasites.
-# Écrit `2_1_filtrage_nettoyage.csv`, utilisé par l'étape suivante (2-2).
+# Écrit `2_1_filtrage_nettoyage.csv`, utilisé par l'étape suivante (2_2).
 
 # %%
 import re

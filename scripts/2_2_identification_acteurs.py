@@ -1,10 +1,10 @@
 # %% [markdown]
 # # 2-2 - Fusion des identifiants d'acteurs et correction des erreurs
-# Lit `2_1_filtrage_nettoyage.csv` (issu de 2-1).
+# Lit `2_1_filtrage_nettoyage.csv` (issu de 2_1).
 # Fusionne id_acteur et id_orateur, calcule le nom le plus fréquent par acteur,
 # corrige les erreurs d'identification détectées par comparaison directe
 # puis par similarité fuzzy.
-# Écrit `2_2_identification_acteurs.csv`, utilisé par l'étape suivante (2-3).
+# Écrit `2_2_identification_acteurs.csv`, utilisé par l'étape suivante (2_3).
 
 # %%
 import re

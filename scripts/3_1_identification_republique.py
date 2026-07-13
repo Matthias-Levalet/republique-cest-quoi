@@ -1,8 +1,8 @@
 # %% [markdown]
 # # 3-1 - Identifier les textes mentionnant la République
-# Lit `interventions_nettoyees.csv` (issu de 2-4). Repère les mentions
+# Lit `2_4_interventions_nettoyees.csv` (issu de 2_4). Repère les mentions
 # valides du champ lexical "républi" en excluant les faux positifs
-# (Les Républicains, président de la République, pays en -republique, etc.)
+# (Les Républicains, président de la République, pays nommés "République de…", etc.)
 # via une logique d'exclusion par positions.
 # Écrit `df_repu_proportion.csv` (toutes lignes, avec colonnes de match) et
 # `df_repu.csv` (seules les lignes matchées).
@@ -26,15 +26,16 @@ print("Shape du df chargé : ", df.shape)
 # ## Nettoyage du texte : déjà fait en amont
 # nb : le nettoyage basique du texte (balises, parenthèses, espaces,
 # apostrophes) a déjà été appliqué à l'étape 2-1 (voir
-# `2_1_filtrage_nettoyage.py`). La fonction `nettoyer_texte()` utilisée là-bas est
+# `2_1_filtrage.py`). La fonction `nettoyer_texte()` utilisée là-bas est
 # strictement identique à celle qui était ici à l'origine (vérifié par diff
 # le 07/07/2026) : on ne la réapplique donc pas, pour éviter un travail
 # redondant et le risque d'écraser `texte_brut` sans raison.
 # Conservée ci-dessous en commentaire pour référence/traçabilité, à
 # réactiver uniquement si ce script est un jour utilisé à partir d'un
-# fichier qui n'aurait pas déjà été nettoyé par 2-1.
+# fichier qui n'aurait pas déjà été nettoyé par 2_1.
 
 # %%
+# Trace fonction nettoyage (voir 2_1_filtrage.py)
 # def nettoyer_texte(texte):
 #     if not isinstance(texte, str):
 #         return ""

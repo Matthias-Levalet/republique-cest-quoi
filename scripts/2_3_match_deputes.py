@@ -1,8 +1,8 @@
 # %% [markdown]
 # # 2-3 - Match des infos générales des députés (données datan)
-# Lit `2_2_identification_acteurs.csv` (issu de 2-2). Fusionne avec les
+# Lit `2_2_identification_acteurs.csv` (issu de 2_2). Fusionne avec les
 # données générales des députés (nom, groupe, mandat...) sur id_acteur.
-# Écrit `2_3_match_deputes.csv`, utilisé par l'étape suivante (2-4).
+# Écrit `2_3_match_deputes.csv`, utilisé par l'étape suivante (2_4).
 
 # %%
 import pandas as pd

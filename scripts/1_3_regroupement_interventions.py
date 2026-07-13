@@ -1,9 +1,9 @@
 # %% [markdown]
 # # 1-3 - Regroupement des interventions interrompues
-# Lit `extract_15_16_concat.csv` (issu de 1-2).
+# Lit `1_2_extract_15_16_concat.csv` (issu de 1_2).
 # Fusionne les interventions d'un même orateur interrompues par des INTERRUPTION_1_10,
 # en conservant les interruptions elles-mêmes intercalées dans l'ordre.
-# Exporte `interventions_regroupees.csv`, utilisé par le pipeline de nettoyage (voir 2-x).
+# Exporte `1_3_interventions_regroupees.csv`, utilisé par le pipeline de nettoyage (voir 2_1).
 
 # %%
 import pandas as pd
