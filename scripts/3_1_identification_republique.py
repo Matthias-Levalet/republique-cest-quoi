@@ -139,13 +139,13 @@ pattern_excl_case_insensitive = re.compile(
     r"|(?:\bGauche démocratique et Républicaine\b)"  # (feinte) ajout léo
     r"|(?:\bgauche démocrate et républicaine-NUPES\b)"
     r"|(?:\bsocialiste, écologiste et républicain\b)"
-    r"|(?:\groupe socialiste et républicain\b)"  # ajout léo (garder groupe pour limiter flag)
+    r"|(?:\bgroupe socialiste et républicain\b)"  # ajout léo (garder groupe pour limiter flag)
     r"|(?:\bcommuniste républicain citoyen et écologiste\b)"  # ajout léo
     r"|(?:\brépublique en marche\b)"
-    r"|(?:\constructifs : républicains, UDI, indépendants\b)"  # ajout léo
-    r"|(?:\constructifs : républicains, UDI et apparentés\b)"  # (feinte) ajout léo
-    r"|(?:\Les Indépendants - République et Territoires\b)"  # ajout léo
-    r"|(?:\Les Indépendants-République et Territoires\b)"  # (feinte) ajout léo
+    r"|(?:\bconstructifs : républicains, UDI, indépendants\b)"  # ajout léo
+    r"|(?:\bconstructifs : républicains, UDI et apparentés\b)"  # (feinte) ajout léo
+    r"|(?:\bLes Indépendants - République et Territoires\b)"  # ajout léo
+    r"|(?:\bLes Indépendants-République et Territoires\b)"  # (feinte) ajout léo
     # TODO : aviser
     # "Rassemblement pour la République" RPR 1 cas -> mais risque appel rassemblement sensible casse ?
     # Union des démocrates pour la République UDR 0 cas
