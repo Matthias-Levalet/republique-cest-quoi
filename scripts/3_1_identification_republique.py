@@ -148,12 +148,10 @@ pattern_excl_case_insensitive = re.compile(
     r"|(?:\bLes Indépendants-République et Territoires\b)"  # (feinte) ajout léo
     # TODO : aviser
     # "Rassemblement pour la République" RPR 1 cas -> mais risque appel rassemblement sensible casse ?
-    # Union des démocrates pour la République UDR 0 cas
-    # Union des droites pour la République 0 cas
-    # Union pour une Nouvelle République 0 cas
-    # Debout la République 0 cas
-    # Forum des républicains sociaux 0 cas
-    # Identité et République 0 cas
+    # NOTE : ont également été testés (0 cas ici, mais voir selon autres législatures)
+    # "Union des démocrates pour la République" UDR  / "Union des droites pour la République"
+    # "Union pour une Nouvelle République" / "Debout la République"
+    # "Forum des républicains sociaux" / "Identité et République"
     # --- Fonctions et institutions ---
     # TODO : MATTHIAS CHOISI POUR exclusion présidente(s) de la république
     r"|(?:\bprésidents? de la république\b)"
