@@ -137,8 +137,18 @@ pattern_excl_case_insensitive = re.compile(
     r"|(?:\bgauche démocrate et républicaine-NUPES\b)"
     r"|(?:\brépublique en marche\b)"
     r"|(?:\bsocialiste, écologiste et républicain\b)"
+    # TODO : confirmation MATTHIAS POUR EXCLUSIONS NV CAS PARTIS
+    # "Rassemblement pour la République" RPR 1 cas -> mais sensible casse ?
+    # Union des démocrates pour la République UDR 0 cas
+    # Union des droites pour la République 0 cas
+    # Union pour une Nouvelle République 0 cas
+    # Debout la République 0 cas
+    # Forum des républicains sociaux 0 cas
+    # Identité et République 0 cas
     # --- Fonctions et institutions ---
+    # TODO : MATTHIAS CHOISI POUR exclusion présidente(s) de la république
     r"|(?:\bprésidents? de la république\b)"
+    r"|(?:\bprésidentes? de la république\b)"  # 7 cas pour féminiser la fonction ou souhaiter élection MLP
     r"|(?:\bprésidences? de la république\b)"
     r"|(?:\bprocureurs? de la république\b)"
     r"|(?:\bcours? de justice de la république\b)"  # nb : cours de sûreté est lui gardé car projet loi LR et pas une institution
