@@ -22,6 +22,8 @@
 - [X] récupération des points de contexte parents(cf tentative Matthias) = DONE
 - [ ] check par matthias si contexte est OK.
 - [ ] check repu against ND
+- [ ] # TODO : check si implementation gestion <br/> est ok
+
 
 ## 2-clean&filter
 
@@ -39,11 +41,12 @@
 
 ## 3-identify-republic
 
-- [X] check "\t" vs rien dans liste pays république -> DONE
-- [ ] ajouter les nouveaux cas identifiés
-- [ ] aviser avec la nouvelle remontée d'exclusions possibles.
-- [ ] check repu against ND
 - [X] ON PERD DES OCCURRENCES AVEC LE NETTOYAGE TEXTE -> normal, espaces multiples mal gérés par regex si pas nettoyé avant
+- [X] check "\t" vs rien dans liste pays république -> DONE
+- [X] ajouter les nouveaux cas identifiés
+- [X] aviser avec la nouvelle remontée d'exclusions possibles.
+- [ ] voir pour un check des ajouts avec matthias si c'est ok
+- [ ] check repu against ND
   
 
 # NOTE : quelques (~10) "république islamique" sans précision pour parler de l'Iran
