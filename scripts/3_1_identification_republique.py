@@ -98,13 +98,13 @@ pattern_lexical = re.compile(
 # Expressions à exclure - casse exacte
 # possible cas du féminin… mais pas d'occurrence dans la base avec nos exclusions
 pattern_excl_case_sensitive = re.compile(
-    # Exclusion des occurences liées au parti les Républicains
+    # --- Exclusion des occurrences liées au parti les Républicains ---
     r"(?:\b[LlDd]es Républicains\b)"  # garde la casse pour identifier le parti (et pas un adjectif)
     r"|(?:\baux Républicains\b)"  # idem majuscule pour le groupe
     r"|(?:\b[Cc]ollègues? Républicains?\b)"  # cas avec et sans maj pour collègues
     r"|(?:\bsénateurs? Républicains?\b)"  # pas de maj sénateurs ou féminin dans la base après exclu, mais aviser
     r"|(?:\bdéputés? Républicains?\b)"  # pas de maj députés ou féminin dans la base après exclu, mais aviser
-    # spécifique corpus AN choisi
+    # --- Spécifique corpus AN choisi ---
     r"|(?:\bLes Républicain\b)"  # typo manque s = spécifique corpus AN (4 occurrences)
     r"|(?:\bentre Républicains?\b)"  # spécifique corpus AN (4 occurrences)
     r"|(?:\bex-Républicains?\b)"  # spécifique corpus AN (4 occurrences)
@@ -116,25 +116,25 @@ pattern_excl_case_sensitive = re.compile(
     r"|(?:\b[Nn]ous Républicains\b)"  # spécifique corpus AN (2 occurrences)
     r"|(?:\bcertains Républicains\b)"  # spécifique corpus AN (4 occurrences)
     r"|(?:\bamis Républicains\b)"  # spécifique corpus AN (1 occurrence)
-    # occurrences plusieurs partis
+    # --- Occurrences plusieurs partis ---
     r"|(?:\bdroite, Républicains et macronistes\b)"  # spécifique corpus AN (1 occurrence)
     r"|(?:\bRépublicains-Front national\b)"  # spécifique corpus AN (1 occurrence)
     r"|(?:\bMacronistes, Républicains, lepénistes\b)"  # spécifique corpus AN (1 occurrence)
     r"|(?:\bRassemblement national, Républicains et macronistes\b)"  # spécifique corpus AN (1 occurrence)
     r"|(?:\bparti Républicain\b)"  # spécifique corpus AN (1 occurrence : US)
-    # titre presse
+    # --- Titres de presse ---
     r"|(?:\bL[’']Est républicain\b)"  # le journal
     r"|(?:\bLa Nouvelle République\b)"  # le journal
 )
 
 # Expressions à exclure - ignorer la casse
 pattern_excl_case_insensitive = re.compile(
-    # partis et groupes politiques
+    # --- Partis et groupes politiques ---
     r"(?:\bgauche démocrate et républicaine\b)"  # premier sans |
     r"|(?:\bgauche démocrate et républicaine-NUPES\b)"
     r"|(?:\brépublique en marche\b)"
     r"|(?:\bsocialiste, écologiste et républicain\b)"
-    # fonctions et institutions
+    # --- Fonctions et institutions ---
     r"|(?:\bprésidents? de la république\b)"
     r"|(?:\bprésidences? de la république\b)"
     r"|(?:\bprocureurs? de la république\b)"
@@ -149,38 +149,40 @@ pattern_excl_case_insensitive = re.compile(
     r"|(?:\bgardes? républicains?\b)"
     r"|(?:\buniversités? de la République\b)"  # sur corpus 2017-2024 réf à une commission d'enquête
     r"|(?:\binstitut Famille et République\b)"  # institut privé de la galaxie LMPT
-    # titres de loi
+    # --- Titres de lois ---
     r"|(?:\bnouvelle organisation territoriale de la République\b)"
     r"|(?:\bconfortant le respect des principes de la République\b)"
     r"|(?:\bpour une république numérique\b)"
-    # expression et législations
-    # NOTE: Le choix a été fait de ne pas exclure ces formes qui sont pertinentes à conserver
+    # --- Expression et législations ---
+    # NOTE: Le choix a été fait de ne pas exclure ces formes qui sont pertinentes à garder
     # Elles sont conservées ici en commentaires pour traçabilité
     # r"|(?:\bcontrat d[’']engagement républicain\b)"
     # r"|(?:\bcontrat d[’']engagement au respect des principes de la République\b)"
     # r"|(?:\bcontrat d[’']intégration républicaine\b)"
     # r"|(?:\bquartier[s]? de reconquête républicaine\b)"
-    # pays
+    # --- Lieux (places, monuments) ---
+    r"|(?:\bplace de la République\b)"  # (45 occurrences)
+    # --- Pays, territoires, entités, etc. ---
     r"|(?:\brépubliques? soviétiques?\b)"
     r"|(?:\bex-républiques? soviétiques?\b)"
     r"|(?:\brépublique de Weimar\b)"
-    r"|(?:\b(?:" + pattern_pays + r")\b)",  # ajout des exclusions de pays
+    r"|(?:\bRépublique yougoslave\b)"  # spécifique corpus AN
+    r"|(?:\brépublique du Haut-Karabakh\b)"  # spécifique corpus AN
+    r"|(?:\brépublique d[’']Artsakh\b)"  # spécifique corpus AN
+    r"|(?:\brépublique de l[’']Artsakh\b)"  # spécifique corpus AN
+    r"|(?:\brépublique des Fidji\b)"  # spécifique corpus AN
+    r"|(?:\bRépublique de Chine\b)"  # spécifique corpus AN
+    r"|(?:\brépubliques? du Donbass\b)"  # spécifique corpus AN
+    r"|(?:\brépublique de Crimée\b)"  # spécifique corpus AN
+    r"|(?:\bRépublique démocratique d[’']Arménie\b)"  # spécifique corpus AN
+    r"|(?:\bRépubliques du Bénin et du Sénégal\b)"  # spécifique corpus AN
+    r"|(?:\b(?:" + pattern_pays + r")\b)",  # ajout des exclusions de pays (liste)
     re.I,
 )
 
-# TODO : ajouter les dernières exclusions et cas limites
-# place de la république = 45
-# république du Haut-Karabakh = 3
-# république d’Artsakh (selon forme de l’Artsakh) = 16
-# république islamique (iran) = ~9 ?????
-# république des Fidji =1
-# République de Chine = 1
-# républiques du Donbass = 2
-# république de Crimée = 1
-# République yougoslave
-# République démocratique d'Arménie
-# Républiques du Bénin et du Sénégal = 2
-# République romaine = 5 ???? -> on supprime pas
+# TODO / NOTE : quelques (~10) "république islamique" sans précision pour parler de l'Iran
+# mais risque de supprimer d'autres occurrences que l'on veut garder,
+# ou alors aviser majuscule a République vs sans ? -> trop niche
 
 
 # Fonction de décompte des occurrences
