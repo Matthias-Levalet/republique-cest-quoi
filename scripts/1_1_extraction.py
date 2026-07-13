@@ -201,8 +201,8 @@ def extraire_paragraphes_lxml(fichier_xml: str) -> pd.DataFrame:
                 # un collage de mots silencieux (ex. "Rires etapplaudissements", etc.).
                 for it in texte_elem.findall(".//ns:italique", namespaces=ns):
                     # aucun texte et aucun élément enfant (<italique/> ou <italique></italique>)
-                    est_vide = not (it.text and it.text.strip()) and len(it) == 0
-                    if est_vide:
+                    # Si balise vide (n'a ni texte ni enfant : <italique/> ou <italique></italique>)
+                    if (not it.text or not it.text.strip()) and len(it) == 0:
                         # ajoute un espace avant le texte qui suit la balise vide
                         it.tail = " " + (it.tail or "")
 
