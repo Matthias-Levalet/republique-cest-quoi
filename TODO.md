@@ -21,9 +21,10 @@
 - [X] EXCLURE LAMARTINE OU PAS ? -> DONE = non : passage des acteurs restant en externes
 - [X] récupération des points de contexte parents(cf tentative Matthias) = DONE
 - [ ] check par matthias si contexte est OK.
-
+- [ ] check repu against ND
 
 ## 2-clean&filter
+
 - [X] voir la liste que je sors des sans affiliations (pas nombreux)
 - [X] Aviser cas gouvernement
 - [X] Aviser cas affiliation multiples (ex gauche sans groupe comme RN, etc.)
@@ -38,14 +39,18 @@
 
 ## 3-identify-republic
 
-- TODO : ajouter les nouveaux cas identifiés
-- Et aviser avec la nouvelle remontée d'exclusions possibles.
-- check "\t" vs rien dans liste pays république
+- [X] check "\t" vs rien dans liste pays république -> DONE
+- [ ] ajouter les nouveaux cas identifiés
+- [ ] aviser avec la nouvelle remontée d'exclusions possibles.
+- [ ] check repu against ND
 
+# NOTE : quelques (~10) "république islamique" sans précision pour parler de l'Iran
+# mais risque de supprimer d'autres occurrences que l'on veut garder
+# Ou alors aviser maj a République vs sans ?
 
 ### nettoyer les textes ?
 
-- [X] ENJEU DES ACCENTS À TESTER ! fait avec unicodedata, pas de diff
+- [X] ENJEU DES ACCENTS À TESTER ! DONE fait avec unicodedata, pas de diff -> introduit quand même dans nettoyage 2_1
 - [ ] RAS ?
 
 ## 4-analysis ?
