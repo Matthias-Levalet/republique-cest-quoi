@@ -182,20 +182,33 @@ def extraire_paragraphes_lxml(fichier_xml: str) -> pd.DataFrame:
             # texte du paragraphe
             # TODO : tester et explorer les textes suite intégration modif
             texte_elem = paragraphe.find("ns:texte", namespaces=ns)
-            if texte_elem is not None:
+            texte = None  # on initialise a None
+            if texte_elem is not None:  # et on complete si texte_elem n'est pas None
+                # itertext() ignore les balises <br/> ; on insère donc un espace
+                # dans leur tail pour conserver la séparation entre les mots.
+                # NB : pas besoin de lstrip() du tail existant (<br/> ne sont visiblement
+                # pas suivis d'espace/saut de ligne dans le XML source ;
+                # et c'est au pire géré par le \s+ de nettoyer_texte (1_2)
                 for br in texte_elem.findall(".//ns:br", namespaces=ns):
-                    # itertext() ignore les balises <br/> ; on insère donc un espace
-                    # dans leur tail pour conserver la séparation entre les mots.
-                    # NB : pas besoin de lstrip() du tail existant (<br/> ne sont visiblement
-                    # pas suivis d'espace/saut de ligne dans le XML source ;
-                    # et c'est au pire géré par le \s+ de nettoyer_texte (1_2)
                     br.tail = " " + (
                         br.tail or ""
                     )  # br.tail = suite texte, or "" gère cas où tail est None
 
+                # certains <italique/> vides (sans texte ni contenu) ne portent aucune
+                # mise en forme : ils servent uniquement à séparer des mots ou segments
+                # (surtout en 15e législature).
+                # Sans ce fix, ~42961 paragraphes sur la 15e et ~576 sur la 16e subissent
+                # un collage de mots silencieux (ex. "Rires etapplaudissements", etc.).
+                for it in texte_elem.findall(".//ns:italique", namespaces=ns):
+                    # aucun texte et aucun élément enfant (<italique/> ou <italique></italique>)
+                    est_vide = not (it.text and it.text.strip()) and len(it) == 0
+                    if est_vide:
+                        # ajoute un espace avant le texte qui suit la balise vide
+                        it.tail = " " + (it.tail or "")
+
+                # une fois exceptions gérées, renvoyer le texte
                 texte = "".join(texte_elem.itertext()).strip()
-            else:
-                texte = None
+
             # TODO : supr après test et quand matthias aura vu
             # NOTE : anciennement mais mini bug sur les br (supprimeait
             # texte = (
