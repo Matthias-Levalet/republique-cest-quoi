@@ -133,12 +133,21 @@ pattern_excl_case_sensitive = re.compile(
 # Expressions à exclure - ignorer la casse
 pattern_excl_case_insensitive = re.compile(
     # --- Partis et groupes politiques ---
-    r"(?:\bgauche démocrate et républicaine\b)"  # premier sans |
-    r"|(?:\bgauche démocrate et républicaine-NUPES\b)"
-    r"|(?:\brépublique en marche\b)"
-    r"|(?:\bsocialiste, écologiste et républicain\b)"
     # TODO : confirmation MATTHIAS POUR EXCLUSIONS NV CAS PARTIS
-    # "Rassemblement pour la République" RPR 1 cas -> mais sensible casse ?
+    r"(?:\bgauche démocrate et républicaine\b)"  # premier sans |
+    r"|(?:\bGauche démocrate républicaine\b)"  # (feinte) ajout léo
+    r"|(?:\bGauche démocratique et Républicaine\b)"  # (feinte) ajout léo
+    r"|(?:\bgauche démocrate et républicaine-NUPES\b)"
+    r"|(?:\bsocialiste, écologiste et républicain\b)"
+    r"|(?:\groupe socialiste et républicain\b)"  # ajout léo (garder groupe pour limiter flag)
+    r"|(?:\bcommuniste républicain citoyen et écologiste\b)"  # ajout léo
+    r"|(?:\brépublique en marche\b)"
+    r"|(?:\constructifs : républicains, UDI, indépendants\b)"  # ajout léo
+    r"|(?:\constructifs : républicains, UDI et apparentés\b)"  # (feinte) ajout léo
+    r"|(?:\Les Indépendants - République et Territoires\b)"  # ajout léo
+    r"|(?:\Les Indépendants-République et Territoires\b)"  # (feinte) ajout léo
+    # TODO : aviser
+    # "Rassemblement pour la République" RPR 1 cas -> mais risque appel rassemblement sensible casse ?
     # Union des démocrates pour la République UDR 0 cas
     # Union des droites pour la République 0 cas
     # Union pour une Nouvelle République 0 cas
