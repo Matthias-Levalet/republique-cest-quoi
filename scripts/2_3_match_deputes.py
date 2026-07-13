@@ -64,5 +64,7 @@ print("shape après fusion données députés:", df.shape)
 # ## Export
 
 # %%
+print("\nShape du df en sortie : ", df.shape)
+
 df.to_csv(PATH_SORTIE, index=False)
 print("Export vers :", PATH_SORTIE)

@@ -268,13 +268,13 @@ print(f"Nombre de cas à corriger erreur identification : {mask_a_corriger.sum()
 df.loc[mask_a_corriger, "id_acteur"] = "PA0"
 df.loc[mask_a_corriger, "nom_orateur_clean"] = df.loc[mask_a_corriger, "nom_orateur"]
 
-print("\nShape du df en sortie : ", df.shape)
-
 # %% [markdown]
 # ## Export
 
 # %%
 # ========== Export ==========
+print("\nShape du df en sortie : ", df.shape)
+
 df.to_csv(PATH_SORTIE, index=False)
 print("Export vers :", PATH_SORTIE)
 

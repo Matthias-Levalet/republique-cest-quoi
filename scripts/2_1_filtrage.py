@@ -150,5 +150,7 @@ print("Shape du df après nettoyage et exclusion des textes : ", df.shape)
 
 # %%
 # ========== Export ==========
+print("\nShape du df en sortie : ", df.shape)
+
 df.to_csv(PATH_SORTIE, index=False)
 print("Export vers :", PATH_SORTIE)
