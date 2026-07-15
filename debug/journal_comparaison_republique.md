@@ -19,13 +19,13 @@ NOTE : colle pas pile à la shape df avec Nan,
 | Fichier maison (2_4_interventions_nettoyees)          | 517023   | (506192) 505725   | (11298 brut) 10831 (net = de base) |
 
 **Écart observé :**
-NosDéputés : 13675 mentions valides (nettoyé comme brut)
-Extraction nettoyée : 13095 mentions valides sur texte nettoyé (13818 sur brut)
-Différence : 580 occurrences
-(pour rappel sur fusion interruptions : 10831 (11298 sur brut))
+- NosDéputés : 13675 mentions valides (nettoyé comme brut)
+- Extraction nettoyée : 13095 mentions valides sur texte nettoyé (13818 sur brut)
+- Différence : 580 occurrences
+- (pour rappel sur fusion interruptions : 10831 (11298 sur brut))
 
 **TODO :**
-- comprendre les ~600 occurrences présentes côté NosDéputés mais absentes de l’extraction nettoyée ;
+- comprendre les ~600 occurrences présentes côté NosDéputés mais absentes de l’extraction nettoyée
 - distinguer :
   - différence de périmètre ;
   - découpage différent des interventions ;
@@ -35,8 +35,7 @@ Différence : 580 occurrences
 
 Dans le texte brut, les espaces multiples empêchent certaines exclusions.
 
-Ex : Écart identifié :
-- "le Président de                            la République"
+Ex d'cart identifié : "le Président de                            la République"
 
 Conclusion :
 
@@ -46,9 +45,8 @@ Conclusion :
 ### 1.3 Impact de la présence d'un speaker sur les matchs regex
 
 La comparaison avec et sans restriction aux interventions disposant d'un speaker montre que les matchs valides de la regex repu dépendent très peu des interventions sans speaker (50aine de cas).  
-(Ce qui est donc très différent des explications de différence du nombre de lignes dans le cas de l'ensemble des interventions (voir journal dédié vs nd), majoritairement due aux interventions sans speakers)
 
-> À noter que ce résultat est très différent de l’analyse des écarts de volumétrie brute entre fichiers : les lignes sans intervenant expliquent une grande partie des différences de structure (voir journal dédié vs nd), mais contribuent très peu aux matchs regex valides.
+> À noter que ce résultat est très différent de l’analyse des écarts de volumétrie brute entre fichiers : les lignes sans intervenant expliquent une grande partie des différences de structure (voir journal dédié vs nd), mais contribuent (très) peu aux matchs regex valides.
 
 | Texte        | Corpus     | Sans filtre speaker | Avec speaker | Écart |
 | ------------ | ---------- | ------------------: | -----------: | ----: |
@@ -57,8 +55,9 @@ La comparaison avec et sans restriction aux interventions disposant d'un speaker
 | `texte_net`  | NosDéputés |              13 675 |       13 623 |   -52 |
 | `texte_net`  | Extraction |              13 095 |       13 095 |     0 |
 
+> NOTE : la 50 aine de cas côté NosDéputés semble être liée à la "confusion" entre texte vs niveau point (voir plus bas)
 
-Ces résultats indiquent que les écarts observés entre NosDéputés et l'extraction ne semblent pas principalement liés à la présence ou absence d'un orateur associé aux interventions.
+Les écarts observés entre NosDéputés et l'extraction ne semblent donc pas principalement liés à la présence ou absence d'un orateur associé aux interventions.
 
 Les divergences proviennent plutôt (voir plus bas) :
 
@@ -94,9 +93,11 @@ cette période, ou méthode de comptage différente).
 
 ## 2. Analyse des divergences regex repu
 
-Exploration des cas LIMITES :
+Exploration des cas LIMITES.
 
 ### 2.1 Comparaison absence par pnum vs_idsyceron
+
+> NOTE : comparaison effectuée dès première version sur les textes bruts, affiner avec les exclusions depuis textes nettoyés
 
 Pas forcément la vraie/seule source différence mais aide comparaison par pnum / id_syceron
 (cf exploration manuelle de `nd_pnum_absentes_de_brut_match.csv`)
@@ -118,31 +119,32 @@ Attaques contre les élus de la République, Attaques contre la République et l
 ```
 
 ### 2.2 Comparaison par snippets de texte
+> NOTE : ici sur les textes nettoyés pour commensurabilité
 
-cf. exploration manuelle des fichiers sortie
+> NOTE : observations reposant sur automatisation script + exploration manuelle des fichiers sortie
 
 - CHECK : des cas ou snippet peut pas bien comparer car **normalisation des textes** (avant même fonction nettoyage) colle pas ?
   - TODO souci fonction nettoyage qui marche bien mais qui plante dans le fichier extract ?
   - fait pour br et italique -> retester
-- Snippet échoue car texte extract **contient des parenthèses**, (virent avec nettoyage) -> mais **match pas avec format ND** qui renvoie **interventions séparées** si parenthèses de didascalies
+- Snippet échoue lorsque texte extract **contenait des parenthèses** avant normalisation : elles virent bien avec le nettoyage, mais témoigne d'une différence de structure des fichiers =  **match pas avec format ND** qui renvoie **interventions séparées** si parenthèses de didascalies
   - Nombre de snippets ND absents de brut avec parenthèses : 32
   - Nombre de snippets brut absents de ND avec parenthèses : 2032
 - Même idée **points suspension** ?
   - Fait (cf 2.3) : le check confirme que les points de suspension expliquent une part substantielle des "absents", plus importante en proportion que les parenthèses côté ND->extract (617 vs 32), et comparable côté extract->ND (1049 vs 2032). Chevauchement partiel entre les deux patterns (union croisée < somme simple, cf 2.3) : certaines lignes cumulent les deux causes.
   
 
-ex parenthèses : 
+Ex de cas de parenthèses : 
 CRSANR5L15S2017E1N012,,,20170713150000000,jeudi 13 juillet 2017,2,12,AN,15,Première session extraordinaire 2017,20171012,Présidence de M. François de Rugy,Renforcement du dialogue social > Discussion des articles (suite) > Après l’article 3 (suite),4,Renforcement du dialogue social,Discussion des articles (suite),Après l’article 3 (suite),,Après l’article 3 (suite),(n[[o]] 19),Après_ 3,DISC_ARTICLES_3_1,1,1,62,PA717379,PM723282,DISC_ARTICLES_1_30_1,NORMAL,PAROLE_1_2,991112,,M. Sylvain Maillard,,717379.0,,"Je tenais à saluer votre première présidence de séance, monsieur le président. (Applaudissements sur les bancs des groupes REM et MODEM.) Nous sommes fiers de vous voir à cette place. Vous êtes le plus jeune vice-président de l’histoire de la VeRépublique. Félicitations ! Nous comptons sur vous. (Applaudissements sur les bancs du groupe REM.)","Je tenais à saluer votre première présidence de séance, monsieur le président. Nous sommes fiers de vous voir à cette place. Vous êtes le plus jeune vice-président de l'histoire de la VeRépublique. Félicitations ! Nous comptons sur vous.",1,True,"Je tenais à saluer votre première présidence de séance, monsieur le président. Nous sommes fiers de vous voir à cette place. Vous êtes le plus jeune v",False
 
 ### 2.3 Confrontation systématique (script factorisé) : orig/net × tous/speaker
 
 Résultats du script de confrontation factorisé (4 configurations :
-texte_brut / texte_net × tous / avec-orateur uniquement).
+texte_brut / texte_net × tous / avec-speaker uniquement).
 
 NOTE : la comparaison par pnum/id_syceron (identifiants) est valide dans les 4 configs.
 La comparaison par snippets, elle, repose sur une égalité de sous-chaîne exacte entre les deux corpus.
 Et elle n'est donc pertinente que sur texte_net, où les deux textes sont normalisés de façon comparable (balises, apostrophes,; espaces).
-Sur texte_brut, elle donne un taux d'"introuvable" artificiellement proche de 100%, donc non calculée / non retenue ici.
+Sur texte_brut, elle donne un taux d'"introuvable" artificiellement proche de 100%, donc non calculée / non retenue ici. (tests réalisés pour la science quand même et pour avoir une idée)
 
 /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ 
 # TODO : creuser tout ce qui est ci-dessous
@@ -150,25 +152,27 @@ Sur texte_brut, elle donne un taux d'"introuvable" artificiellement proche de 10
 
 #### a) pnum vs id_syceron
 
-| Configuration        | Lignes ND | Absentes de l'extraction | Dont mention valide de République |
+> NOTE / TODO : ajouter une colone des matchs repu, c'est confusionnant sinon
+
+| Configuration        | Lignes ND | Absentes de extraction | Dont mention valide de République |
 |-----------------------|----------:|--------------------------:|-----------------------------------:|
 | texte_brut             | 1 391 207 |                     45 410 |                                 130 |
 | texte_brut_speaker     | 1 088 105 |                        841 |                                  81 |
 | texte_net              | 1 391 207 |                     45 410 |                                 130 |
 | texte_net_speaker      | 1 088 105 |                        841 |                                  81 |
 
+
+
 **Constats :**
 
-- TODO : Les comptes sont identiques entre `texte_brut` et `texte_net` (130 / 81) :
+
+- Les comptes sont identiques entre `texte_brut` et `texte_net` (130 / 81) :
   sur ce sous-ensemble précis (lignes ND absentes de l'extraction), les
-  variantes brut/net de la regex ne divergent pas — contrairement à l'écart
-  observé en 1 sur l'ensemble du corpus
-  (13818 vs 13095 nettoyé fichier extraction ; 10831 vs 11 298 fishier fusion) 
-- Le filtre "avec speaker" fait chuter les lignes absentes de 45410 à 841
-  (-98%) : cohérent avec l'hypothèse "texte vs niveau point" de 2.1 — la
-  grande majorité de l'écart pnum/id_syceron correspond à des lignes ND sans
-  speaker associé (titres/niveaux de discussion), pas à un vrai défaut
-  d'extraction.
+  variantes brut/net de la regex ne divergent pas
+- Le filtre "avec speaker" fait chuter les lignes absentes de 45410 à 841, mais beaucoup moins concernant les match repu valides. Cf : cohérent avec identification précédente sur le fait que ne semble pas se jouer au niveau de l'absence de speakers, sauf cas marginaux (textes vs niv point, etc.).
+
+> **NOTE / TODO : ALLER CREUSER LES 81 QUI TRAINENT ICI**
+> Et creuser l'écart entre les quasi 600 et juste 81 ici = qui sont les autres.
 
 #### b) Snippets (texte_net uniquement)
 
@@ -180,33 +184,29 @@ Sur texte_brut, elle donne un taux d'"introuvable" artificiellement proche de 10
 | texte_net_speaker  | extract -> ND    |      2 579 / 13 095 |      2 033 |        1 050 |         2 364 |
 
 **Constats :**
-- Le filtre speaker ne fait presque pas bouger les deux comptes ND->extract
-  (1229->1209) et extract->ND (2577->2579), et ce n'est **pas symétrique par
-  hasard** : côté "extract avec mention valide" la population reste
-  identique (13 095-> 13 095, quasi aucune ligne extract sans orateur), donc
-  seule la population *cherchée* côté ND diminue (13675->13623), ce qui peut
-  faire baisser légèrement son propre taux d'introuvable (1229->1209) tout en
-  faisant *monter* légèrement l'autre sens, puisque le "big" ND utilisé comme
-  cible de recherche rétrécit (2577->2579). Cf. discussion détaillée dans le
-  script de confrontation.
-- Union croisée (`check_au_moins_un`) < somme simple des deux patterns dans
-  les deux sens : léger chevauchement de lignes qui cumulent parenthèses et
-  points de suspension (7 lignes en ND->extract, 719 en extract->ND, en
-  texte_net non filtré).
-- Il reste un residu non expliqué par ces deux patterns : **587** côté
-  ND->extract et **215** côté extract->ND (texte_net). C'est ce résidu qui
-  mériterait l'exploration manuelle prioritaire (cf. TODO ci-dessous).
+
+- Le filtre speaker ne fait presque pas bouger les deux comptes ND->extract (-20) ou extract -> ND (+2). Note : l'augmentation marginale > possibles matchs qui étaient dans le big blob et en sont supprimés avec leur intervention sans speakers (avec découpe intervention qui n'est pas la même, etc.)
+- TODO DÉTAILLER RAPIDEMENT PATTERNS AVANT POINT DESSOUS
+- Union croisée (`check_au_moins_un`) des patterns : léger chevauchement de lignes qui cumulent parenthèses et points de suspension en en ND->extract (7 lignes) plus "franc" pour extract->ND (719) en ND->extract [fonction appliquée sur les textes originels/bruts].
+- Vérifier si ces patterns révèlent bien une différence de structure sous-jacente et donc un découpage des interventions qui empêchent le match.
+- Il reste dans tous les cas un residu non expliqué par ces deux patterns : **587** côté ND->extract et **215** côté extract->ND (texte_net).
+- Explorer les cas :
+  - exploration manuelle des fichiers
+  - et c'est ce résidu qui mériterait l'exploration manuelle prioritaire
+
+> TODO : EXPLORER LES CAS RESTANTS
 
 #### c) Focus patterns
 
-**Cas liés aux parenthèses :**
+**Cas liés aux parenthèses :**  
+
 ND absent dans extraction Total : 1229  
 Avec parenthèses dans texte original : 32  
 
 Extraction absente dans ND Total : 2577  
 Avec parenthèses dans texte original : 2032  
 
-**Cas liés aux points de suspension**
+**Cas liés aux points de suspension :**
 
 ND absent extraction Avec points de suspension : 617  
 Extraction absente ND Avec points de suspension : 1049  
@@ -219,12 +219,12 @@ Hypothèse : les points de suspension peuvent donc révéler :
 
 /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ 
 # TODO :
-- sur texte_net, pas de diff réelle entre avec et sans speaker
-- possiblement car fonction nettoyage renvoie déjà des textes vides, donc regex = false pour pas mal de cas sans speakers:(Applaudissements), etc.
+- explorer les cas, notamment après nettoyage speakers
+- exploration manuelle des fichiers correspondants
+- prioritairement ND abs de extract (l'autre sens à la limite pour la science et identifier des patterns)
 
-
-POUR LA SCIENCE :
-(même si pas de sens/logique puisque pas normalisé, mais pour observer les écarts)
+# Analyse complète en vrac
+(fait tourné snippets volontairement aussi sur brut même si artificiellement mauvais pour avoir idée évolutions avec comparaison)
 
 ============================================================
 CONFIGURATION : texte_brut
