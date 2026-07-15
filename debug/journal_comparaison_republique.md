@@ -107,6 +107,9 @@ CRSANR5L15S2017E1N012,,,20170713150000000,jeudi 13 juillet 2017,2,12,AN,15,Premi
 **TODO AJD :** tests sur fichiers intervenants ???
 (cf comme fichier vsND)
 
+
+# TESTS
+## ANCIENNE version :
 ------------------------------------
 ----- check pnum VS id_syceron -----
 ------------------------------------
@@ -138,3 +141,44 @@ Lignes ND speaker avec mention repu valide : 13623
 Lignes brut speaker avec mention repu valide : 13095
 ND speaker (repu) introuvable dans brut (snippets) : 1209 / 13623
 Brut speaker (repu) introuvable dans ND : 2579 / 13095
+
+## nouvelle version
+
+============================================================
+CONFIGURATION : texte_brut
+============================================================
+--- pnum vs id_syceron [texte_brut] ---
+Lignes ND : 1391207 | absentes de l'extraction : 45410
+Dont mention valide de République : 130
+============================================================
+CONFIGURATION : texte_brut_speaker
+============================================================
+--- pnum vs id_syceron [texte_brut_speaker] ---
+Lignes ND : 1088105 | absentes de l'extraction : 841
+Dont mention valide de République : 81
+============================================================
+CONFIGURATION : texte_net
+============================================================
+--- pnum vs id_syceron [texte_net] ---
+Lignes ND : 1391207 | absentes de l'extraction : 45410
+Dont mention valide de République : 130
+--- snippets [texte_net] ---
+Lignes ND avec mention repu valide       : 13675
+Lignes extract avec mention repu valide  : 13095
+ND (repu) introuvable dans extract : 1229 / 13675
+  dont avec parenthèses : 32
+Extract (repu) introuvable dans ND : 2577 / 13095
+  dont avec parenthèses : 2032
+============================================================
+CONFIGURATION : texte_net_speaker
+============================================================
+--- pnum vs id_syceron [texte_net_speaker] ---
+Lignes ND : 1088105 | absentes de l'extraction : 841
+Dont mention valide de République : 81
+--- snippets [texte_net_speaker] ---
+Lignes ND avec mention repu valide       : 13623
+Lignes extract avec mention repu valide  : 13095
+ND (repu) introuvable dans extract : 1209 / 13623
+  dont avec parenthèses : 32
+Extract (repu) introuvable dans ND : 2579 / 13095
+  dont avec parenthèses : 2033
