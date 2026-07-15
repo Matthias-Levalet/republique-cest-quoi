@@ -5,7 +5,9 @@ le code. Comptages obtenus lors des premiers tests de la fonction
 `contains_lexical_outside_excl` (avec exclusions), selon la source du corpus.  
 Actualisé depuis changement extraction (br/italique) / changement nettoyage / changement regex
 
-## Match valide
+## 1. Résumé global regex repu vs différents fichiers
+
+### Match regex repu valide
 
 NOTE : colle pas pile à la shape df avec Nan,
 (ou incongruences entre versions si vire ou pas selon présence combinée id_orateur/id_acteur/nom_orateur, etc.)
@@ -24,7 +26,8 @@ espaces multiples non normalisés dans texte_brut.
 repu_match_valide (texte nettoyé) : True      10831
 repu_match_valide (texte_brut) : True      11298
 
-### Match après exclusions sans orateurs
+### Match après exclusions sans speaker
+
 df_brut_with_speaker shape :  (1027685, 41)
 repu_match_valide counts : True       13817
 repu_match_valide_net counts : True       13095
@@ -33,8 +36,9 @@ df_ND1516_with_speaker shape :  (1088105, 20)
 repu_match_valide counts : True       13623
 repu_match_valide_net : True       13623
 
-## Match "républi" sans aucune exclusion
+### Match "républi" brut sans aucune exclusion de termes
 
+Pour trace et idée (sans nettoyage spécifiques ni verif speakers etc.)
 NOTE : colle pas pile à la shape df avec Nan etc.
 
 Pour référence, `pattern_lexical = re.compile(r"républi", re.I)` seul,
@@ -56,8 +60,7 @@ interventions matchées — période plus longue que la nôtre mais total de
 matches inférieur, à creuser (source potentiellement moins exhaustive sur
 cette période, ou méthode de comptage différente).
 
-
-## DIVERGENCES
+## 2. Analyse des divergences regex repu
 
 Exploration des cas LIMITES :
 
@@ -98,3 +101,8 @@ cf. exploration manuelle de `nd_snippets_absent_de_brut.csv`
 
 ex parenthèses : 
 CRSANR5L15S2017E1N012,,,20170713150000000,jeudi 13 juillet 2017,2,12,AN,15,Première session extraordinaire 2017,20171012,Présidence de M. François de Rugy,Renforcement du dialogue social > Discussion des articles (suite) > Après l’article 3 (suite),4,Renforcement du dialogue social,Discussion des articles (suite),Après l’article 3 (suite),,Après l’article 3 (suite),(n[[o]] 19),Après_ 3,DISC_ARTICLES_3_1,1,1,62,PA717379,PM723282,DISC_ARTICLES_1_30_1,NORMAL,PAROLE_1_2,991112,,M. Sylvain Maillard,,717379.0,,"Je tenais à saluer votre première présidence de séance, monsieur le président. (Applaudissements sur les bancs des groupes REM et MODEM.) Nous sommes fiers de vous voir à cette place. Vous êtes le plus jeune vice-président de l’histoire de la VeRépublique. Félicitations ! Nous comptons sur vous. (Applaudissements sur les bancs du groupe REM.)","Je tenais à saluer votre première présidence de séance, monsieur le président. Nous sommes fiers de vous voir à cette place. Vous êtes le plus jeune vice-président de l'histoire de la VeRépublique. Félicitations ! Nous comptons sur vous.",1,True,"Je tenais à saluer votre première présidence de séance, monsieur le président. Nous sommes fiers de vous voir à cette place. Vous êtes le plus jeune v",False
+
+### comparaison réduite aux with_speaker
+
+**TODO AJD :** tests sur fichiers intervenants ???
+(cf comme fichier vsND)
