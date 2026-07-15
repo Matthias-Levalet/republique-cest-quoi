@@ -2,13 +2,13 @@
 
 ## 1. Résumé Global (par `id_syceron` uniquement)
 
-=== RÉSUMÉ GLOBAL (par id_syceron uniquement) ===
-IDs communs              :  1,065,985
-Uniquement dans extract  :     61,477
-Uniquement dans ND15-16  :     43,516
+=== RÉSUMÉ GLOBAL (par id_syceron uniquement) ===  
+IDs communs              :  1,065,985  
+Uniquement dans extract  :     61,477  
+Uniquement dans ND15-16  :     43,516  
 
-Total IDs extract :  1,127,462
-Total IDs ND      :  1,109,501
+Total IDs extract :  1,127,462  
+Total IDs ND      :  1,109,501  
 
 | Métrique                      | Valeur    |
 | ----------------------------- | --------- |
@@ -104,11 +104,11 @@ Les IDs présents uniquement dans l’un ou l’autre des DataFrames corresponde
 
 ## 4. Résultats recherche texte rapide (snippets)
 
-fast_only_extract_with_speaker -> found: 899 / 1569
-fast_only_ND_with_speaker -> found: 382 / 838
+fast_only_extract_with_speaker -> found: 899 / 1569  
+fast_only_ND_with_speaker -> found: 382 / 838  
 
 --- Décompte SANS les cas 'congres' ---  
-fast_only_ND_with_speaker -> found (sans congres): 330 / 478
+fast_only_ND_with_speaker -> found (sans congres): 330 / 478  
 
 | Jeu de données                                  | Trouvés (`found=True`) | Total   | % de correspondance |
 | ----------------------------------------------- | ---------------------- | ------- | ------------------- |
@@ -143,4 +143,4 @@ fast_only_ND_with_speaker -> found (sans congres): 330 / 478
   - en vrai : https://www.assemblee-nationale.fr/dyn/15/comptes-rendus/seance/session-ordinaire-de-2018-2019/deuxieme-seance-du-lundi-12-novembre-2018#1515918 
   - -> "des articles **de la première partie** du projet de loi" 
 
-# TODO AJD : tests sur fichiers intervenants ???
+# TODO : tests sur fichiers speakers ???
