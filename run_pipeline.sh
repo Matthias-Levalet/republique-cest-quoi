@@ -1,31 +1,33 @@
-#!/bin/bash
-set -e  # stoppe si une étape échoue
+# PAS MAINTENU A JOUR, AVISER EN FONCTION
 
-cd "$(dirname "$0")/scripts"   # ← correct si le .sh est à la racine
+# #!/bin/bash
+# set -e  # stoppe si une étape échoue
 
-etapes=(
-    "1_1_extraction.py"
-    "1_2_fusion_legislatures.py"
-    "1_3_regroupement_interventions.py"
-    "2_1_filtrage.py"
-    "2_2_identification_acteurs.py"
-    "2_3_match_deputes.py"
-    "2_4_affiliations.py"
-)
+# cd "$(dirname "$0")/scripts"   # ← correct si le .sh est à la racine
 
-for etape in "${etapes[@]}"; do
-    echo ""
-    echo "=============================="
-    echo "=== $etape ==="
-    echo "=============================="
-    python "$etape"
-done
+# etapes=(
+#     "1_1_extraction.py"
+#     "1_2_fusion_legislatures.py"
+#     "1_3_regroupement_interventions.py"
+#     "2_1_filtrage.py"
+#     "2_2_identification_acteurs.py"
+#     "2_3_match_deputes.py"
+#     "2_4_affiliations.py"
+# )
 
-echo ""
-echo "=============================="
-echo "=== Pipeline sh complet ==="
-echo "=============================="
+# for etape in "${etapes[@]}"; do
+#     echo ""
+#     echo "=============================="
+#     echo "=== $etape ==="
+#     echo "=============================="
+#     python "$etape"
+# done
 
-# Pour exécuter : 
-# chmod +x run_pipeline.sh
-# ./run_pipeline.sh
+# echo ""
+# echo "=============================="
+# echo "=== Pipeline sh complet ==="
+# echo "=============================="
+
+# # Pour exécuter : 
+# # chmod +x run_pipeline.sh
+# # ./run_pipeline.sh
