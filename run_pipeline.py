@@ -1,3 +1,5 @@
+# TODO : sans doute passer à un vrai log pour conserver infos ?
+
 import subprocess
 import sys
 from pathlib import Path
