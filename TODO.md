@@ -13,6 +13,7 @@
 
 ## À voir
 
+## 1-extraction
 - [ ] SOUCIS REGROUPEMENT INTERVENTIONS FOIRE -> nouvelle version semble okayish
   - toujours un mini écart, semble plus stable de pas trier les fichiers par numéro ordre  :
   - les interventions sont déjà dans l'ordre, les id numérotés semblent pas super stables ?
@@ -23,7 +24,59 @@
 - [ ] check par matthias si contexte est OK.
 - [ ] check repu against ND
 - [ ] IMPORTANT : check si implementation gestion balises <br/> ET italique est ok
+- [ ] sans doute devoir l'implementer aussi pour récupération du niv point : des trucs qui passent sur plusieurs lignes
+- [ ] IE :voir ce qui foire pour rappel réglement sur plusieurs lignes :
+  - [ ] ex : CRSANR5L15S2017E1N007, CRSANR5L15S2018E1N027, CRSANR5L15S2018O1N284
+  - [ ] etc.
 
+20171007,Présidence de M. François de Rugy,"Renforcement du dialogue social > Discussion des articles (suite) > Rappel
+            s
+             au règlement",3,Renforcement du dialogue social,Discussion des articles (suite),"Rappel
+            s
+             au règlement","Rappel
+            s
+             au règlement","Rappel
+            s
+             au règlement"
+
+ex : dans CRSANR5L15S2018E1N027
+
+            <titreStruct id_syceron="1386637">
+              <intitule>
+                <italique>Rappel</italique>
+                <italique>s</italique>
+                <italique> au règlement<br/></italique>
+              </intitule>
+
+        <point nivpoint="3" valeur_ptsodj="1" ordinal_prise="2" id_preparation="0" ordre_absolu_seance="15" code_grammaire="RAP_REGLEMENT_1_1" code_style="Suspension rappel" code_parole="" sommaire="1" id_syceron="1386637" valeur="">
+          <orateurs/>
+          <texte>
+            <italique>Rappel</italique>
+            <italique>s</italique>
+            <italique> au règlement</italique>
+          </texte>
+
+
+- [ ] MAIS AUSSI AUTRE CHOSE : CRSANR5L15S2019O1N021
+CRSANR5L15S2019O1N021,,,20181017150000000,mercredi 17 octobre 2018,1,21,AN,15,Session ordinaire 2018-2019,20180021,Présidence de M. Richard Ferrand,"Projet de loi de finances pour 2019 > Première partie 
+        (suite) > Après l’article 2 (suite)",4,Projet de loi de finances pour 2019,"Première partie 
+        (suite)",Après l’article 2 (suite),,Après l’article 2 (suite),,Après_ 2,DISC_
+
+Cf
+        <sommaire2 type_debat="PLF">
+          <titreStruct type_debat="PLF" id_syceron="1456429">
+            <intitule>
+              <italique>Première partie </italique>
+              <italique>(suite)</italique>
+              <italique>
+                <br/>
+              </italique>
+            </intitule>
+          </titreStruct>
+          <sommaire3 type_debat="PLF">
+            <titreStruct type_debat="PLF" id_syceron="1456431">
+              <intitule>Après l’article 2 <italique>(suite)</italique></intitule>
+            </titreStruct>
 
 ## 2-clean&filter
 
@@ -47,7 +100,9 @@
 - [X] aviser avec la nouvelle remontée d'exclusions possibles.
 - [ ] voir pour un check des ajouts avec matthias si c'est ok
 - [ ] check repu against ND
-  
+
+ENCORE des trucs qui flaguent ? sans trop savoir pourquoi ?
+ex
 
 # NOTE : quelques (~10) "république islamique" sans précision pour parler de l'Iran
 # mais risque de supprimer d'autres occurrences que l'on veut garder
@@ -76,3 +131,4 @@
 - [ ] aviser genAI sur le nom des topics ? -> meh.
 
 ## Pistes, etc.
+
