@@ -106,3 +106,35 @@ CRSANR5L15S2017E1N012,,,20170713150000000,jeudi 13 juillet 2017,2,12,AN,15,Premi
 
 **TODO AJD :** tests sur fichiers intervenants ???
 (cf comme fichier vsND)
+
+------------------------------------
+----- check pnum VS id_syceron -----
+------------------------------------
+Doublons id_syceron : 367
+Doublons pnum : 281705
+Lignes ND absentes de l'extraction brute : 45410
+Dont avec mention valide de République : 130
+
+------------------------------
+----- check par snippets -----
+------------------------------
+Lignes ND avec mention repu valide   : 13675
+Lignes brut avec mention repu valide : 13095
+ND (repu) introuvable dans brut (snippets) : 1229 / 13675
+Brut (repu) introuvable dans ND : 2577 / 13095
+
+-------------------------------------------------
+----- check pnum VS id_syceron (speaker) --------
+-------------------------------------------------
+Lignes extraction brute avec speaker : 1027685
+Lignes ND avec speaker : 1088105
+Lignes ND avec speaker absentes de l'extraction brute : 841
+Dont avec mention valide de République : 81
+
+----------------------------------------
+----- check par snippets (speaker) -----
+----------------------------------------
+Lignes ND speaker avec mention repu valide : 13623
+Lignes brut speaker avec mention repu valide : 13095
+ND speaker (repu) introuvable dans brut (snippets) : 1209 / 13623
+Brut speaker (repu) introuvable dans ND : 2579 / 13095
