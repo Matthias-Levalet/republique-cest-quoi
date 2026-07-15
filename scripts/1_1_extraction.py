@@ -13,6 +13,7 @@ import os
 import glob
 from lxml import etree
 import pandas as pd
+import re
 
 PATH_XML_15 = "../data/raw/15-xml/compteRendu/"
 PATH_XML_16 = "../data/raw/16-xml/compteRendu/"
@@ -30,6 +31,31 @@ PATH_SORTIE_16 = "../data/interim/1_1_extract_16.csv"
 # ==================================================================
 
 # ======== Fonctions extraction infos depuis fichier XML =========
+
+
+def _extraire_texte_avec_espacement(elem, ns):
+    """
+    Reconstruit le texte d'un élément XML en corrigeant deux pertes
+    d'espacement propres au format des comptes rendus AN :
+    - <br/> : ignoré par itertext(), on restaure l'espace via son tail.
+    - <italique/> vide (sans texte ni enfant) : ne porte aucune mise en
+      forme, sert uniquement à séparer des mots/segments (ex. didascalies
+      ou titres découpés mot par mot en 15e législature).
+    Ne gère PAS la normalisation des espaces multiples/retours à la ligne
+    issus de l'indentation du XML source : à la charge de l'appelant,
+    pour préserver la trace brute utile en debug.
+    """
+    for br in elem.findall(".//ns:br", namespaces=ns):
+        # tail = suite texte, `or ""`` gère cas où tail est None
+        br.tail = " " + (br.tail or "")
+
+    for it in elem.findall(".//ns:italique", namespaces=ns):
+        # balise vide : aucun texte et aucun élément enfant (<italique/> ou <italique></italique>)
+        if (not it.text or not it.text.strip()) and len(it) == 0:
+            it.tail = " " + (it.tail or "")
+
+    return "".join(elem.itertext()).strip()
+
 
 # Fonction extraction de la hiérarchie complète des points parents
 
@@ -78,12 +104,16 @@ def construire_contexte_nivpoint(root, ns):
                 if (
                     niv is not None and niv != 99
                 ):  # ne pas rompre contexte pour nivpoint=99 (suspension de séance)
-                    texte_elem = child.find("ns:texte", namespaces=ns)
+                    titre_texte_elem = child.find("ns:texte", namespaces=ns)
                     titre = (
-                        "".join(texte_elem.itertext()).strip()
-                        if texte_elem is not None
+                        _extraire_texte_avec_espacement(titre_texte_elem, ns)
+                        if titre_texte_elem is not None
                         else ""
                     )
+                    titre = re.sub(
+                        r"\s+", " ", titre
+                    ).strip()  # normalisation espaces multiples et retours à la ligne
+
                     # un nouveau point de niveau N invalide tout contexte >= N
                     for k in [k for k in contexte_par_niveau if k >= niv]:
                         del contexte_par_niveau[k]
@@ -112,7 +142,7 @@ def construire_contexte_nivpoint(root, ns):
     return resultat
 
 
-# Transformation hiérarchie vers colonnes
+# Fonction transformation hiérarchie vers colonnes
 def _hierarchie_to_colonnes(hierarchy):
     """
     Aplati une hiérarchie de points (liste ordonnée du niveau le plus haut
@@ -179,43 +209,15 @@ def extraire_paragraphes_lxml(fichier_xml: str) -> pd.DataFrame:
             point_type = (
                 hierarchy_nivpoint[-1].get("code") if hierarchy_nivpoint else None
             )
-            # texte du paragraphe
+            # texte du paragraphe (sans normalisation espaces/retours à ligne bruts du XML)
+            # utiles en debug et géré par nettoyer_texte (1_2) ensuite.
             # TODO : tester et explorer les textes suite intégration modif
             texte_elem = paragraphe.find("ns:texte", namespaces=ns)
-            texte = None  # on initialise a None
-            if texte_elem is not None:  # et on complete si texte_elem n'est pas None
-                # itertext() ignore les balises <br/> ; on insère donc un espace
-                # dans leur tail pour conserver la séparation entre les mots.
-                # NB : pas besoin de lstrip() du tail existant (<br/> ne sont visiblement
-                # pas suivis d'espace/saut de ligne dans le XML source ;
-                # et c'est au pire géré par le \s+ de nettoyer_texte (1_2)
-                for br in texte_elem.findall(".//ns:br", namespaces=ns):
-                    br.tail = " " + (
-                        br.tail or ""
-                    )  # br.tail = suite texte, or "" gère cas où tail est None
-
-                # certains <italique/> vides (sans texte ni contenu) ne portent aucune
-                # mise en forme : ils servent uniquement à séparer des mots ou segments
-                # (surtout en 15e législature).
-                # Sans ce fix, ~42961 paragraphes sur la 15e et ~576 sur la 16e subissent
-                # un collage de mots silencieux (ex. "Rires etapplaudissements", etc.).
-                for it in texte_elem.findall(".//ns:italique", namespaces=ns):
-                    # aucun texte et aucun élément enfant (<italique/> ou <italique></italique>)
-                    # Si balise vide (n'a ni texte ni enfant : <italique/> ou <italique></italique>)
-                    if (not it.text or not it.text.strip()) and len(it) == 0:
-                        # ajoute un espace avant le texte qui suit la balise vide
-                        it.tail = " " + (it.tail or "")
-
-                # une fois exceptions gérées, renvoyer le texte
-                texte = "".join(texte_elem.itertext()).strip()
-
-            # TODO : supr après test et quand matthias aura vu
-            # NOTE : anciennement mais mini bug sur les br (supprimeait
-            # texte = (
-            #     "".join(texte_elem.itertext()).strip()
-            #     if texte_elem is not None
-            #     else None
-            # )
+            texte = (
+                _extraire_texte_avec_espacement(texte_elem, ns)
+                if texte_elem is not None
+                else None
+            )
 
             # stime du paragraphe (attribut de <texte>, pas de <paragraphe>)
             stime = texte_elem.get("stime") if texte_elem is not None else None
