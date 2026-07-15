@@ -125,18 +125,22 @@ fast_only_ND_with_speaker -> found (sans congres): 330 / 478
 # TODO : aller creuser les cas pas trouver pour voir
 
 -> bilan : dans les derniers
+
 - certain liés au fichier zelensky
 - des cas qui existent pas/plus dans le fichier ?
   - ex : https://www.assemblee-nationale.fr/16/cri/2022-2023/20230100.asp#2966325,2966325,Louis Boyard,,1055581,que vous a-t-il dit d'autre ?,False -> introuvable dans le doc en question
 - certains liés même erreur pnum vs id_syceron quand regroupé dans une intervention
-  - (mais le snipet ne flag pas car des "…" séparent des interventions, parfois aussi des transfo de balises mal lues vs nos députés ie chez nous : <exposant>o</exposant>, devient "no" VS chez eux "n°".
+  - mais le snipet ne flag pas car des "…" séparent des interventions, parfois aussi des transfo de balises mal lues vs nos députés ie chez nous : <exposant>o</exposant>, devient "no" VS chez eux "n°".
   - ex : après normalisation eux "n° 2779" vs nous "no 2779" ?
   - ex : pnum 2964497 vs syceron 2971505 / https://www.assemblee-nationale.fr/16/cri/2022-2023/20230100.asp#2964497
- -> normalisation texte suffit pas
+  - -> normalisation texte suffit pas
   - TEST après remplacement exposant vs ° ( texte = re.sub(r"<exposant>o</exposant>", "°", texte) #)
-    - -> meh ?, suffit pas, affiner ? mais en tout cas trouve bien à la main les cas identifiés 
-- pnum et id diff mais flag pas texte car des textes qui collent pas (corrections entre fichiers ?) :
+    - -> meh ?, suffit pas, affiner ? mais en tout cas trouve bien à la main les cas identifiés
+    - NOTE si veut creuser revoir depuis ajout gestion br et italique, sinon remplacer n° par no direct
+- pnum et id diff mais flag pas texte car contenu des textes similaires mais ne collent pas tout à fait (corrections entre versions fichiers AN ? ajout et modif de mots, etc.) :
   - ex : pnum 1505471 vs id_syceron 1515918
   - http://www.assemblee-nationale.fr/15/cri/2018-2019/20190059.asp#P1505471,1505471,Hugues Renson,,299372,"cet après-midi, l'assemblée a commencé la discussion des articles du projet de loi, s'arrêtant à l'article 4 et à l'état a annexé.",False
   - en vrai : https://www.assemblee-nationale.fr/dyn/15/comptes-rendus/seance/session-ordinaire-de-2018-2019/deuxieme-seance-du-lundi-12-novembre-2018#1515918 
   - -> "des articles **de la première partie** du projet de loi" 
+
+# TODO AJD : tests sur fichiers intervenants ???
