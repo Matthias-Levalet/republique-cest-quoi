@@ -12,7 +12,7 @@ LOGFILE="$LOGS/pipeline_$(date +%Y%m%d_%H%M%S).txt"
 
 exec > >(tee -a "$LOGFILE") 2>&1
 
-echo "Pipeline lancé le $(date)"
+echo "Pipeline sh lancé le $(date)"
 
 etapes=(
     "1_1_extraction.py"
