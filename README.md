@@ -31,10 +31,10 @@ run_pipeline.py / run_pipeline.sh           # orchestration : enchaîne les scri
 
 scripts/1_1_extraction.py                   # lecture des XML de l'AN, exclusion doublons/congrès
 scripts/1_2_fusion_legislatures.py          # concaténation 15e + 16e, déduplication
-scripts/1_3_regroupement_interventions.py   # fusion des interventions interrompues
-scripts/2_1_filtrage.py                     # exclusion des interventions non exploitables, nettoyage des textes
-scripts/2_2_identification_acteurs.py       # fusion id_acteur / id_orateur, correction des erreurs d'identification
-scripts/2_3_match_deputes.py                # jointure avec les données députés (groupe, mandat, etc.)
+scripts/1_3_regroupement_interventions.py   # fusion interventions interrompues
+scripts/2_1_filtrage.py                     # exclusion interventions non exploitables, nettoyage textes
+scripts/2_2_identification_acteurs.py       # fusion id_acteur / id_orateur, correction erreurs d'identification
+scripts/2_3_match_deputes.py                # jointure données députés (groupe, mandat, etc.)
 scripts/2_4_affiliations.py                 # affiliation (groupe/gouv) à date de l'intervention
 scripts/3_1_identification_republique.py    # repérage des mentions de « républi* », exclusion faux positifs
 scripts/4_1_analysis_stats.py               # statistiques descriptives, dynamique temporelle (exploratoire)
