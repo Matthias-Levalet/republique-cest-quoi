@@ -4,6 +4,7 @@ Première ébauche d'analyse des comptes rendus des débats à l'Assemblée nati
 Collaboration entre [Léo Mignot](https://www.centreemiledurkheim.fr/notre-equipe/leo-mignot/) et [Matthias Levalet](https://www.centreemiledurkheim.fr/notre-equipe/matthias-levalet/) sur l'objet de thèse de ce dernier.  
 Projet initié dans le cadre de [SICSS-Paris 2025](https://sicss.io/2025/paris/).
 
+> [!NOTE]
 > Projet en cours : première ébauche, résultats non stabilisés.
 >
 > **Reproductibilité** : le pipeline n'est pas encore entièrement reproductible.
