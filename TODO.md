@@ -10,6 +10,10 @@
 - finaliser pipeline
 - ajouter infos sur téléchargement fichiers et ou option exécution code
 - ajouter liste pays txt pour reproductibilité
+- REPRENDRE DEMANDE AJOUT COMMISSIONS ETC DÉPUTÉS POUR MATTHIAS
+- Aviser si fichier datan diffusables. Sinon voir pour reproductibilité
+- REPRENDRE LE **README** !!!!
+
 
 ## À voir
 
@@ -48,7 +52,8 @@
   - [X] désormais géré par le fait que conserve une trace sur-imprimée de nom_orateur sur nom_orateur_clean quand on en a pas si PA0
 - [X] Vérif cas de nom orateur sans nom orateur clean plus qu'1 (cf depuis gestion en cas de PA0)
 - [X] Vérif cas de nom orateur clean sans nom orateur -> pas concluant ~13 cas (président séances autres mal identif (chenu, laporte)
-- [ ] 2.4 affiliation : depuis le doc mandats de la datan, repasser leur comission d'appartenance + leur "codeQualite" et libelleAbrev
+- [ ] 2.4 affiliation : depuis le doc mandats de la datan, repasser leur comission d'appartenance + leur "codeQualite" et libelleAbrev = REPRENDRE DEMANDE AJOUT COMMISSIONS ETC DÉPUTÉS POUR MATTHIAS
+
 
 ## 3-identify-republic
 
@@ -84,7 +89,11 @@
 
 ## Pistes, etc.
 
+
 Analyses.ipynb pour le fichier ok de matthias.
 
 https://data.assemblee-nationale.fr/archives-anterieures/archives-15e/debats-en-seance-publique
 https://data.assemblee-nationale.fr/archives-16e/debats
+
+https://data.assemblee-nationale.fr/static/openData/repository/15/vp/syceronbrut/syseron.xml.zip
+https://data.assemblee-nationale.fr/static/openData/repository/16/vp/syceronbrut/syseron.xml.zip
