@@ -1,14 +1,6 @@
 # %% [markdown]
 # # 5-2 - Topic modeling avec BERTopic (analyse thématique)
 
-# %% [markdown]
-# ## décider de comment on découpe
-# - sentence ?
-# - paragraphe (existe pas ici) -> mais possible avec wtpsplit : https://github.com/segment-any-text/wtpsplit
-# - dire que tant pis ? Ok si utilise modèle avec fenetre suffisante (ici ok avec qwen)
-# - Passer à l'échelle de la phrase pour tout ce qui va être pour sentiment, réseau de mots, proba des termes, etc.
-# - etc.
-
 # %%
 # TODO : se passer de dataset ?
 
