@@ -15,7 +15,7 @@ Projet initié dans le cadre de [SICSS-Paris 2025](https://sicss.io/2025/paris/)
 ## Pipeline
 
 | Étape | Scripts (`scripts/`) | Description |
-|---|---|---|
+| --- | --- | --- |
 | 1 | `1_1` à `1_3` | Extraction des XML de l'AN, fusion des législatures, regroupement des interventions |
 | 2 | `2_1` à `2_5` | Filtrage, identification des acteurs, appariement aux députés, affiliations partisanes et commissions |
 | 3 | `3_1` | Repérage des occurrences de « République » |
