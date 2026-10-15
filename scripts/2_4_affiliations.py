@@ -66,6 +66,7 @@ LISTE_NI_RN = [
 DATE_SEUIL_FIN_15E_LEGISLATURE = "2022-06-21"
 
 # %%
+# TODO : normalement ok à ce stade pour type id_orateur (PA a été ajouté)
 df = pd.read_csv(PATH_ENTREE, low_memory=False, dtype={"id_orateur": str})
 print("Shape du df chargé : ", df.shape)
 
@@ -89,14 +90,14 @@ df_affiliation = pd.read_csv(
     PATH_AFFILIATIONS, encoding="latin1", sep=";"
 )  # format dégueu
 
-# ========== Match temporel des affiliations ==========
-
-# préparation des dates
 df_affiliation["libelleAbrev"] = df_affiliation["libelleAbrev"].astype(str).str.strip()
 df_affiliation["parti_recod"] = df_affiliation["libelleAbrev"].replace(
     RECODAGE_AFFILIATION
 )
 
+# ========== Match temporel des affiliations ==========
+
+# préparation des dates
 df["dateSeance_ts"] = pd.to_datetime(
     df["dateSeance"], format="%Y%m%d%H%M%S%f", errors="raise"
 )
