@@ -17,7 +17,7 @@ Projet initié dans le cadre de [SICSS-Paris 2025](https://sicss.io/2025/paris/)
 | Étape | Scripts (`scripts/`) | Description |
 |---|---|---|
 | 1 | `1_1` à `1_3` | Extraction des XML de l'AN, fusion des législatures, regroupement des interventions |
-| 2 | `2_1` à `2_4` | Filtrage, identification des acteurs, appariement aux députés, affiliations partisanes |
+| 2 | `2_1` à `2_5` | Filtrage, identification des acteurs, appariement aux députés, affiliations partisanes et commissions |
 | 3 | `3_1` | Repérage des occurrences de « République » |
 | 4 | `4_1`, **TODO** | Statistiques |
 | 5 | `5_1`, **TODO** | Embeddings, topic modeling |
@@ -36,6 +36,7 @@ scripts/2_1_filtrage.py                     # exclusion interventions non exploi
 scripts/2_2_identification_acteurs.py       # fusion id_acteur / id_orateur, correction erreurs d'identification
 scripts/2_3_match_deputes.py                # jointure données députés (groupe, mandat, etc.)
 scripts/2_4_affiliations.py                 # affiliation (groupe/gouv) à date de l'intervention
+scripts/2_5_commissions.py                  # affiliation commission à date de l'intervention
 scripts/3_1_identification_republique.py    # repérage des mentions de « républi* », exclusion faux positifs
 scripts/4_1_analysis_stats.py               # statistiques descriptives, dynamique temporelle (exploratoire)
 scripts/5_1_embeddings.py                   # embeddings des interventions
