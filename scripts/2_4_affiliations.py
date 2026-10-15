@@ -9,14 +9,14 @@
 # 3. fallback sur dernière affiliation connue (groupe/groupeAbrev)
 #    -> var affiliation_et_gouv complétée
 #    - correction des affiliations NI/RN
-# Écrit `2_4_interventions_nettoyees.csv`.
+# Écrit `2_4_affiliations.csv`.
 
 # %%
 import pandas as pd
 
 PATH_ENTREE = "../data/interim/2_3_match_deputes.csv"
 PATH_AFFILIATIONS = "../data/raw/id-dep/datan_affiliations.csv"
-PATH_SORTIE = "../data/interim/2_4_interventions_nettoyees.csv"
+PATH_SORTIE = "../data/interim/2_4_affiliations.csv"
 
 
 # nb : ici choix de recoder avec les principaux noms sur la législature des
