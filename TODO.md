@@ -32,6 +32,7 @@
 ## 4-analysis ?
 
 - [ ] repartir de ce qu'a fait matthias, mettre à plat, vérifier, stabiliser, améliorer, etc.
+- [ ] Analyses.ipynb pour le fichier ok de matthias.
 - [ ] envisager stat en nb occurrence, % des interventions, et même chose hors interruption(doc actualiser numérateur et dénominateur)
 - [ ] aviser en % nb mots / ngrams ?
 - [ ] faire des sorties vizu pour avoir une base de discussion de ce qu'on veut (= avoir des exemples pour imaginer ce qui est réalisable et utile)
