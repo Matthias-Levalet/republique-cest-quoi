@@ -1,6 +1,6 @@
 # %% [markdown]
 # # 3-1 - Identifier les textes mentionnant la République
-# Lit `2_4_interventions_nettoyees.csv` (issu de 2_4). Repère les mentions
+# Lit `2_5_interventions_infos.csv` (issu des traitements section 2). Repère les mentions
 # valides de la famille du mot "républi" en excluant les faux positifs
 # (Les Républicains, président de la République, pays nommés "République de…", etc.)
 # via une logique d'exclusion par positions.
@@ -11,7 +11,7 @@
 import pandas as pd
 import re
 
-PATH_ENTREE = "../data/interim/2_4_interventions_nettoyees.csv"
+PATH_ENTREE = "../data/interim/2_5_interventions_infos.csv"
 PATH_SORTIE_PROPORTION = "../data/interim/3_1_df_repu_proportion.csv"
 PATH_SORTIE_MATCHES = "../data/interim/3_1_df_repu.csv"
 PATH_LISTE_PAYS = "../data/raw/liste_pays_republique_stable.txt"
