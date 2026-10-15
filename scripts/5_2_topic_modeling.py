@@ -1,5 +1,5 @@
 # %% [markdown]
-# # Test Bertopic
+# # 5-2 - Topic modeling avec BERTopic (analyse thématique)
 
 # %% [markdown]
 # ## décider de comment on découpe
