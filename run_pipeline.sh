@@ -14,6 +14,15 @@ exec > >(tee -a "$LOGFILE") 2>&1
 
 echo "Pipeline sh lancé le $(date)"
 
+SECONDS=0
+
+formater_duree() {
+    printf "%dh %02dmin %02ds" $(($1 / 3600)) $((($1 % 3600) / 60)) $(($1 % 60))
+}
+
+# affiché aussi en cas d'échec d'une étape (set -e)
+trap 'echo "Durée totale : $(formater_duree $SECONDS)"' EXIT
+
 etapes=(
     "1_1_extraction.py"
     "1_2_fusion_legislatures.py"
@@ -34,7 +43,9 @@ for etape in "${etapes[@]}"; do
     echo "=== $etape ==="
     echo "========================================"
 
+    debut_etape=$SECONDS
     python -u "$etape"
+    echo "--- $etape : $(formater_duree $((SECONDS - debut_etape)))"
 done
 
 echo
