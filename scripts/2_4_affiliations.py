@@ -9,7 +9,7 @@
 # 3. fallback sur dernière affiliation connue (groupe/groupeAbrev)
 #    -> var affiliation_et_gouv complétée
 #    - correction des affiliations NI/RN
-# Écrit `2_4_interventions_nettoyees.csv`, l'export final du pipeline de nettoyage.
+# Écrit `2_4_interventions_nettoyees.csv`.
 
 # %%
 import pandas as pd
