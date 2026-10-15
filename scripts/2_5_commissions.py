@@ -56,8 +56,7 @@ ORDRE_QUALITE = [
 ]
 
 # %%
-# TODO : normalement ok à ce stade pour id_orateur (PA a été ajouté)
-df = pd.read_csv(PATH_ENTREE, low_memory=False, dtype={"id_orateur": str})
+df = pd.read_csv(PATH_ENTREE, low_memory=False)
 print("Shape du df chargé : ", df.shape)
 
 # %% [markdown]
@@ -81,6 +80,7 @@ if TYPES_ORGANE_RETENUS is not None:
     print(f"\nMandats retenus (typeOrgane {TYPES_ORGANE_RETENUS}) :", len(df_mandats))
 
 # préparation des dates df_mandats
+# (pas de normalize ici car dejà uniquement date : ei pas d'horaire dans données datan)
 df_mandats["dateDebut"] = pd.to_datetime(df_mandats["dateDebut"], errors="raise")
 df_mandats["dateFin"] = pd.to_datetime(df_mandats["dateFin"], errors="raise")
 print(
@@ -131,13 +131,22 @@ if qualites_inconnues:
 # TODO: modifier et affiner si on ajoute DELEGBUREAU = quelles règles cumuls ?
 
 TYPE_FERMETURE = "COMPER"  # fermeture par "commission suivante" valable seulement ici
+# Date de fin de législature utilisée pour fermer les mandats (overkill)
+DATE_FIN_PAR_LEGISLATURE = {
+    "15": pd.Timestamp("2022-06-21"),
+    "16": pd.Timestamp("2024-06-09"),
+}
 
 
 # fonction pour fermer les mandats ouverts (dateFin manquante) selon TYPE_FERMETURE retenu
 def fermer_mandats_ouverts(df_m):
-    """Renvoie une copie de df_m dont les dateFin manquantes sont fermées, et le journal des fermetures."""
+    """Renvoie une copie de df_m dont les dateFin manquantes sont fermées, et le journal des fermetures.
+    Règle :
+    - borne par défaut : fin de la législature ;
+    - si le député rejoint un autre mandat du meme type (cf. COMPER)
+      avant cette borne, l'ancien mandat se termine la veille du nouveau mandat.
+    """
     df_m = df_m.copy()
-    fin_legislature = df_m.groupby("legislature")["dateFin"].max()
     journal = []
 
     ouverts = df_m.index[
@@ -145,8 +154,17 @@ def fermer_mandats_ouverts(df_m):
     ]
     for i in ouverts:
         m = df_m.loc[i]
-        borne, raison = fin_legislature[m["legislature"]], "fin de législature"
+        legislature = str(m["legislature"]).strip()
+        # ici l'overkill pour la gestion par législature
+        if legislature not in DATE_FIN_PAR_LEGISLATURE:
+            raise ValueError(
+                f"Pas de date de fin définie pour la législature {legislature!r}"
+            )
+        borne = DATE_FIN_PAR_LEGISLATURE[legislature]
+        raison = "fin de législature"
 
+        # recherche mandat du même typeOrgane mais autre organeRef et de la même législature,
+        # débutant après le mandat courant
         suivantes = df_m.loc[
             (df_m[COL_ID_MP] == m[COL_ID_MP])
             & (df_m["typeOrgane"] == m["typeOrgane"])
@@ -155,9 +173,12 @@ def fermer_mandats_ouverts(df_m):
             & (df_m["dateDebut"] > m["dateDebut"]),
             "dateDebut",
         ]
-        if len(suivantes) and suivantes.min() < borne:
-            borne, raison = suivantes.min(), "début d'une autre commission"
 
+        if len(suivantes) and suivantes.min() <= borne:
+            # passer à la veille pour éviter chevauchement
+            borne = suivantes.min() - pd.Timedelta(days=1)
+            raison = "début d'une autre commission"
+        # et passer la dateFin à la borne calculée
         df_m.loc[i, "dateFin"] = borne
         journal.append(
             {
