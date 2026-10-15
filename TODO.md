@@ -14,14 +14,14 @@
 - Aviser si fichier datan diffusables. Sinon voir pour reproductibilité
 - REPRENDRE LE **README** !!!!
 
-
 ## À voir
 
 ## 1-extraction
 
 ## 2-clean&filter
 
-- [ ] 2.4 affiliation : depuis le doc mandats de la datan, repasser leur comission d'appartenance + leur "codeQualite" et libelleAbrev = REPRENDRE DEMANDE AJOUT COMMISSIONS ETC DÉPUTÉS POUR MATTHIAS
+- [ ] 2.4 affiliation : depuis le doc mandats de la datan, repasser leur commission d'appartenance + leur "codeQualite" et libelleAbrev = REPRENDRE DEMANDE AJOUT COMMISSIONS ETC DÉPUTÉS POUR MATTHIAS
+  - [ ] FAIT EN V0, ATTENTE CONFIRMATION MATTHIAS !!!
 
 ## 3-identify-republic
 
@@ -47,7 +47,13 @@
 - [ ] aviser si nécessaire de refaire tourner une fois le fichier final export repu consolidé
   - [ ] à ce jour : toujours ok sur nb interventions, mais probalbme ajout de colones info députés entre temps (comission, etc.), voir pour une fusuion si nécessaire
 - [ ] Aviser les possibles embeddings qwen, alibaba et explo topic modelling depuis activetigger
-- [ ] **decider du focus sentence/paragraph/intervention/etc.**
+- [ ] **decider du focus.découpe sentence/paragraph/intervention/etc.**
+  - [ ] Option retenue à ce jour = full intervention (ok taille modèle, mais on mesure en effet pas la meme chose : thème interv vs thème lorsque mobilise précisément république. = à quelle occasion plus que purement pour dire quoi)
+    - sentence ?
+    - paragraphe (existe pas ici) -> mais possible avec wtpsplit : https://github.com/segment-any-text/wtpsplit
+    - dire que tant pis ? Ok si utilise modèle avec fenetre suffisante (ici ok avec qwen)
+    - Passer à l'échelle de la phrase pour tout ce qui va être pour sentiment, réseau de mots, proba des termes, etc.
+    - etc.
 
 ### 5_2_topic_modeling
 
