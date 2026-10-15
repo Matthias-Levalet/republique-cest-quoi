@@ -33,6 +33,10 @@ PATH_XML_16 = "../data/raw/16-xml/compteRendu/"
 PATH_SORTIE_15 = "../data/interim/1_1_extract_15.csv"
 PATH_SORTIE_16 = "../data/interim/1_1_extract_16.csv"
 
+# Les fichiers XML sont disponibles ici :
+# https://data.assemblee-nationale.fr/static/openData/repository/15/vp/syceronbrut/syseron.xml.zip
+# https://data.assemblee-nationale.fr/static/openData/repository/16/vp/syceronbrut/syseron.xml.zip
+
 # %% [markdown]
 # ## Fonctions d'extraction
 
