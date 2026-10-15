@@ -14,6 +14,7 @@ etapes = [
     "2_2_identification_acteurs.py",
     "2_3_match_deputes.py",
     "2_4_affiliations.py",
+    "2_5_commissions.py",
     "3_1_identification_republique.py",
 ]
 
