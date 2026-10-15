@@ -60,9 +60,3 @@
 ## Pistes, etc.
 
 Analyses.ipynb pour le fichier ok de matthias.
-
-https://data.assemblee-nationale.fr/archives-anterieures/archives-15e/debats-en-seance-publique
-https://data.assemblee-nationale.fr/archives-16e/debats
-
-https://data.assemblee-nationale.fr/static/openData/repository/15/vp/syceronbrut/syseron.xml.zip
-https://data.assemblee-nationale.fr/static/openData/repository/16/vp/syceronbrut/syseron.xml.zip
