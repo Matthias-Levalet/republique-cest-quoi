@@ -42,6 +42,8 @@ df = pd.read_csv(
 df
 
 # %%
+# TODO: simplif et harmoniser avec import depuis autre colone
+
 import datetime
 import locale
 
@@ -773,6 +775,8 @@ print(f"Déciles (%)  : {stats_global['deciles_proportion']}")
 # Sous format fonction et nommer diachronique_groupes_%
 
 # %%
+# TODO: debug
+# FIXME: debug
 # Compter le nombre de fois où chaque groupe parlementaire dit "République"
 counts = (
     df.groupby("affiliation_et_gouv")["repu_match_valide"]
@@ -821,6 +825,7 @@ df_toppartis
 df
 
 # %%
+# TODO #FIXME: debug
 # Paramètres
 colonne_condition = "interv_mythe_"
 colonne_groupe = "affiliation_et_gouv"
@@ -1354,6 +1359,8 @@ diachronique_groupe_total(
 )
 
 # %%
+#TODO #FIXME: debug
+
 # Définir les paramètres
 colonne_groupe = "REN"
 colonne_condition = "repu_match_valide"
@@ -1595,6 +1602,7 @@ fig = px.line(
 fig.show()
 
 # %%
+#FIXME: debug
 df_CRPR["id_orateur"].nunique()
 
 
@@ -2220,6 +2228,7 @@ def synchronique_personnel_proportion(
 
 
 # %%
+#FIXME: debug
 synchronique_personnel_proportion(
     df,
     couleurs_groupes,
@@ -2396,6 +2405,7 @@ def synchronique_personnels_proportion(
 
 
 # %%
+#FIXME: debug
 synchronique_personnels_proportion(
     df,
     couleurs_groupes,
@@ -2436,6 +2446,7 @@ def topics_par_orateur(df, nom_orateur):
 df
 
 # %%
+#FIXME
 resultat = topics_par_orateur(df, "M. Xavier Breton")
 print(resultat)
 
@@ -2493,6 +2504,7 @@ def stat_test(
 
 
 # %%
+#FIXME
 resultats = stat_test(
     df=df_interv,
     colonne_condition="repu_match_valide",
@@ -3069,6 +3081,7 @@ def synchronique_personnel_moyenne(
 
 
 # %%
+#FIXME
 synchronique_personnel_moyenne(
     df,
     couleurs_groupes,
@@ -3217,6 +3230,7 @@ def synchronique_personnel_va(
 # #### Analyses générales
 
 # %%
+#FIXME
 df = df.drop(df["commission_député"] == "RI et GE")
 
 
@@ -3407,6 +3421,7 @@ def synchronique_personnelpo_groupe(
 
 
 # %%
+#FIXME
 synchronique_personnelpo_groupe(
     df,
     groupe="SOC-A",
@@ -3482,6 +3497,8 @@ def statistiques_députés_groupes(
 
 
 # %%
+#FIXME
+
 groupe = "LR"
 
 # Sur toute la période
@@ -3630,6 +3647,7 @@ def synchronique_personnelpo_groupe(
 
 
 # %%
+#FIXME
 synchronique_personnelpo_groupe(
     df_CRPR,
     groupe="RN",
@@ -3652,6 +3670,7 @@ synchronique_personnelpo_groupe(
 # ##### En proportion (non nécessaire, fonction datée)
 
 # %%
+#FIXME
 # Définir les paramètres
 groupe = "LR"
 colonne_condition = "Immigration"
@@ -3719,6 +3738,7 @@ df_counts
 # ##### En VA et % (fonction datée)
 
 # %%
+#FIXME
 # Définir les paramètres
 groupe = "REN"
 colonne_condition = "Laïcité-Islam"
@@ -3865,6 +3885,7 @@ def evolution_députés_groupes_va(
 
 
 # %%
+#FIXME
 evolution_députés_groupes_va(
     df_thématique,
     groupe="REN",
@@ -4027,6 +4048,7 @@ def evolution_députés_groupes_pourcentage(
 
 
 # %%
+#FIXME
 evolution_députés_groupes_pourcentage(df, groupe="LR")
 
 # %% [markdown]
