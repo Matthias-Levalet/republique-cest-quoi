@@ -32,7 +32,11 @@ import seaborn as sns
 import numpy as np
 
 # %%
-df = pd.read_csv("../data/interim/3_1_df_repu_proportion.csv", low_memory=False)
+df = pd.read_csv(
+    "../data/interim/3_1_df_repu_proportion.csv",
+    low_memory=False,
+    dtype={"ID_orateur": str},
+)
 
 # %%
 df
@@ -370,274 +374,6 @@ def diachronique_général(
     fig.show()
     return tableau
 
-# %% [markdown]
-# ###### Test
-
-# %%
-# def statistiques_générales_temporelles(
-#     df,
-#     colonne_condition,
-#     colonne_nombre="nombre_mentions_repu",
-#     periode="semaine",
-#     colonne_date="dateSeance_day",
-# ):
-#     # Définir la granularité
-#     if periode == "semaine":
-#         df["periode"] = (
-#             df[colonne_date].dt.isocalendar().year.astype(str)
-#             + "-W"
-#             + df[colonne_date].dt.isocalendar().week.astype(str)
-#         )
-#     elif periode == "jour":
-#         df["periode"] = df[colonne_date].dt.to_period("D").astype(str)
-#     elif periode == "mois":
-#         df["periode"] = df[colonne_date].dt.to_period("M").astype(str)
-#     elif periode == "annee":
-#         df["periode"] = df[colonne_date].dt.year.astype(str)
-#     elif periode == "global":
-#         df["periode"] = "Global"
-
-#     # Compter occurrences par période
-#     df_counts = (
-#         df.groupby("periode")
-#         .agg(
-#             total_mentions=(colonne_condition, "count"),
-#             true_mentions=(colonne_condition, lambda x: (x == True).sum()),
-#             somme_mentions_repu=(colonne_nombre, "sum"),
-#             moyenne_mentions_repu=(colonne_nombre, "mean"),
-#             mediane_mentions_repu=(colonne_nombre, "median"),
-#         )
-#         .reset_index()
-#     )
-
-#     # Proportion de True
-#     df_counts["proportion_true"] = (
-#         df_counts["true_mentions"] / df_counts["total_mentions"] * 100
-#     )
-
-#     # Statistiques pour colonne_condition
-#     stats_condition = {
-#         "moyenne_proportion": round(df_counts["proportion_true"].mean(), 2),
-#         "médiane_proportion": round(df_counts["proportion_true"].median(), 2),
-#         "moyenne_valeur": round(df_counts["true_mentions"].mean(), 2),
-#         "médiane_valeur": round(df_counts["true_mentions"].median(), 2),
-#         "deciles_proportion": [
-#             round(q, 2)
-#             for q in df_counts["proportion_true"].quantile(
-#                 [i / 10 for i in range(1, 10)]
-#             )
-#         ],
-#         "deciles_valeur": [
-#             round(q, 2)
-#             for q in df_counts["true_mentions"].quantile([i / 10 for i in range(1, 10)])
-#         ],
-#         "quartile_proportion": [
-#             round(q, 2)
-#             for q in df_counts["proportion_true"].quantile([i / 4 for i in range(1, 4)])
-#         ],
-#         "quartile_valeur": [
-#             round(q, 2)
-#             for q in df_counts["true_mentions"].quantile([i / 4 for i in range(1, 4)])
-#         ],
-#         "écart-type_proportion": round(df_counts["proportion_true"].std(), 2),
-#         "variance_proportion": round(df_counts["proportion_true"].var(), 2),
-#         "écart-type_valeur": round(df_counts["true_mentions"].std(), 2),
-#         "variance_valeur": round(df_counts["true_mentions"].var(), 2),
-#     }
-
-#     # Statistiques pour colonne_nombre
-#     stats_nombre = {
-#         "moyenne_nombre": round(df_counts["somme_mentions_repu"].mean(), 2),
-#         "médiane_nombre": round(df_counts["moyenne_mentions_repu"].median(), 2),
-#         "moyenne_par_période": round(df_counts["moyenne_mentions_repu"].mean(), 2),
-#         "médiane_par_période": round(df_counts["moyenne_mentions_repu"].median(), 2),
-#         "deciles_nombre": [
-#             round(q, 2)
-#             for q in df_counts["moyenne_mentions_repu"].quantile(
-#                 [i / 10 for i in range(1, 10)]
-#             )
-#         ],
-#         "quartile_nombre": [
-#             round(q, 2)
-#             for q in df_counts["moyenne_mentions_repu"].quantile(
-#                 [i / 4 for i in range(1, 4)]
-#             )
-#         ],
-#         "écart-type_nombre": round(df_counts["moyenne_mentions_repu"].std(), 2),
-#         "variance_nombre": round(df_counts["moyenne_mentions_repu"].var(), 2),
-#     }
-
-#     # Distributions cumulées
-#     for col, key_prefix in [
-#         ("true_mentions", "true_mentions"),
-#         ("proportion_true", "proportion_true"),
-#         ("moyenne_mentions_repu", "moyenne_mentions_repu"),
-#     ]:
-#         valeurs_triees = np.sort(df_counts[col].values)
-#         distribution_cumulee = (
-#             100 * (np.arange(len(valeurs_triees)) + 1) / len(valeurs_triees)
-#         )
-#         stats = (
-#             stats_condition
-#             if col in ["true_mentions", "proportion_true"]
-#             else stats_nombre
-#         )
-#         stats[f"distribution_cumulee_{key_prefix}"] = {
-#             "valeurs": valeurs_triees,
-#             "distribution": distribution_cumulee,
-#         }
-
-#     return {
-#         "colonne_condition": stats_condition,
-#         "colonne_nombre": stats_nombre,
-#         "df_counts": df_counts,
-#     }
-
-# %%
-# Test de hachurage mais complexe (voir ce qui bloque)
-
-
-def diachronique_général(
-    df,
-    préfixe,
-    suffixe,
-    colonne_condition,
-    colonne_nombre="nombre_mentions_repu",
-    colonne_date="dateSeance_day",
-    periode="semaine",
-    titre=None,
-):
-    df = df.copy()
-
-    # 1. Définition des paramètres de période
-    if periode == "semaine":
-        df["periode"] = (
-            df[colonne_date] - pd.to_timedelta(df[colonne_date].dt.dayofweek, unit="d")
-        ).dt.strftime("%Y-%m-%d")
-        titre_defaut = f"Évolution hebdomadaire de la {préfixe} {colonne_condition}"
-    elif periode == "jour":
-        df["periode"] = df[colonne_date].dt.to_period("D").astype(str)
-        titre_defaut = f"Évolution journalière de la {préfixe} {colonne_condition}"
-    elif periode == "mois":
-        df["periode"] = df[colonne_date].dt.to_period("M").astype(str)
-        titre_defaut = f"Évolution mensuelle de la {préfixe} {colonne_condition}"
-    elif periode == "annee":
-        df["periode"] = df[colonne_date].dt.year.astype(str)
-        titre_defaut = f"Évolution annuelle de la {préfixe} {colonne_condition}"
-
-    # 2. Regrouper et compter les occurrences
-    counts = (
-        df.groupby("periode")
-        .agg(
-            total_mentions=(colonne_condition, "count"),
-            true_mentions=(colonne_condition, lambda x: (x == True).sum()),
-            somme_mentions_repu=(colonne_nombre, "sum"),
-            date=(colonne_date, "min"),
-        )
-        .reset_index()
-    )
-    counts["proportion_true"] = (
-        counts["true_mentions"] / counts["total_mentions"] * 100
-    ).round(2)
-
-    # Calculer les parties superposées et non superposées
-    counts["superposition"] = counts[["true_mentions", "somme_mentions_repu"]].min(
-        axis=1
-    )
-    counts["uniquement_occurrences"] = (
-        counts["somme_mentions_repu"] - counts["superposition"]
-    )
-
-    # Gérer les valeurs nulles pour la proportion
-    y_proportion = counts["proportion_true"].copy()
-    y_proportion[y_proportion == 0] = None
-
-    # 3. Graphique
-    fig = go.Figure()
-
-    # Barre pour true_mentions (couleur pleine)
-    fig.add_trace(
-        go.Bar(
-            x=counts["periode"],
-            y=counts["true_mentions"],
-            name="Nb d'interventions (true_mentions)",
-            marker_color="#91AACF",
-            opacity=1,
-            hovertemplate="<b>Période : %{x}</b><br>Nb interventions : %{y}<extra></extra>",
-        )
-    )
-
-    # Barre pour la superposition (hachurée)
-    fig.add_trace(
-        go.Bar(
-            x=counts["periode"],
-            y=counts["superposition"],
-            name="Superposition",
-            marker_color="#FFA500",
-            marker_pattern_shape="x",
-            marker_pattern_fill_mode="repeat",
-            opacity=1,
-            hovertemplate="<b>Période : %{x}</b><br>Superposition : %{y}<extra></extra>",
-        )
-    )
-
-    # Barre pour uniquement_occurrences (couleur pleine)
-    fig.add_trace(
-        go.Bar(
-            x=counts["periode"],
-            y=counts["uniquement_occurrences"],
-            name=f"Uniquement occurrences ({colonne_nombre})",
-            marker_color="#FFA500",
-            opacity=1,
-            hovertemplate="<b>Période : %{x}</b><br>Uniquement occurrences : %{y}<extra></extra>",
-        )
-    )
-
-    # Courbe pour la proportion (optionnelle)
-    fig.add_trace(
-        go.Scatter(
-            x=counts["periode"],
-            y=y_proportion,
-            mode="markers",
-            name="Proportion d'interventions",
-            line=dict(color="#080102", width=2.7),
-            marker=dict(size=8, symbol="circle"),
-            yaxis="y2",
-            hovertemplate="<b>Période : %{x}</b><br>Proportion : %{y:.2f}%<extra></extra>",
-        )
-    )
-
-    # 4. Mise en forme
-    fig.update_layout(
-        title=(titre if titre else titre_defaut) + (f" ({suffixe})" if suffixe else ""),
-        xaxis=dict(title="Période"),
-        yaxis=dict(title="Nombre", showgrid=False),
-        yaxis2=dict(
-            title="Proportion (%)", overlaying="y", side="right", showgrid=False
-        ),
-        barmode="stack",  # Empiler les barres
-        template="plotly_white",
-        legend=dict(x=0.75, y=1.15, bgcolor="rgba(255,255,255,0.7)"),
-        bargap=0.4,
-    )
-
-    # 5. Tableau
-    tableau = counts.drop(columns=["date", "total_mentions"], errors="ignore")
-    tableau = tableau.rename(
-        columns={
-            "periode": "Période",
-            "true_mentions": "Nb d'interventions",
-            "somme_mentions_repu": f"Nb occurrences ({colonne_nombre})",
-            "proportion_true": "Proportion d'interventions",
-            "superposition": "Superposition",
-            "uniquement_occurrences": f"Uniquement occurrences ({colonne_nombre})",
-        }
-    )
-    tableau.index = range(1, len(tableau) + 1)
-
-    fig.show()
-    return tableau
-
 
 # %% [markdown]
 # ### Par ans
@@ -665,8 +401,8 @@ stats = plot_boxplots_from_stats(
 # Tableau et graphique des évolutions annuelles
 diachronique_général(
     df,
-    colonne_nombre="interv_mythe_",
-    colonne_condition="interv_mythe_",
+    colonne_nombre="nombre_mentions_repu",
+    colonne_condition="repu_match_valide",
     objet="famille du mot République",
     periode="annee",
     suffixe="interv + inters",
@@ -699,16 +435,13 @@ stats = plot_boxplots_from_stats(
 # Tableau et graphique des évolutions annuelles
 diachronique_général(
     df,
-    colonne_nombre="occ_mythe_",
-    colonne_condition="interv_mythe_",
+    colonne_nombre="nombre_mentions_repu",
+    colonne_condition="repu_match_valide",
     objet="famille du mot République",
     periode="mois",
     suffixe="interv + inters",
 )
 
-
-# %%
-df
 
 # %% [markdown]
 # ### Par semaines
@@ -736,8 +469,8 @@ stats = plot_boxplots_from_stats(
 # Tableau et graphique des évolutions hebdomadaires
 diachronique_général(
     df,
-    colonne_nombre="occ_mythe_",
-    colonne_condition="interv_mythe_",
+    colonne_nombre="nombre_mentions_repu",
+    colonne_condition="repu_match_valide",
     objet="famille du mot République",
     periode="semaine",
     suffixe="interv + inters",
@@ -781,9 +514,6 @@ stats = plot_boxplots_from_stats(
 table = df_repu["dateSeance_day"].value_counts()[0:50].reset_index()
 table = table.rename(columns={"count": "Nombre de mentions"})
 table
-
-# %%
-df
 
 # %% [markdown]
 # **Remarques**
@@ -834,68 +564,74 @@ table
 
 # %%
 # Définir les paramètres
-colonne_condition = "Laïcité-Islam"
-periode = "ME"  # "ME" = mois, "WE" = semaine, "YS" = année.
+# colonne_condition = "Laïcité-Islam"
+# periode = "ME"  # "ME" = mois, "WE" = semaine, "YS" = année.
 
 # S'assurer que la colonne date est bien en datetime
-df["dateSeance_day"] = pd.to_datetime(df["dateSeance_day"])
+# df["dateSeance_day"] = pd.to_datetime(df["dateSeance_day"])
 
 # Agréger les données par mois
-df_monthly = (
-    df.resample(periode, on="dateSeance_day")[colonne_condition]
-    .agg(total_mentions="count", true_mentions=lambda x: (x == True).sum())
-    .reset_index()
-)
+# df_monthly = (
+#    df
+#    .resample(periode, on="dateSeance_day")[colonne_condition]
+#    .agg(
+#        total_mentions="count",
+#        true_mentions=lambda x: (x == True).sum()
+#    )
+##    .reset_index()
+# )
 
 # Calculer la proportion
-df_monthly["proportion_true"] = (
-    df_monthly["true_mentions"] / df_monthly["total_mentions"]
-)
+# df_monthly["proportion_true"] = df_monthly["true_mentions"] / df_monthly["total_mentions"]
 
 # Créer la figure avec Plotly Graph Objects
-fig = go.Figure()
+# fig = go.Figure()
 
 # Barres : volume total
-fig.add_trace(
-    go.Bar(
-        x=df_monthly["dateSeance_day"],
-        y=df_monthly["true_mentions"],
-        name="Nombre d'interventions avec FDM 'République'",
-        marker_color="rgba(99, 110, 250, 0.6)",
-        yaxis="y1",
-    )
-)
+# fig.add_trace(go.Bar(
+#    x=df_monthly["dateSeance_day"],
+#    y=df_monthly["true_mentions"],
+#    name="Nombre d'interventions avec FDM 'République'",
+#    marker_color="rgba(99, 110, 250, 0.6)",
+#    yaxis="y1"
+# ))
 
 # Courbe : proportion
-fig.add_trace(
-    go.Scatter(
-        x=df_monthly["dateSeance_day"],
-        y=df_monthly["proportion_true"] * 100,  # en pourcentage
-        name="Proportion d'intervention en % avec FDM 'République'",
-        mode="lines+markers",
-        line=dict(color="rgba(239, 85, 59, 0.8)", width=3),
-        yaxis="y2",
-    )
-)
+# fig.add_trace(go.Scatter(
+#    x=df_monthly["dateSeance_day"],
+#    y=df_monthly["proportion_true"] * 100,  # en pourcentage
+#    name="Proportion d'intervention en % avec FDM 'République'",
+#    mode="lines+markers",
+#    line=dict(color="rgba(239, 85, 59, 0.8)", width=3),
+#    yaxis="y2"
+# ))
 
 # Mise en forme du graphique
-fig.update_layout(
-    title=f"Évolution hebdomadaire de l'investissement de la famille du mot 'République' (A)",
-    xaxis=dict(title="Mois"),
-    yaxis=dict(title="Valeurs absolue", showgrid=False),
-    yaxis2=dict(title="Proportion en %", overlaying="y", side="right", showgrid=False),
-    legend=dict(x=0.65, y=1.14, bgcolor="rgba(255,255,255,0.7)"),
-    template="plotly_white",
-    bargap=0.2,
-)
-fig.update_xaxes(
-    dtick="M12",  # un tick par an
-    tickformat="%Y",
-    ticklabelmode="period",  # place les labels entre les périodes
-)
+# fig.update_layout(
+#    title=f"Évolution hebdomadaire de l'investissement de la famille du mot 'République' (A)",
+#    xaxis=dict(title="Mois"),
+#    yaxis=dict(
+#        title="Valeurs absolue",
+#        showgrid=False
+#    ),
+#    yaxis2=dict(
+#        title="Proportion en %",
+#        overlaying="y",
+#        side="right",
+#        showgrid=False
+#    ),
+#    legend=dict(x=0.65, y=1.14, bgcolor="rgba(255,255,255,0.7)"),
+#    template="plotly_white",
+#    bargap=0.2
+# )
+# fig.update_xaxes(
+#    dtick="M12",  # un tick par an
+#    tickformat="%Y",
+#    ticklabelmode="period"  # place les labels entre les périodes
+# )
 
-fig.show()
-df_monthly
+# fig.show()
+# df_monthly
 
 
 # %% [markdown]
